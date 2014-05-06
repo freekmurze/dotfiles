@@ -39,7 +39,6 @@ plugins=(git laravel4)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Users/murze/.rvm/gems/ruby-1.9.3-p374/bin:/Users/murze/.rvm/gems/ruby-1.9.3-p374@global/bin:/Users/murze/.rvm/rubies/ruby-1.9.3-p374/bin:/Users/murze/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 export PATH=/Applications/MAMP/bin/php/php5.4.19/bin:$PATH
 export PATH=~/spatiecommands:$PATH
 
