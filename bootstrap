@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# bootstrap installs things.
+
+echo 'bootstrap shell'
+sudo echo 'lets go'; #ask for password beforehand
+
+#install zsh
+rm -rf $HOME/.oh-my-zsh
+curl -L http://install.ohmyz.sh | sh
+
+#symlink zsh prefs
+rm $HOME/.zshrc
+ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+
+#fix missing font characters (see https://github.com/robbyrussell/oh-my-zsh/issues/1906)
+cd ~/.oh-my-zsh/themes/
+git checkout  d6a36b1 agnoster.zsh-theme
+
+#install composer
+echo install composer
+cd ~/.dotfiles
+curl -sS https://getcomposer.org/installer | php
+mv -f composer.phar /usr/local/bin/composer
+
+#install homebrew
+echo install homebrew
+rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+#install wget
+echo install wget
+brew install wget
+
+#set finder default
+$HOME/.dotfiles/osx/set-defaults.sh
+
+echo 'all done, restart terminal to see changes'
