@@ -29,8 +29,8 @@ rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 #install wget
-echo install wget
-brew install wget
+echo 'install wget'
+brew install wget --overwrite
 
 #set finder default
 $HOME/.dotfiles/osx/set-defaults.sh
