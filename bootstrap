@@ -35,4 +35,13 @@ brew install wget
 #set finder default
 $HOME/.dotfiles/osx/set-defaults.sh
 
-echo 'all done, restart terminal to see changes'
+echo 'all done'
+echo 'next steps:'
+
+#patch font contains right characters for promt
+echo '1. install menlo patched font https://gist.github.com/qrush/1595572/raw/Menlo-Powerline.otf' 
+
+#install solarized http://ethanschoonover.com/solarized
+echo '2. install solarized theme included in ~/.dotfiles/misc
+
+echo '3. restart terminal'
