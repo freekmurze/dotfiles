@@ -25,7 +25,7 @@ mv -f composer.phar /usr/local/bin/composer
 
 #install homebrew
 echo install homebrew
-rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 #install wget
@@ -42,6 +42,6 @@ echo 'next steps:'
 echo '1. install menlo patched font https://gist.github.com/qrush/1595572/raw/Menlo-Powerline.otf' 
 
 #install solarized http://ethanschoonover.com/solarized
-echo '2. install patched solarized theme included in ~/.dotfiles/misc
+echo '2. install patched solarized theme included in ~/.dotfiles/misc'
 
 echo '3. restart terminal'
