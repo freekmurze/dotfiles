@@ -39,3 +39,8 @@ function fs() {
 function digga() {
 	dig +nocmd "$1" any +multiline +noall +answer
 }
+
+#shortcut voor zhs quick-look command
+function ql() {
+   quick-look "$1"
+}
