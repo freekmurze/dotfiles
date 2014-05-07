@@ -37,16 +37,17 @@ brew install wget --overwrite
 
 #install brew-cask
 echo 'install brew-cask'
-  echo '------------------'
-brew install brew-cask --overwrite
+echo '------------------'
+brew tap caskroom/cask
+brew install brew-cask
 
 #install some nice quicklook plugins
 echo 'install some nice quicklook plugins'
-  echo '-----------------------------------'
-  brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+echo '-----------------------------------'
+brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
-  echo '++++++++++++++++++++++++++++++'
-  echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'
 echo 'all done'
 echo 'Things to do to make the agnoster terminal theme work:'
 
@@ -60,7 +61,7 @@ echo '++++++++++++++++++++++++++++++'
 echo 'Some optional tidbits
 
 echo '1. install mamp (http://www.mamp.info/) and check if /Applications/MAMP/bin/php/php5.4.19/ exists'
-echo '2. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh
+echo '2. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh'
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
