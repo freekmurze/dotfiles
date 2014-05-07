@@ -45,11 +45,6 @@ echo 'install some nice quicklook plugins'
   echo '-----------------------------------'
   brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
-#set finder default
-  echo 'set osx defaults'
-  echo '----------------'
-source $HOME/.dotfiles/osx/set-defaults.sh
-
   echo '++++++++++++++++++++++++++++++'
   echo '++++++++++++++++++++++++++++++'
 echo 'all done'
