@@ -2,49 +2,85 @@
 #
 # bootstrap installs things.
 
-echo 'bootstrap shell'
+function bootstrapTerminal() {	
+	sudo -v #ask password beforehand
 
-sudo -v; #ask for password beforehand
+	#install zsh
+	echo 'install oh-my-zhs'
+    echo '-----------------'
+	rm -rf $HOME/.oh-my-zsh
+	curl -L http://install.ohmyz.sh | sh
 
-#install zsh
-rm -rf $HOME/.oh-my-zsh
-curl -L http://install.ohmyz.sh | sh
+	#symlink zsh prefs
+	rm $HOME/.zshrc
+	ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
 
-#symlink zsh prefs
-rm $HOME/shell/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+	#fix missing font characters (see https://github.com/robbyrussell/oh-my-zsh/issues/1906)
+	cd ~/.oh-my-zsh/themes/
+	git checkout d6a36b1 agnoster.zsh-theme
 
-#fix missing font characters (see https://github.com/robbyrussell/oh-my-zsh/issues/1906)
-cd ~/.oh-my-zsh/themes/
-git checkout d6a36b1 agnoster.zsh-theme
+	#install composer
+	echo 'install composer'
+    echo '----------------'
+	echo install composer
+	cd ~/.dotfiles
+	curl -sS https://getcomposer.org/installer | php
+	echo 'move composer to /usr/local/bin/composer'
+	mv -f composer.phar /usr/local/bin/composer
 
-#install composer
-echo install composer
-cd ~/.dotfiles
-curl -sS https://getcomposer.org/installer | php
-mv -f composer.phar /usr/local/bin/composer
+	#install homebrew
+	echo 'install homebrew'
+    echo '----------------'
+	echo install homebrew
+	sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+	ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-#install homebrew
-echo install homebrew
-sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+	#install wget
+    echo 'install wget'
+    echo '------------'
+	brew install wget --overwrite
+	
+	#install brew-cask
+	echo 'install brew-cask'
+    echo '------------------'
+	brew install brew-cask --overwrite
+	
+	#install some nice quicklook plugins
+	echo 'install some nice quicklook plugins'
+    echo '-----------------------------------'
+    brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
-#install wget
-echo 'install wget'
-brew install wget --overwrite
+	#set finder default
+    echo 'set osx defaults'
+    echo '----------------'
+	source $HOME/.dotfiles/osx/set-defaults.sh
 
-#set finder default
-$HOME/.dotfiles/shell/set-defaults.sh
+    echo '++++++++++++++++++++++++++++++'
+    echo '++++++++++++++++++++++++++++++'
+	echo 'all done'
+	echo 'Things to do:'
 
-echo 'all done'
-echo 'Things to do:'
+	#patch font contains right characters for promt
+	echo '1. install menlo patched font included in ~/.dotfiles/misc https://gist.github.com/qrush/1595572/raw/Menlo-Powerline.otf' 
 
-#patch font contains right characters for promt
-echo '1. install menlo patched font included in ~/.dotfiles/misc https://gist.github.com/qrush/1595572/raw/Menlo-Powerline.otf' 
+	#install solarized http://ethanschoonover.com/solarized
+	echo '2. install patched solarized theme included in ~/.dotfiles/misc'
 
-#install solarized http://ethanschoonover.com/solarized
-echo '2. install patched solarized theme included in ~/.dotfiles/misc'
+	echo '3. restart terminal'
 
-echo '3. restart terminal'
+	echo '4. install mamp (http://www.mamp.info/) and check if /Applications/MAMP/bin/php/php5.4.19/ exists'
+	
+	echo '++++++++++++++++++++++++++++++'
+	echo '++++++++++++++++++++++++++++++'
+}
 
-echo '4. install mamp (http://www.mamp.info/) and check if /Applications/MAMP/bin/php/php5.4.19/ exists'
+
+echo 'Bootstrap terminal'
+echo '------------------'
+echo 'This will reset your terminal. Are you sure you want to to this? (y/n) '
+read -p 'Answer: '  reply
+
+if [[ $reply =~ ^[Yy]$ ]]
+then
+   bootstrapTerminal
+fi   
