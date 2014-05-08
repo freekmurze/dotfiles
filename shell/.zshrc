@@ -39,6 +39,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/Applications/MAMP/bin/php/php5.4.19/bin:$PATH
 export PATH=~/spatiecommands:$PATH
 export PATH="$HOME/bin:$PATH"
+export PATH=/Users/freek/npm/bin/:$PATH
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
