@@ -58,7 +58,7 @@ echo '1. install menlo patched font included in ~/.dotfiles/misc https://gist.gi
 echo '2. install patched solarized theme included in ~/.dotfiles/misc'
 
 echo '++++++++++++++++++++++++++++++'
-echo 'Some optional tidbits
+echo 'Some optional tidbits'
 
 echo '1. install mamp (http://www.mamp.info/) and check if /Applications/MAMP/bin/php/php5.4.19/ exists'
 echo '2. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh'
