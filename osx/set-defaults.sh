@@ -24,7 +24,7 @@ sudo nvram SystemAudioVolume=" "
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 	defaults write "${domain}" dontAutoLoad -array \
 		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-		"/System/Library/CoreServices/Menu Extras/Volume.menu" 
+#       "/System/Library/CoreServices/Menu Extras/Volume.menu"
 	    "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
 #		"/System/Library/CoreServices/Menu Extras/User.menu"
 done
@@ -291,6 +291,9 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
+
+# Show the ~/Users folder
+chflags nohidden /Users
 
 # Remove Dropbox’s green checkmark icons in Finder
 #file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
