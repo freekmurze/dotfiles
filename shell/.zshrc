@@ -36,7 +36,7 @@ plugins=(git laravel4 composer osx vagrant)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Applications/MAMP/bin/php/php5.4.19/bin:$PATH
+export PATH=/Applications/MAMP/bin/php/php5.4.26/bin:$PATH
 export PATH=~/spatiecommands:$PATH
 export PATH="$HOME/bin:$PATH"
 export PATH=/Users/freek/npm/bin/:$PATH
