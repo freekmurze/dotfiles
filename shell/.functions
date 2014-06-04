@@ -44,3 +44,7 @@ function digga() {
 function ql() {
    quick-look "$1"
 }
+
+archive () {
+   zip -r "$1".zip -i "$1" ;
+}
