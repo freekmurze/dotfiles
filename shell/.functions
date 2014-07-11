@@ -48,3 +48,8 @@ function ql() {
 archive () {
    zip -r "$1".zip -i "$1" ;
 }
+
+function removehost() {
+   ssh-keygen -R "$1"
+}
+
