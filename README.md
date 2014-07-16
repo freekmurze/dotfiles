@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-My personal dotfiles. Also used by all geeks at [spatie.be](http://spatie.be) 
+My personal dotfiles. Also used by all other geeks at [spatie.be](http://spatie.be) 
 
 You can install them by cloning the repository as '.dotfiles' in your homedirectory and running the bootstrap-script.
 
