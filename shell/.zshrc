@@ -82,3 +82,4 @@ done
 cd $HOME/sites;
 
 unset file
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

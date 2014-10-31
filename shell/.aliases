@@ -41,3 +41,6 @@ alias lsd="ls -lF | grep --color=never '^d'"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
+
+# Edit your hosts files
+alias hostfile="sudo nano /etc/hosts"
