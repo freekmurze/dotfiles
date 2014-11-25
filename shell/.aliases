@@ -44,3 +44,6 @@ alias sudo='sudo '
 
 # Edit your hosts files
 alias hostfile="sudo nano /etc/hosts"
+
+# Provision the homestead box
+alias homestead-reload="cd ~/.composer/vendor/laravel/homestead;vagrant provision"
