@@ -9,8 +9,8 @@ composer.phar
 .*.sw?
 
 # RVM and rbenv
-/.rvmrc
-/.rbenv-version
+.rvmrc
+.rbenv-version
 
 # PhpStorm
 .idea
