@@ -7,25 +7,8 @@
 ehthumbs.db
 Thumbs.db
 
-# composer
-composer.phar
-
 # Vim swap files
 .*.sw?
 
-# RVM and rbenv
-.rvmrc
-.rbenv-version
-
 # PhpStorm
 .idea
-
-# environment-files
-.env.*.php
-.env.php
-
-# sass
-.sass-cache
-
-# node modules
-node_modules
