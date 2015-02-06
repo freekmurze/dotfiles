@@ -45,5 +45,5 @@ alias sudo='sudo '
 # Edit your hosts files
 alias hostfile="sudo nano /etc/hosts"
 
-# Provision the homestead box
+# Provision the homestead 2 box
 alias homestead-provision="homestead halt;homestead up --provision"
