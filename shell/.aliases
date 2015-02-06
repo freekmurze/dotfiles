@@ -46,4 +46,4 @@ alias sudo='sudo '
 alias hostfile="sudo nano /etc/hosts"
 
 # Provision the homestead box
-alias homestead-reload="cd ~/.composer/vendor/laravel/homestead;vagrant provision"
+alias homestead-provision="homestead halt;homestead up --provision"
