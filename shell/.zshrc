@@ -77,9 +77,9 @@ done
 for file in ~/.dotfiles-custom/shell/.{exports,aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
-
-#start in sites
-cd $HOME/sites;
-
 unset file
+
+#load rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
