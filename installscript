@@ -23,6 +23,10 @@ curl -sS https://getcomposer.org/installer | php
 echo 'move composer to /usr/local/bin/composer'
 mv -f composer.phar /usr/local/bin/composer
 
+#activate z
+cd ~/.dotfiles/shell
+chmod +x z.sh
+
 #install homebrew
 echo 'install homebrew'
   echo '----------------'
