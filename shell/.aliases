@@ -47,3 +47,5 @@ alias hostfile="sudo nano /etc/hosts"
 
 # Provision the homestead 2 box
 alias homestead-provision="homestead halt;homestead up --provision"
+
+alias phpstorm='open -a /Applications/PhpStorm.app `pwd`'
