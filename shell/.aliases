@@ -45,7 +45,14 @@ alias sudo='sudo '
 # Edit your hosts files
 alias hostfile="sudo nano /etc/hosts"
 
-# Provision the homestead 2 box
-alias homestead-provision="homestead halt;homestead up --provision"
+# PHP
+alias phpspec="vendor/bin/phpspec"
+alias phpunit="vendor/bin/phpunit"
+alias art="php artisan"
+alias c="composer"
+alias cu="composer update"
+alias cr="composer require"
+alias ci="composer install"
 
+#phpstorm
 alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
