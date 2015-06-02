@@ -12,3 +12,6 @@ Thumbs.db
 
 # PhpStorm
 .idea
+
+# Sublime Text
+*.sublime-project
