@@ -43,7 +43,7 @@ alias lsd="ls -lF | grep --color=never '^d'"
 alias sudo='sudo '
 
 # Edit your hosts files
-alias hostfile="sudo nano /etc/hosts"
+alias hostfile="sudo vi /etc/hosts"
 
 # PHP
 alias phpspec="vendor/bin/phpspec"
