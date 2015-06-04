@@ -53,3 +53,17 @@ function removehost() {
    ssh-keygen -R "$1"
 }
 
+# Usage: initpackage package-name
+function initpackage {
+    git clone git@github.com:thephpleague/skeleton.git $1
+    cd $1
+    rm -rf .git
+    find ./ -type f -exec sed -i '' -e "s/:package_name/${1}/g" {} \;
+    find ./ -type f -exec sed -i '' -e "s/thephpleague/spatie/g" {} \;
+    find ./ -type f -exec sed -i '' -e "s/league/spatie/g" {} \;
+    find ./ -type f -exec sed -i '' -e "s/:author_name/Freek Van der Herten/g" {} \;
+    find ./ -type f -exec sed -i '' -e "s/:author_email/freek@spatie\.be/g" {} \;
+    find ./ -type f -exec sed -i '' -e "s/:author_username/freekmurze/g" {} \;
+    find ./ -type f -exec sed -i '' -e "s/:author_website/https:\/\/murze\.be/g" {} \;
+}
+
