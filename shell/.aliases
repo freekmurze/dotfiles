@@ -46,7 +46,7 @@ alias sudo='sudo '
 alias hostfile="sudo vi /etc/hosts"
 
 # PHP
-alias phpspec="vendor/bin/phpspec"
+alias phpspec="vendor/bin/phpspec run"
 alias phpunit="vendor/bin/phpunit"
 alias art="php artisan"
 alias c="composer"
