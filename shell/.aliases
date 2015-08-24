@@ -48,6 +48,7 @@ alias hostfile="sudo vi /etc/hosts"
 # PHP
 alias phpspec="vendor/bin/phpspec run"
 alias phpunit="vendor/bin/phpunit"
+alias behat="vendor/bin/behat"
 alias art="php artisan"
 alias c="composer"
 alias cu="composer update"
