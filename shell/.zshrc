@@ -44,7 +44,7 @@ source $ZSH/oh-my-zsh.sh
 # export PATH=~/spatiecommands:$PATH
 # export PATH="$HOME/bin:$PATH"
 # export PATH=/Users/$DEFAULT_USER/npm/bin/:$PATH
-
+export=Users/$DEFAULT_USER/.rvm/gems/ruby-2.1.2/bin:$PATH
 #set numeric keys
 # 0 . Enter
 bindkey -s "^[Op" "0"
@@ -92,3 +92,6 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 # command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+#install php5.6 http://jacurtis.com/easily-install-mcrypt-php-mavericks-yosemite/
+export PATH=/usr/local/php5/bin:$PATH
