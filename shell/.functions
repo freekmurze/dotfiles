@@ -67,3 +67,10 @@ function initpackage {
     find ./ -type f -exec sed -i '' -e "s/:author_website/https:\/\/murze\.be/g" {} \;
 }
 
+function bbo {
+    remote=$(git config --get remote.origin.url)
+    remote=${remote#"git@bitbucket.org:"}
+    remote=${remote%".git"}
+
+    open "https://bitbucket.org/${remote}"
+}
