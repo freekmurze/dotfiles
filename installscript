@@ -43,6 +43,11 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
   echo '------------'
 brew install wget --overwrite
 
+#install httpie
+  echo 'install httpie'
+  echo '------------'
+brew install httpie
+
 #install brew-cask
 echo 'install brew-cask'
 echo '------------------'
