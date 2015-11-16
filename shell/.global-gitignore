@@ -15,3 +15,7 @@ Thumbs.db
 
 # Sublime Text
 *.sublime-project
+
+# Node
+node_modules
+npm-debug.log

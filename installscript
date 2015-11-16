@@ -59,10 +59,20 @@ echo 'install some nice quicklook plugins'
 echo '-----------------------------------'
 brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
+#install envoy
+echo 'install laravel envoy'
+echo '-----------------------------------'
+composer global require "laravel/envoy=~1.0"
+
 #git config
 #echo 'configure git'
 #echo '-------------'
 #git config --global core.editor "nano"
+
+#install php 5.6
+echo 'install php 5.6'
+echo '-----------------------------------'
+curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
@@ -78,8 +88,8 @@ echo '2. install patched solarized theme included in ~/.dotfiles/misc'
 echo '++++++++++++++++++++++++++++++'
 echo 'Some optional tidbits'
 
-echo '1. you should install php 5.6. Here is a great tutorial that provides step by step instructions: http://jacurtis.com/easily-install-mcrypt-php-mavericks-yosemite/'.
-echo '2. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh'
+echo '1. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh'
+echo '2. make a .dotfiles-custom/shell/.aliases for your personal commands'
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
