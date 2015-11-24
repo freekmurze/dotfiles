@@ -2,7 +2,7 @@
 
 #install zsh
 echo 'install oh-my-zhs'
-  echo '-----------------'
+echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L http://install.ohmyz.sh | sh
 
