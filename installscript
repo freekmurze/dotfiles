@@ -39,13 +39,13 @@ sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 #install wget
-  echo 'install wget'
-  echo '------------'
+echo 'install wget'
+echo '------------'
 brew install wget --overwrite
 
 #install httpie
-  echo 'install httpie'
-  echo '------------'
+echo 'install httpie'
+echo '------------'
 brew install httpie
 
 #install brew-cask
@@ -61,8 +61,13 @@ brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlpret
 
 #install envoy
 echo 'install laravel envoy'
-echo '-----------------------------------'
+echo '---------------------'
 composer global require "laravel/envoy=~1.0"
+
+#install php-cs-fixer
+echo 'install php-cs-fixer'
+echo '--------------------'
+composer global require fabpot/php-cs-fixer
 
 #git config
 #echo 'configure git'
