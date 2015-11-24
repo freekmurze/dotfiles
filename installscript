@@ -20,7 +20,7 @@ git checkout d6a36b1 agnoster.zsh-theme
 
 #install composer
 echo 'install composer'
-  echo '----------------'
+echo '----------------'
 echo install composer
 cd ~/.dotfiles
 curl -sS https://getcomposer.org/installer | php
