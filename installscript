@@ -48,6 +48,11 @@ echo 'install httpie'
 echo '------------'
 brew install httpie
 
+#install ncdu
+echo 'install ncdu'
+echo '------------'
+brew install ncdu
+
 #install brew-cask
 echo 'install brew-cask'
 echo '------------------'
