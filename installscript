@@ -82,7 +82,7 @@ composer global require fabpot/php-cs-fixer
 #install php 5.6
 echo 'install php 5.6'
 echo '-----------------------------------'
-curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
+curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
