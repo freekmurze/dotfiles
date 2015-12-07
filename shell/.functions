@@ -66,11 +66,15 @@ function vm() {
    
    command="$1"
 
-   if [ -z "$command"]; then
+   if [ -z "$command" ]; then 
       command="ssh"
    fi
    
-   vagrant "${command}"
+   if [[ "$command" == "provision" ]]; then 
+      command="up --provision"
+   fi
+   
+   eval "vagrant ${command}"
    
    cd -
 }
