@@ -70,10 +70,6 @@ function vm() {
       command="ssh"
    fi
    
-   if [[ "$command" == "provision" ]]; then 
-      command="up --provision"
-   fi
-   
    eval "vagrant ${command}"
    
    cd -
