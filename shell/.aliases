@@ -42,9 +42,6 @@ alias lsd="ls -lF | grep --color=never '^d'"
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Edit your hosts files
-alias hostfile="sudo vi /etc/hosts"
-
 # PHP
 alias phpspec="vendor/bin/phpspec run"
 alias phpunit="vendor/bin/phpunit"

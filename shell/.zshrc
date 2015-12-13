@@ -1,5 +1,3 @@
-
-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -39,11 +37,6 @@ plugins=(git laravel4 laravel5 composer osx vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-# export PATH=/Applications/MAMP/bin/php/php5.4.26/bin:$PATH
-# export PATH=~/spatiecommands:$PATH
-# export PATH="$HOME/bin:$PATH"
-# export PATH=/Users/$DEFAULT_USER/npm/bin/:$PATH
 export=Users/$DEFAULT_USER/.rvm/gems/ruby-2.1.2/bin:$PATH
 #set numeric keys
 # 0 . Enter
@@ -82,7 +75,7 @@ unset file
 #load rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin"
 . $HOME/.dotfiles/shell/z.sh
 
 #sudoless npm https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
@@ -93,5 +86,5 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
-#install php5.6 http://jacurtis.com/easily-install-mcrypt-php-mavericks-yosemite/
 export PATH=/usr/local/php5/bin:$PATH
+export PATH=$HOME/.dotfiles/bin:$PATH
