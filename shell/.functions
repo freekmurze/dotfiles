@@ -74,9 +74,9 @@ function vm() {
       fi
    
       eval "vagrant ${command}"
-   
-      cd -
    fi
+
+   cd -
 }
 
 alias mysqladm='mysql -u homestead -psecret'
