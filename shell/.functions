@@ -92,6 +92,6 @@ function db {
 }
 
 # Scrape a single webpage with all assets
-function scrapePageWithAssets() {
+function scrapeUrl() {
     wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
 }
