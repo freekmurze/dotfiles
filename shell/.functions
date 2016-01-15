@@ -90,3 +90,8 @@ function db {
         mysql -u homestead -psecret "drop database $2"
     fi
 }
+
+# Scrape a single webpage with all assets
+function scrapePageWithAssets() {
+    wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
+}
