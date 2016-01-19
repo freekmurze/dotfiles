@@ -73,11 +73,6 @@ echo 'install php-cs-fixer'
 echo '--------------------'
 composer global require fabpot/php-cs-fixer
 
-#git config
-#echo 'configure git'
-#echo '-------------'
-#git config --global core.editor "nano"
-
 #install php 7.0
 echo 'install php 7.0'
 echo '---------------'
