@@ -21,7 +21,6 @@ git checkout d6a36b1 agnoster.zsh-theme
 #install composer
 echo 'install composer'
 echo '----------------'
-echo install composer
 cd ~/.dotfiles
 curl -sS https://getcomposer.org/installer | php
 echo 'move composer to /usr/local/bin/composer'
@@ -79,8 +78,8 @@ composer global require fabpot/php-cs-fixer
 #echo '-------------'
 #git config --global core.editor "nano"
 
-#install php 5.6
-echo 'install php 5.6'
+#install php 7.0
+echo 'install php 7.0'
 echo '-----------------------------------'
 curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0
 
