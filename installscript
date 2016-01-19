@@ -80,7 +80,7 @@ composer global require fabpot/php-cs-fixer
 
 #install php 7.0
 echo 'install php 7.0'
-echo '-----------------------------------'
+echo '---------------'
 curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0
 
 echo '++++++++++++++++++++++++++++++'
