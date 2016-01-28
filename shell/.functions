@@ -96,8 +96,8 @@ function scrapeUrl() {
     wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
 }
 
-# Git commit everything
-function gce() {
+#  Commit everything
+function commit() {
   commitMessage="$1"
 
   if [ "$commitMessage" = "" ]; then
