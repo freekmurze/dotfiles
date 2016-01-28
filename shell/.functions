@@ -95,3 +95,15 @@ function db {
 function scrapeUrl() {
     wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
 }
+
+# Git commit everything
+function gce() {
+  commitMessage="$1"
+
+  if [ "$commitMessage" = "" ]; then
+     commitMessage="commit"
+  fi
+
+  git add .
+  eval "git commit -a -m '${commitMessage}'"
+}
