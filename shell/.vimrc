@@ -1,14 +1,14 @@
-" Based on CSS WIzardry's .vimrc
-" http://csswizardry.com/2014/06/vim-for-people-who-think-things-like-vim-are-weird-and-hard/
-
-" Syntax highlighting
-
-" Enable syntax highighting
+"Enable syntax highighting
 syntax enable
-" 256 colours, please
+
+"256 colours, please
 set t_Co=256
+"line numbers"
+set number
 
-
+"highlist search"
+set hlsearch
+set incsearch
 " Tabs, indentation and lines
 
 filetype plugin indent on
@@ -47,3 +47,16 @@ set modeline
 set ruler
 " Show file title in terminal tab
 set title
+
+
+"-------- Auto commands -------"
+"automatically source the Vimrc file on save.
+augroup autosourcing
+   autocmd! 
+   autocmd BufWritePost .vimrc source %
+augroup END
+
+"-------- Mappings-------"
+"make it easy to edit the vimrc file"
+nmap ,ev :tabedit $MYVIMRC<cr>
+nmap ,<space> :nohlsearch<cr>
