@@ -1,18 +1,23 @@
-"Enable syntax highighting
+"-------- General -------"
+
 syntax enable
 
 "256 colours, please
 set t_Co=256
+
 "line numbers"
 set number
 
+
+"-------- Search -------"
 "highlist search"
 set hlsearch
 set incsearch
-" Tabs, indentation and lines
+
+
+"-------- Tabs & indentation -------"
 
 filetype plugin indent on
-" 4 spaces please
 set expandtab
 set shiftwidth=4
 set tabstop=4
@@ -22,7 +27,8 @@ set shiftround
 " No line-wrapping
 set nowrap
 
-" Interactions
+
+"-------- Interactions -------"
 
 " Start scrolling slightly before the cursor reaches an edge
 set scrolloff=3
@@ -33,7 +39,8 @@ set sidescroll=1
 set nocompatible
 set backspace=2
 
-" Visual decorations
+
+"-------- Visual decorations -------"
 
 " Show status line
 set laststatus=2
@@ -55,6 +62,7 @@ augroup autosourcing
    autocmd! 
    autocmd BufWritePost .vimrc source %
 augroup END
+
 
 "-------- Mappings-------"
 "make it easy to edit the vimrc file"
