@@ -108,7 +108,6 @@ function commit() {
   eval "git commit -a -m '${commitMessage}'"
 }
 
-
 transfer() {
     # write to output to tmpfile because of progress bar
     tmpfile=$( mktemp -t transferXXX )
