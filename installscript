@@ -55,6 +55,12 @@ echo 'install ncdu'
 echo '------------'
 brew install ncdu
 
+#install ack
+echo 'install ack'
+echo '------------'
+brew install ncdu
+brew install ack
+
 #install brew-cask
 echo 'install brew-cask'
 echo '------------------'
