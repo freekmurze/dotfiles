@@ -58,8 +58,12 @@ brew install ncdu
 #install ack
 echo 'install ack'
 echo '------------'
-brew install ncdu
 brew install ack
+
+#install doctl
+echo 'install doctl'
+echo '-------------'
+brew install doctl
 
 #install brew-cask
 echo 'install brew-cask'
