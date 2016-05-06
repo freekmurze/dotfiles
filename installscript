@@ -115,6 +115,7 @@ valet install
 echo 'install mariadb'
 echo '---------------'
 brew install mariadb
+sudo chmod -R 777 /usr/local/var/mysql/
 mysql.server start
 sudo brew services start mariadb
 
