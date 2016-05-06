@@ -91,8 +91,11 @@ composer global require fabpot/php-cs-fixer
 echo 'install php'
 echo '------------'
 #curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0
+brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/homebrew-php
 brew install php70
-brew services start homebrew/php/php70
+sudo brew services start homebrew/php/php70
 brew install homebrew/php/php70-mcrypt
 brew install homebrew/php/php70-imagick
 
@@ -113,7 +116,7 @@ echo 'install mariadb'
 echo '---------------'
 brew install mariadb
 mysql.server start
-brew services start mariadb
+sudo brew services start mariadb
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
