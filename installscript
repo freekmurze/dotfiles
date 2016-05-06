@@ -81,15 +81,33 @@ echo 'install laravel envoy'
 echo '---------------------'
 composer global require "laravel/envoy=~1.0"
 
+#install valet
+echo 'install laravel valet'
+echo '---------------------'
+composer global require laravel/valet
+valet install
+
+#install mariadb
+echo 'install mariadb'
+echo '---------------'
+brew install mariadb
+mysql.server start
+
 #install php-cs-fixer
 echo 'install php-cs-fixer'
 echo '--------------------'
 composer global require fabpot/php-cs-fixer
 
-#install php 7.0
-echo 'install php 7.0'
-echo '---------------'
-curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0
+#install phpbrew
+echo 'install php'
+echo '------------'
+#curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0
+brew install php70
+brew services start homebrew/php/php70
+
+echo 'compiling php (this takes a while)'
+echo '----------------------------------'
+phpbrew install latest +default
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
