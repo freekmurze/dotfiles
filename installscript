@@ -93,6 +93,8 @@ echo '------------'
 #curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0
 brew install php70
 brew services start homebrew/php/php70
+brew install homebrew/php/php70-mcrypt
+brew install homebrew/php/php70-imagick
 
 #install valet
 echo 'install laravel valet'
