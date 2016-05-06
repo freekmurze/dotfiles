@@ -92,6 +92,7 @@ echo 'install mariadb'
 echo '---------------'
 brew install mariadb
 mysql.server start
+brew services start mariadb
 
 #install php-cs-fixer
 echo 'install php-cs-fixer'
