@@ -81,18 +81,6 @@ echo 'install laravel envoy'
 echo '---------------------'
 composer global require "laravel/envoy=~1.0"
 
-#install valet
-echo 'install laravel valet'
-echo '---------------------'
-composer global require laravel/valet
-valet install
-
-#install mariadb
-echo 'install mariadb'
-echo '---------------'
-brew install mariadb
-mysql.server start
-brew services start mariadb
 
 #install php-cs-fixer
 echo 'install php-cs-fixer'
@@ -106,9 +94,18 @@ echo '------------'
 brew install php70
 brew services start homebrew/php/php70
 
-echo 'compiling php (this takes a while)'
-echo '----------------------------------'
-phpbrew install latest +default
+#install valet
+echo 'install laravel valet'
+echo '---------------------'
+composer global require laravel/valet
+valet install
+
+#install mariadb
+echo 'install mariadb'
+echo '---------------'
+brew install mariadb
+mysql.server start
+brew services start mariadb
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
