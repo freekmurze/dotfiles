@@ -96,6 +96,12 @@ brew services start homebrew/php/php70
 brew install homebrew/php/php70-mcrypt
 brew install homebrew/php/php70-imagick
 
+#install redis
+echo 'install redis'
+echo '------------'
+brew install redis
+brew install --HEAD homebrew/php/php70-redis
+
 #install valet
 echo 'install laravel valet'
 echo '---------------------'
