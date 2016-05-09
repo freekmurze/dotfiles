@@ -111,6 +111,8 @@ echo '---------------------'
 composer global require laravel/valet
 valet install
 
+
+
 #install mariadb
 echo 'install mariadb'
 echo '---------------'
@@ -118,6 +120,11 @@ brew install mariadb
 sudo chmod -R 777 /usr/local/var/mysql/
 mysql.server start
 sudo brew services start mariadb
+
+#install ghostscript
+echo 'install ghostscript'
+echo '-------------------'
+brew install ghostscript
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
