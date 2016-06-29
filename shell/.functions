@@ -79,15 +79,15 @@ function vm() {
    cd -
 }
 
-alias mysqladm='mysql -u homestead -psecret'
+alias mysqladm='mysql -u root'
 
 function db {
     if [ "$1" = "refresh" ]; then
-        mysql -u homestead -psecret "drop database $2; create database $2"
+        mysql -u root "drop database $2; create database $2"
     elif [ "$1" = "create" ]; then
-        mysql  -u homestead -psecret "create database $2"
+        mysql  -u root "create database $2"
     elif [ "$1" = "drop" ]; then
-        mysql -u homestead -psecret "drop database $2"
+        mysql -u root "drop database $2"
     fi
 }
 
