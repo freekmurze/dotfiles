@@ -86,5 +86,5 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
-export PATH=/usr/local/php5/bin:$PATH
 export PATH=$HOME/.dotfiles/bin:$PATH
+[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
