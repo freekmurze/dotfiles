@@ -115,13 +115,11 @@ echo '---------------------'
 composer global require laravel/valet
 valet install
 
-#install mariadb
-echo 'install mariadb'
+#install mysql
+echo 'install mysql'
 echo '---------------'
-brew install mariadb
-sudo chmod -R 777 /usr/local/var/mysql/
-mysql.server start
-sudo brew services start mariadb
+brew install mysql
+brew services start mysql
 
 #install yarn
 echo 'install yarn'
