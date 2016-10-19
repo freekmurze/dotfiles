@@ -14,6 +14,10 @@ ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
 rm $HOME/.vimrc
 ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
 
+#symlink yarn prefs
+rm $HOME/.yarnrc
+ln -s $HOME/.dotfiles/shell/.yarnrc $HOME/.yarnrc
+
 rm $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
@@ -111,8 +115,6 @@ echo '---------------------'
 composer global require laravel/valet
 valet install
 
-
-
 #install mariadb
 echo 'install mariadb'
 echo '---------------'
@@ -120,6 +122,11 @@ brew install mariadb
 sudo chmod -R 777 /usr/local/var/mysql/
 mysql.server start
 sudo brew services start mariadb
+
+#install yarn
+echo 'install yarn'
+echo '------------'
+brew install yarn
 
 #install ghostscript
 echo 'install ghostscript'
