@@ -99,6 +99,7 @@ brew tap homebrew/dupes
 brew tap homebrew/versions
 brew tap homebrew/homebrew-php
 brew install php70
+brew install php70-xdebug
 sudo brew services start homebrew/php/php70
 brew install homebrew/php/php70-mcrypt
 brew install homebrew/php/php70-imagick
