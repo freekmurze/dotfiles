@@ -88,3 +88,6 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 export PATH=$HOME/.dotfiles/bin:$PATH
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
+
+#import ssh keys in keychain
+ssh-add -A 2>/dev/null;
