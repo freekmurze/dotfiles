@@ -79,6 +79,16 @@ function vm() {
    cd -
 }
 
+function weather() {
+   city="$1"
+
+   if [ -z "$city" ]; then
+      city="Antwerp"
+   fi
+
+   eval "curl http://wttr.in/${city}"
+}
+
 alias mysqladm='mysql -u root'
 
 function db {
