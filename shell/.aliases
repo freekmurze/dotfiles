@@ -51,3 +51,6 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 
 # scrape webpage
 alias scrape="scrapeUrl"
+
+npmnpm="npm config set registry https://registry.npmjs.org"
+npmspatie="npm config set registry https://npm.spatie.be"
