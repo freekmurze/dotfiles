@@ -6,6 +6,10 @@ echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L http://install.ohmyz.sh | sh
 
+#global gitigore
+ln -s $HOME/.dotfiles/shell/.global-gitigore $HOME/.global-gitignore
+git config --global core.excludesfile $HOME/.global-gitignore
+
 #symlink zsh prefs
 rm $HOME/.zshrc
 ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
