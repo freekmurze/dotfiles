@@ -130,10 +130,17 @@ echo 'install yarn'
 echo '------------'
 brew install yarn
 
+# install gulp
+echo 'install gulp'
+echo '------------'
+npm install -g gulp
+
 #install ghostscript
 echo 'install ghostscript'
 echo '-------------------'
 brew install ghostscript
+
+
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
