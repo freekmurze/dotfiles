@@ -111,7 +111,7 @@ brew install homebrew/php/php71-imagick
 echo 'install redis'
 echo '------------'
 brew install redis
-brew install --HEAD homebrew/php/php70-redis
+brew install --HEAD homebrew/php/php71-redis
 
 #install valet
 echo 'install laravel valet'
