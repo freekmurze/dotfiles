@@ -93,7 +93,7 @@ composer global require "laravel/envoy=~1.0"
 #install php-cs-fixer
 echo 'install php-cs-fixer'
 echo '--------------------'
-composer global require fabpot/php-cs-fixer
+composer global require friendsofphp/php-cs-fixer
 
 #install phpbrew
 echo 'install php'
