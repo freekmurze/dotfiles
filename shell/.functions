@@ -125,3 +125,18 @@ transfer() {
     cat $tmpfile;
     rm -f $tmpfile;
 }
+
+xdebug() {
+   iniFileLocation="/usr/local/etc/php/7.1/conf.d/ext-xdebug.ini";
+   
+   currentLine=`cat $iniFileLocation | grep xdebug.so`
+
+   if [[ $currentLine =~ ^#zend_extension ]];
+   then
+      sed -i -e 's/^zend_extension/zend_extension/g' $iniFileLocation
+      echo "xdebug is now active";
+   else
+      sed -i -e 's/^#zend_extension/zend_extension/g' $iniFileLocation
+      echo "xdebug is now inactive";
+   fi
+}
