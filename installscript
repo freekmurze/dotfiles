@@ -6,6 +6,10 @@ echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L http://install.ohmyz.sh | sh
 
+#global gitigore
+ln -s $HOME/.dotfiles/shell/.global-gitignore $HOME/.global-gitignore
+git config --global core.excludesfile $HOME/.global-gitignore
+
 #symlink zsh prefs
 rm $HOME/.zshrc
 ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
@@ -89,7 +93,7 @@ composer global require "laravel/envoy=~1.0"
 #install php-cs-fixer
 echo 'install php-cs-fixer'
 echo '--------------------'
-composer global require fabpot/php-cs-fixer
+composer global require friendsofphp/php-cs-fixer
 
 #install phpbrew
 echo 'install php'
@@ -107,7 +111,7 @@ brew install homebrew/php/php71-imagick
 echo 'install redis'
 echo '------------'
 brew install redis
-brew install --HEAD homebrew/php/php70-redis
+brew install --HEAD homebrew/php/php71-redis
 
 #install valet
 echo 'install laravel valet'
@@ -126,10 +130,17 @@ echo 'install yarn'
 echo '------------'
 brew install yarn
 
+# install gulp
+echo 'install gulp'
+echo '------------'
+npm install -g gulp
+
 #install ghostscript
 echo 'install ghostscript'
 echo '-------------------'
 brew install ghostscript
+
+
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
