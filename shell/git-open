@@ -130,7 +130,15 @@ fi
 # simplify URL for master
 giturl=${giturl/tree\/master/}
 
-giturl=${giturl/:///}
+# get current open browser command
+case $( uname -s ) in
+  Darwin)  open=open;;
+  MINGW*)  open=start;;
+  CYGWIN*) open=cygstart;;
+  MSYS*)   open="powershell.exe –NoProfile Start";;
+  *)       open=${BROWSER:-xdg-open};;
+esac
 
-open "https://$giturl" &> /dev/null
-
+# open it in a browser
+$open "$giturl" &> /dev/null
+exit $?
