@@ -63,6 +63,11 @@ echo 'install ncdu'
 echo '------------'
 brew install ncdu
 
+#install hub
+echo 'install hub'
+echo '-----------'
+brew install hub
+
 #install ack
 echo 'install ack'
 echo '------------'

@@ -78,8 +78,8 @@ unset file
 export PATH="$PATH:$HOME/.rvm/bin"
 . $HOME/.dotfiles/shell/z.sh
 
-#load git-open
-export PATH="$PATH:$HOME/.dotfiles/shell"
+#alias hub to git
+eval "$(hub alias -s)"
 
 #sudoless npm https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
 NPM_PACKAGES="${HOME}/.npm-packages"
