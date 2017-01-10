@@ -135,6 +135,11 @@ echo 'install yarn'
 echo '------------'
 brew install yarn
 
+#install file watch (needed for watching phpunit tests)
+echo 'install onchange'
+echo '----------------'
+yarn global add onchange
+
 # install gulp
 echo 'install gulp'
 echo '------------'
