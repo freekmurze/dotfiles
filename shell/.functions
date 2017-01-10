@@ -140,3 +140,10 @@ xdebug() {
       echo "xdebug is now inactive";
    fi
 }
+
+function phpunitw {
+    # Requires `onchange` module
+    # Installation: yarn global add onchange
+    ./vendor/bin/phpunit $1
+    onchange 'src/**/*.php' 'tests/**/*.php' -- ./vendor/bin/phpunit $1
+}
