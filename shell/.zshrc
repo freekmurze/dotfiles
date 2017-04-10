@@ -100,3 +100,4 @@ export XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9001 remote_ho
 
 
 export PATH="$HOME/.yarn/bin:$PATH"
+export PATH=/usr/local/bin:$PATH
