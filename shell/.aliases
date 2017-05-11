@@ -16,6 +16,10 @@ alias ci="composer install"
 alias cda="composer dump-autoload -o"
 alias hostfile="sudo vi /etc/hosts"
 
+# js
+alias jest="./node_modules/.bin/jest"
+
+# git
 alias gc="git checkout"
 alias gpo="git push origin"
 alias gm="git merge"
