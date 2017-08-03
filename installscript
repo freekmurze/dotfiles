@@ -135,10 +135,15 @@ echo 'install yarn'
 echo '------------'
 brew install yarn
 
-#install file watch (needed for watching phpunit tests)
-echo 'install onchange'
-echo '----------------'
-npm install -g onchange
+#install phpunit watcher
+echo 'install laravel valet'
+echo '---------------------'
+composer global require spatie/phpunit-watcher
+
+#install phpunit watcher
+echo 'install laravel valet'
+echo '---------------------'
+composer global require spatie/mixed-content-scanner-cli
 
 # install gulp
 echo 'install gulp'
