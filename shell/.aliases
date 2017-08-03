@@ -7,6 +7,7 @@ alias .....="cd ../../../.."
 # PHP
 alias phpspec="vendor/bin/phpspec run"
 alias phpunit="vendor/bin/phpunit"
+alias phpunitw="phpunit-watcher watch"
 alias behat="vendor/bin/behat"
 alias a="php artisan"
 alias c="composer"
@@ -31,7 +32,7 @@ alias o="open ."
 alias l="ls -laF"
 
 #phpstorm
-alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`";open -a /Applications/PhpStorm.app "`pwd`"'’
+alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
