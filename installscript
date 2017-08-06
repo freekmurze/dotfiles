@@ -29,7 +29,6 @@ ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 cd ~/.oh-my-zsh/themes/
 git checkout d6a36b1 agnoster.zsh-theme
 
-#install composer
 echo 'install composer'
 echo '----------------'
 cd ~/.dotfiles
@@ -41,66 +40,53 @@ mv -f composer.phar /usr/local/bin/composer
 cd ~/.dotfiles/shell
 chmod +x z.sh
 
-#install homebrew
 echo 'install homebrew'
-  echo '----------------'
+echo '----------------'
 echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-#install wget
 echo 'install wget'
 echo '------------'
 brew install wget --overwrite
 
-#install httpie
 echo 'install httpie'
 echo '------------'
 brew install httpie
 
-#install ncdu
 echo 'install ncdu'
 echo '------------'
 brew install ncdu
 
-#install hub
 echo 'install hub'
 echo '-----------'
 brew install hub
 
-#install ack
 echo 'install ack'
 echo '------------'
 brew install ack
 
-#install doctl
 echo 'install doctl'
 echo '-------------'
 brew install doctl
 
-#install brew-cask
 echo 'install brew-cask'
 echo '------------------'
 brew tap caskroom/cask
 brew install brew-cask
 
-#install some nice quicklook plugins
 echo 'install some nice quicklook plugins'
 echo '-----------------------------------'
 brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
-#install envoy
 echo 'install laravel envoy'
 echo '---------------------'
 composer global require "laravel/envoy=~1.0"
 
-
-#install php-cs-fixer
 echo 'install php-cs-fixer'
 echo '--------------------'
 composer global require friendsofphp/php-cs-fixer
 
-#install phpbrew
 echo 'install php'
 echo '------------'
 brew tap homebrew/dupes
@@ -112,50 +98,40 @@ sudo brew services start homebrew/php/php71
 brew install homebrew/php/php71-mcrypt
 brew install homebrew/php/php71-imagick
 
-#install redis
 echo 'install redis'
 echo '------------'
 brew install redis
 brew install --HEAD homebrew/php/php71-redis
 
-#install valet
 echo 'install laravel valet'
 echo '---------------------'
 composer global require laravel/valet
 valet install
 
-#install mysql
 echo 'install mysql'
 echo '---------------'
 brew install mysql
 brew services start mysql
 
-#install yarn
 echo 'install yarn'
 echo '------------'
 brew install yarn
 
-#install phpunit watcher
 echo 'install laravel valet'
 echo '---------------------'
 composer global require spatie/phpunit-watcher
 
-#install phpunit watcher
-echo 'install laravel valet'
-echo '---------------------'
+echo 'install mixed-content-scanner-cli'
+echo '---------------------------------'
 composer global require spatie/mixed-content-scanner-cli
 
-# install gulp
 echo 'install gulp'
 echo '------------'
 npm install -g gulp
 
-#install ghostscript
 echo 'install ghostscript'
 echo '-------------------'
 brew install ghostscript
-
-
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
