@@ -1,9 +1,3 @@
-# Easier navigation
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
 # PHP
 alias phpspec="vendor/bin/phpspec run"
 alias phpunit="vendor/bin/phpunit"
