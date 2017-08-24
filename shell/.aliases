@@ -10,6 +10,8 @@ alias cr="composer require"
 alias ci="composer install"
 alias cda="composer dump-autoload -o"
 alias hostfile="sudo vi /etc/hosts"
+alias deploy='envoy run deploy'
+alias deploy-code='envoy run deploy-code'
 
 # js
 alias jest="./node_modules/.bin/jest"
