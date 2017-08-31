@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# hide "last login" line when starting a new terminal session
+touch $HOME/.hushlogin
+
 #install zsh
 echo 'install oh-my-zhs'
 echo '-----------------'
