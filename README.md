@@ -10,6 +10,6 @@ The bootstrap script can be run be cd-ing into the .dotfiles directory and perfo
 ./bootstrap
 ```
 
-Feel free to contact me if you have any questions about them.
+Feel free to create an issue on this repo if you have any questions about them.
 
 ![zhs](http://freekmurze.github.io/dotfiles/images/zsh.png)
