@@ -123,7 +123,7 @@ echo 'install yarn'
 echo '------------'
 brew install yarn
 
-echo 'install laravel valet'
+echo 'install phpunit-watcher'
 echo '---------------------'
 composer global require spatie/phpunit-watcher
 
