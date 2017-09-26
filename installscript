@@ -7,7 +7,7 @@ touch $HOME/.hushlogin
 echo 'install oh-my-zhs'
 echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
-curl -L http://install.ohmyz.sh | sh
+curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 #global gitigore
 ln -s $HOME/.dotfiles/shell/.global-gitignore $HOME/.global-gitignore
