@@ -133,10 +133,10 @@ xdebug() {
 
    if [[ $currentLine =~ ^#zend_extension ]];
    then
-      sed -i -e 's/^zend_extension/zend_extension/g' $iniFileLocation
+      sed -i -e 's/^#zend_extension/zend_extension/g' $iniFileLocation
       echo "xdebug is now active";
    else
-      sed -i -e 's/^#zend_extension/zend_extension/g' $iniFileLocation
+      sed -i -e 's/^zend_extension/#zend_extension/g' $iniFileLocation
       echo "xdebug is now inactive";
    fi
 }
