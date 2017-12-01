@@ -1,8 +1,6 @@
 # PHP
-alias phpspec="vendor/bin/phpspec run"
 alias phpunit="vendor/bin/phpunit"
 alias phpunitw="phpunit-watcher watch"
-alias behat="vendor/bin/behat"
 alias a="php artisan"
 alias c="composer"
 alias cu="composer update"
