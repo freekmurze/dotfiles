@@ -28,6 +28,10 @@ alias l="ls -laF"
 #phpstorm
 alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
 
+#vscode
+alias code='open -a "/Applications/Visual Studio Code.app" "`pwd`"'
+
+
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
