@@ -1,6 +1,6 @@
 # Create a new directory and enter it
 function mkd() {
-	mkdir -p "$@" && cd "$@"
+   mkdir -p "$@" && cd "$@"
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
@@ -21,20 +21,6 @@ function phpserver() {
 	php -S "${ip}:${port}"
 }
 
-# Determine size of a file or total size of a directory
-function fs() {
-	if du -b /dev/null > /dev/null 2>&1; then
-		local arg=-sbh
-	else
-		local arg=-sh
-	fi
-	if [[ -n "$@" ]]; then
-		du $arg -- "$@"
-	else
-		du $arg .[^.]* *
-	fi
-}
-
 # All the dig info
 function digga() {
 	dig +nocmd "$1" any +multiline +noall +answer
@@ -53,32 +39,6 @@ function removehost() {
    ssh-keygen -R "$1"
 }
 
-function bbo {
-    remote=$(git config --get remote.origin.url)
-    remote=${remote#"git@bitbucket.org:"}
-    remote=${remote%".git"}
-
-    open "https://bitbucket.org/${remote}"
-}
-
-function vm() {
-   cd ~/homestead7
-   
-   command="$1"
-
-   if [ "$command" = "edit" ]; then
-      open ~/.homestead/homestead.yaml
-   else
-      if [ -z "$command" ]; then 
-         command="ssh"
-      fi
-   
-      eval "vagrant ${command}"
-   fi
-
-   cd -
-}
-
 function weather() {
    city="$1"
 
@@ -90,16 +50,6 @@ function weather() {
 }
 
 alias mysqladm='mysql -u root'
-
-function db {
-    if [ "$1" = "refresh" ]; then
-        mysql -u root "drop database $2; create database $2"
-    elif [ "$1" = "create" ]; then
-        mysql  -u root "create database $2"
-    elif [ "$1" = "drop" ]; then
-        mysql -u root "drop database $2"
-    fi
-}
 
 # Scrape a single webpage with all assets
 function scrapeUrl() {
@@ -116,14 +66,6 @@ function commit() {
 
   git add .
   eval "git commit -a -m '${commitMessage}'"
-}
-
-transfer() {
-    # write to output to tmpfile because of progress bar
-    tmpfile=$( mktemp -t transferXXX )
-    curl --progress-bar --upload-file $1 https://transfer.sh/$(basename $1) >> $tmpfile;
-    cat $tmpfile;
-    rm -f $tmpfile;
 }
 
 xdebug() {
