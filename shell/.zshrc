@@ -100,3 +100,4 @@ export XDEBUG_CONFIG="idekey=VSCODE"
 
 export PATH=/usr/local/bin:$PATH
 export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
