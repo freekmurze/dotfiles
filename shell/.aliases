@@ -11,6 +11,10 @@ alias hostfile="sudo vi /etc/hosts"
 alias deploy='envoy run deploy'
 alias deploy-code='envoy run deploy-code'
 alias mfs='php artisan migrate:fresh --seed'
+alias nah='git reset --hard;git clean -df'
+alias p="phpunit"
+alias pf="phpunit --filter "
+
 
 # js
 alias jest="./node_modules/.bin/jest"
