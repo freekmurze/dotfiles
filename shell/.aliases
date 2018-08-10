@@ -14,7 +14,7 @@ alias mfs='php artisan migrate:fresh --seed'
 alias nah='git reset --hard;git clean -df'
 alias p="phpunit"
 alias pf="phpunit --filter "
-
+alias sshconfig="vi ~/.ssh/config"
 
 # js
 alias jest="./node_modules/.bin/jest"
