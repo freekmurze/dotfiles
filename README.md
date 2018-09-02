@@ -1,5 +1,4 @@
-dotfiles
-========
+# My personal dotfiles
 
 My personal dotfiles. Also used by nearly all other geeks at [spatie.be](http://spatie.be) and [the amazing Frederick Vanbrabant](https://twitter.com/maybeFrederick/status/912620087538016257).
 
