@@ -56,6 +56,10 @@ echo 'install bat'
 echo '-----------'
 brew install bat
 
+echo 'install pkg-config'
+echo '------------------'
+brew install pkg-config
+
 echo 'install prettyping'
 echo '------------------'
 brew install prettyping
@@ -77,7 +81,7 @@ echo '-----------'
 brew install hub
 
 echo 'install ack'
-echo '------------'
+echo '-----------'
 brew install ack
 
 echo 'install doctl'
@@ -93,6 +97,30 @@ echo 'install some nice quicklook plugins'
 echo '-----------------------------------'
 brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
+echo 'install php'
+echo '------------'
+brew install php@7.2
+
+echo 'install imagemagick'
+echo '-------------------'
+brew install imagemagick
+
+echo 'install imagick'
+echo '---------------'
+pecl install imagick
+
+echo 'install memcached'
+echo '-----------------'
+pecl install memcached
+
+echo 'install xdebug'
+echo '--------------'
+pecl install xdebug
+
+echo 'install redis'
+echo '-------------'
+pecl install redis
+
 echo 'install laravel envoy'
 echo '---------------------'
 composer global require "laravel/envoy=~1.0"
@@ -100,36 +128,6 @@ composer global require "laravel/envoy=~1.0"
 echo 'install php-cs-fixer'
 echo '--------------------'
 composer global require friendsofphp/php-cs-fixer
-
-echo 'install php'
-echo '------------'
-brew tap homebrew/dupes
-brew tap homebrew/versions
-brew tap homebrew/homebrew-php
-brew install php72 --with-argon2 
-brew install php72-xdebug
-sudo brew services start homebrew/php/php72
-brew install homebrew/php/php72-mcrypt
-brew install homebrew/php/php72-imagick
-
-echo 'install redis'
-echo '------------'
-brew install redis
-brew install homebrew/php/php72-redis
-
-echo 'install laravel valet'
-echo '---------------------'
-composer global require laravel/valet
-valet install
-
-echo 'install mysql'
-echo '---------------'
-brew install mysql
-brew services start mysql
-
-echo 'install yarn'
-echo '------------'
-brew install yarn
 
 echo 'install phpunit-watcher'
 echo '---------------------'
@@ -139,9 +137,19 @@ echo 'install mixed-content-scanner-cli'
 echo '---------------------------------'
 composer global require spatie/mixed-content-scanner-cli
 
-echo 'install gulp'
+echo 'install laravel valet'
+echo '---------------------'
+composer global require laravel/valet
+valet install
+
+echo 'install mysql'
+echo '-------------'
+brew install mysql@5.7
+brew services start mysql@5.7
+
+echo 'install yarn'
 echo '------------'
-npm install -g gulp
+brew install yarn
 
 echo 'install ghostscript'
 echo '-------------------'
