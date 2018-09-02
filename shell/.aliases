@@ -18,7 +18,7 @@ alias sshconfig="vi ~/.ssh/config"
 
 # tool replacements
 alias cat=bat
-alias ping=prettyping
+alias ping='prettyping --nolegend'
 alias map=tldr
 
 # js
