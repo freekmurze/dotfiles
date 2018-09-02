@@ -15,6 +15,7 @@ alias nah='git reset --hard;git clean -df'
 alias p="phpunit"
 alias pf="phpunit --filter "
 alias sshconfig="vi ~/.ssh/config"
+alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
 
 # Tool replacements
 alias cat=bat
