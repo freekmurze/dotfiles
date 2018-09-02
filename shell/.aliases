@@ -1,4 +1,4 @@
-# php
+# PHP
 alias phpunit="vendor/bin/phpunit"
 alias phpunitw="phpunit-watcher watch"
 alias a="php artisan"
@@ -16,18 +16,19 @@ alias p="phpunit"
 alias pf="phpunit --filter "
 alias sshconfig="vi ~/.ssh/config"
 
-# tool replacements
+# Tool replacements
 alias cat=bat
 alias ping='prettyping --nolegend'
 alias map=tldr
 
-# js
+# JavaScript
 alias jest="./node_modules/.bin/jest"
 
-# git
+# Git
 alias gc="git checkout"
 alias gpo="git push origin"
 alias gm="git merge"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 # Fast open
 alias o="open ."
@@ -35,12 +36,11 @@ alias o="open ."
 # List all files colorized in long format
 alias l="ls -laF"
 
-#phpstorm
+# PhPStorm
 alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
 
-#vscode
+# VSCode
 alias code='open -a "/Applications/Visual Studio Code.app" "`pwd`"'
-
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -63,11 +63,9 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-#git
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-
-# scrape webpage
+# Scape webpage
 alias scrape="scrapeUrl"
 
+# Switch NPM
 alias npmnpm="npm config set registry https://registry.npmjs.org"
 alias npmspatie="npm config set registry https://npm.spatie.be"
