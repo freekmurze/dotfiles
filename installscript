@@ -52,6 +52,14 @@ echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+echo 'install bat'
+echo '-----------'
+brew install bat
+
+echo 'install prettyping'
+echo '------------------'
+brew install prettyping
+
 echo 'install wget'
 echo '------------'
 brew install wget --overwrite

@@ -16,6 +16,11 @@ alias p="phpunit"
 alias pf="phpunit --filter "
 alias sshconfig="vi ~/.ssh/config"
 
+# tool replacements
+alias cat=bat
+alias ping=prettyping
+
+
 # js
 alias jest="./node_modules/.bin/jest"
 
