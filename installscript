@@ -1,36 +1,42 @@
 #!/bin/bash
 
-# hide "last login" line when starting a new terminal session
+# Hide "last login" line when starting a new terminal session
 touch $HOME/.hushlogin
 
-#install zsh
+# Install zsh
 echo 'install oh-my-zhs'
 echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-#global gitignore
+# Add global gitignore
 ln -s $HOME/.dotfiles/shell/.global-gitignore $HOME/.global-gitignore
 git config --global core.excludesfile $HOME/.global-gitignore
 
-#symlink zsh prefs
+# Symlink zsh prefs
 rm $HOME/.zshrc
 ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
 
-#symlink vim prefs
+# Symlink vim prefs
 rm $HOME/.vimrc
 ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
-
-#symlink yarn prefs
-rm $HOME/.yarnrc
-ln -s $HOME/.dotfiles/shell/.yarnrc $HOME/.yarnrc
-
 rm $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
-#fix missing font characters (see https://github.com/robbyrussell/oh-my-zsh/issues/1906)
+# Symlink yarn prefs
+rm $HOME/.yarnrc
+ln -s $HOME/.dotfiles/shell/.yarnrc $HOME/.yarnrc
+
+# Symlink the Mackup config
+ln -s $HOME/.dotfiles/macos/.mackup.cfg $HOME/.mackup.cfg
+
+# Fix missing font characters (see https://github.com/robbyrussell/oh-my-zsh/issues/1906)
 cd ~/.oh-my-zsh/themes/
 git checkout d6a36b1 agnoster.zsh-theme
+
+# Activate z
+cd ~/.dotfiles/shell
+chmod +x z.sh
 
 echo 'install composer'
 echo '----------------'
@@ -41,10 +47,6 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 echo 'move composer to /usr/local/bin/composer'
 mv -f composer.phar /usr/local/bin/composer
-
-#activate z
-cd ~/.dotfiles/shell
-chmod +x z.sh
 
 echo 'install homebrew'
 echo '----------------'
@@ -158,6 +160,10 @@ brew install yarn
 echo 'install ghostscript'
 echo '-------------------'
 brew install ghostscript
+
+echo 'install mackup'
+echo '--------------'
+brew install mackup
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
