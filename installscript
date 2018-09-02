@@ -175,7 +175,7 @@ echo '2. Install patched solarized theme included in ~/.dotfiles/misc'
 echo '++++++++++++++++++++++++++++++'
 echo 'Some optional tidbits'
 
-echo '1. Make sure dropbox is running first. If you don't have backuped up via Mackup yet, then run `macup backup` to symlink preferences for a wide collection of apps to your dropbox. If you already had a backup via mackup run `mackup restore`.
+echo '1. Make sure dropbox is running first. If you don't have backuped up via Mackup yet, then run `macup backup` to symlink preferences for a wide collection of apps to your dropbox. If you already had a backup via mackup run `mackup restore` You'll find more info on Mackup here: https://github.com/lra/mackup.
 echo '2. Set some sensible os x defaults by running: $HOME/.dotfiles/macos/set-defaults.sh'
 echo '3. Make a .dotfiles-custom/shell/.aliases for your personal commands'
 
