@@ -14,4 +14,4 @@ The bootstrap script can be run be cd-ing into the .dotfiles directory and perfo
 
 Feel free to create an issue on this repo if you have any questions about them.
 
-![screenshot](http://freekmurze.github.io/dotfiles/screenshot.png)
+![screenshot](https://freekmurze.github.io/dotfiles/screenshot.png)
