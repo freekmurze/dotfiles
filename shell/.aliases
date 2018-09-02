@@ -19,7 +19,7 @@ alias sshconfig="vi ~/.ssh/config"
 # tool replacements
 alias cat=bat
 alias ping=prettyping
-alias map=tldr
+alias man=tldr
 
 # js
 alias jest="./node_modules/.bin/jest"
