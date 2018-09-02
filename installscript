@@ -56,6 +56,10 @@ echo 'install bat'
 echo '-----------'
 brew install bat
 
+echo 'install tldr'
+echo '------------'
+brew install tldr
+
 echo 'install pkg-config'
 echo '------------------'
 brew install pkg-config
