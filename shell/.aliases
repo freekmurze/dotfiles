@@ -1,4 +1,4 @@
-# PHP
+# php
 alias phpunit="vendor/bin/phpunit"
 alias phpunitw="phpunit-watcher watch"
 alias a="php artisan"
