@@ -17,13 +17,3 @@ if [[ $reply =~ ^[Yy]$ ]]
 then
    bootstrapTerminal
 fi
-
-echo 'Setting MacOS defaults'
-echo '------------------'
-echo 'Optionally we can set some sane defaults for MacOS. Are you sure you want to to this? (y/n) '
-read -p 'Answer: '  reply
-
-if [[ $reply =~ ^[Yy]$ ]]
-then
-   source ~/.dotfiles/installscript
-fi

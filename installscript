@@ -4,7 +4,7 @@
 touch $HOME/.hushlogin
 
 # Install zsh
-echo 'install oh-my-zhs'
+echo 'Install oh-my-zhs'
 echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
@@ -38,7 +38,7 @@ git checkout d6a36b1 agnoster.zsh-theme
 cd ~/.dotfiles/shell
 chmod +x z.sh
 
-echo 'install composer'
+echo 'Install composer'
 echo '----------------'
 cd ~/.dotfiles
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -48,139 +48,136 @@ php -r "unlink('composer-setup.php');"
 echo 'move composer to /usr/local/bin/composer'
 mv -f composer.phar /usr/local/bin/composer
 
-echo 'install homebrew'
+echo 'Install homebrew'
 echo '----------------'
 echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo 'install bat'
+echo 'Install bat'
 echo '-----------'
 brew install bat
 
-echo 'install tldr'
+echo 'Install tldr'
 echo '------------'
 brew install tldr
 
-echo 'install pkg-config'
+echo 'Install pkg-config'
 echo '------------------'
 brew install pkg-config
 
-echo 'install prettyping'
+echo 'Install prettyping'
 echo '------------------'
 brew install prettyping
 
-echo 'install wget'
+echo 'Install wget'
 echo '------------'
 brew install wget --overwrite
 
-echo 'install httpie'
+echo 'Install httpie'
 echo '------------'
 brew install httpie
 
-echo 'install ncdu'
+echo 'Install ncdu'
 echo '------------'
 brew install ncdu
 
-echo 'install hub'
+echo 'Install hub'
 echo '-----------'
 brew install hub
 
-echo 'install ack'
+echo 'Install ack'
 echo '-----------'
 brew install ack
 
-echo 'install doctl'
+echo 'Install doctl'
 echo '-------------'
 brew install doctl
 
-echo 'install brew-cask'
+echo 'Install brew-cask'
 echo '------------------'
 brew tap caskroom/cask
 brew install brew-cask
 
-echo 'install some nice quicklook plugins'
+echo 'Install some nice quicklook plugins'
 echo '-----------------------------------'
 brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
-echo 'install php'
+echo 'Install php'
 echo '------------'
 brew install php@7.2
 
-echo 'install imagemagick'
+echo 'Install imagemagick'
 echo '-------------------'
 brew install imagemagick
 
-echo 'install imagick'
+echo 'Install imagick'
 echo '---------------'
 pecl install imagick
 
-echo 'install memcached'
+echo 'Install memcached'
 echo '-----------------'
 pecl install memcached
 
-echo 'install xdebug'
+echo 'Install xdebug'
 echo '--------------'
 pecl install xdebug
 
-echo 'install redis'
+echo 'Install redis'
 echo '-------------'
 pecl install redis
 
-echo 'install laravel envoy'
+echo 'Install laravel envoy'
 echo '---------------------'
 composer global require "laravel/envoy=~1.0"
 
-echo 'install php-cs-fixer'
+echo 'Install php-cs-fixer'
 echo '--------------------'
 composer global require friendsofphp/php-cs-fixer
 
-echo 'install phpunit-watcher'
+echo 'Install phpunit-watcher'
 echo '---------------------'
 composer global require spatie/phpunit-watcher
 
-echo 'install mixed-content-scanner-cli'
+echo 'Install mixed-content-scanner-cli'
 echo '---------------------------------'
 composer global require spatie/mixed-content-scanner-cli
 
-echo 'install laravel valet'
+echo 'Install laravel valet'
 echo '---------------------'
 composer global require laravel/valet
 valet install
 
-echo 'install mysql'
+echo 'Install mysql'
 echo '-------------'
 brew install mysql@5.7
 brew services start mysql@5.7
 
-echo 'install yarn'
+echo 'Install yarn'
 echo '------------'
 brew install yarn
 
-echo 'install ghostscript'
+echo 'Install ghostscript'
 echo '-------------------'
 brew install ghostscript
 
-echo 'install mackup'
+echo 'Install mackup'
 echo '--------------'
 brew install mackup
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
-echo 'all done'
+echo 'All done!'
 echo 'Things to do to make the agnoster terminal theme work:'
-
-#patch font contains right characters for promt
-echo '1. install menlo patched font included in ~/.dotfiles/misc https://gist.github.com/qrush/1595572/raw/Menlo-Powerline.otf' 
-
-#install solarized http://ethanschoonover.com/solarized
-echo '2. install patched solarized theme included in ~/.dotfiles/misc'
+echo '1. Install menlo patched font included in ~/.dotfiles/misc https://gist.github.com/qrush/1595572/raw/Menlo-Powerline.otf'
+echo '2. Install patched solarized theme included in ~/.dotfiles/misc'
 
 echo '++++++++++++++++++++++++++++++'
 echo 'Some optional tidbits'
 
-echo '1. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh'
-echo '2. make a .dotfiles-custom/shell/.aliases for your personal commands'
+echo '1. Make sure dropbox is running first. If you don't have backuped up via Mackup yet, then run `macup backup` to symlink preferences for a wide collection of apps to your dropbox. If you already had a backup via mackup run `mackup restore`.
+echo '2. Set some sensible os x defaults by running: $HOME/.dotfiles/macos/set-defaults.sh'
+echo '3. Make a .dotfiles-custom/shell/.aliases for your personal commands'
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
