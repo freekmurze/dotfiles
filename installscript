@@ -169,6 +169,10 @@ echo 'Install mackup'
 echo '--------------'
 brew install mackup
 
+echo 'Install zsh-autosuggestions'
+echo '---------------------------'
+brew install zsh-autosuggestions
+
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
 echo 'All done!'
