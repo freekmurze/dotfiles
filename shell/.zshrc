@@ -80,7 +80,12 @@ ssh-add -A 2>/dev/null;
 # Setup xdebug
 export XDEBUG_CONFIG="idekey=VSCODE"
 
+# Enable autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Extra paths
 export PATH=/usr/local/bin:$PATH
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="/usr/local/opt/node@8/bin:$PATH"
+
