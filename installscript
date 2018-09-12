@@ -79,7 +79,7 @@ echo '------------'
 brew install wget --overwrite
 
 echo 'Install httpie'
-echo '------------'
+echo '--------------'
 brew install httpie
 
 echo 'Install ncdu'
@@ -99,7 +99,7 @@ echo '-------------'
 brew install doctl
 
 echo 'Install brew-cask'
-echo '------------------'
+echo '-----------------'
 brew tap caskroom/cask
 brew install brew-cask
 
@@ -108,7 +108,7 @@ echo '-----------------------------------'
 brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
 echo 'Install php'
-echo '------------'
+echo '-----------'
 brew install php@7.2
 
 echo 'Install imagemagick'
