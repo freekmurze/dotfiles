@@ -4,7 +4,7 @@
 touch $HOME/.hushlogin
 
 # Install zsh
-echo 'Install oh-my-zhs'
+echo 'Install oh-my-zsh'
 echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
