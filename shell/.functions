@@ -76,7 +76,7 @@ function commit() {
   commitMessage="$1"
 
   if [ "$commitMessage" = "" ]; then
-     commitMessage="commit"
+     commitMessage="wip"
   fi
 
   git add .
