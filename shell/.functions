@@ -20,14 +20,6 @@ function mkd() {
 
 # Open a valet project in the browser
 
-function browse() {
-   open http://${PWD##*/}.test
-}
-
-function browse-https() {
-   open http://${PWD##*/}.test
-}
-
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
 	local port="${1:-9000}"
