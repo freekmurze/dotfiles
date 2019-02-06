@@ -64,21 +64,9 @@ echo 'Install node'
 echo '-----------'
 brew install node@8
 
-echo 'Install bat'
-echo '-----------'
-brew install bat
-
-echo 'Install tldr'
-echo '------------'
-brew install tldr
-
 echo 'Install pkg-config'
 echo '------------------'
 brew install pkg-config
-
-echo 'Install prettyping'
-echo '------------------'
-brew install prettyping
 
 echo 'Install wget'
 echo '------------'
@@ -118,6 +106,7 @@ echo '-----------'
 brew install php@7.0
 brew install php@7.1
 brew install php@7.2
+brew install php@7.3
 
 echo 'Install imagemagick'
 echo '-------------------'
@@ -143,12 +132,8 @@ echo 'Install laravel envoy'
 echo '---------------------'
 composer global require "laravel/envoy=~1.0"
 
-echo 'Install php-cs-fixer'
-echo '--------------------'
-composer global require friendsofphp/php-cs-fixer
-
 echo 'Install phpunit-watcher'
-echo '---------------------'
+echo '-----------------------'
 composer global require spatie/phpunit-watcher
 
 echo 'Install mixed-content-scanner-cli'

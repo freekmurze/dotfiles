@@ -87,7 +87,7 @@ function commit() {
 }
 
 xdebug() {
-   iniFileLocation="/usr/local/etc/php/7.2/conf.d/ext-xdebug.ini";
+   iniFileLocation="/usr/local/etc/php/7.3/conf.d/ext-xdebug.ini";
    
    currentLine=`cat $iniFileLocation | grep xdebug.so`
 
@@ -100,14 +100,6 @@ xdebug() {
       echo "xdebug is now inactive";
    fi
 }
-
-function phpunitw {
-    # Requires `onchange` module
-    # Installation: yarn global add onchange
-    ./vendor/bin/phpunit $1
-    onchange 'src/**/*.php' 'tests/**/*.php' -- ./vendor/bin/phpunit $1
-}
-
 
 function db {
     if [ "$1" = "refresh" ]; then
