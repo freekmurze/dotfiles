@@ -173,6 +173,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
 
+# Prevent applications from bouncing in Dock
+defaults write com.apple.dock no-bouncing -bool true
+
 # Set the icon size of Dock items to 72 pixels
 defaults write com.apple.dock tilesize -int 72
 
