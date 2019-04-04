@@ -35,6 +35,9 @@ alias l="ls -laF"
 # PhPStorm
 alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
 
+# Redis
+alias flush-redis="redis-cli FLUSHALL"
+
 # VSCode
 alias code='open -a "/Applications/Visual Studio Code.app" "`pwd`"'
 
