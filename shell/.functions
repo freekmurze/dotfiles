@@ -111,3 +111,10 @@ function db {
         mysql -uroot -e "drop database $2"
     fi
 }
+
+function scheduler () {
+    while :; do
+        php artisan schedule:run;
+        sleep 60;
+    done
+}
