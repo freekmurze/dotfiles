@@ -114,7 +114,8 @@ function db {
 
 function scheduler () {
     while :; do
-        php artisan schedule:run;
-        sleep 60;
+        php artisan schedule:run
+	echo "Sleeping 60 seconds..."
+        sleep 60
     done
 }
