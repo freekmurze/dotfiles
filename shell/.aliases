@@ -34,7 +34,7 @@ alias o="open ."
 # List all files colorized in long format
 alias l="ls -laF"
 
-# PhPStorm
+# PhpStorm
 alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
 
 # Redis
