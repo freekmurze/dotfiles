@@ -40,21 +40,11 @@ chmod +x z.sh
 
 echo 'Install composer'
 echo '----------------'
-cd ~/.dotfiles
-EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-ACTUAL_SIGNATURE="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
-
-if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
-then
-    echo 'ERROR: Invalid Composer installer signature'
-    rm composer-setup.php
-else
-    php composer-setup.php --quiet
-    rm composer-setup.php
-    echo 'move composer to /usr/local/bin/composer'
-    sudo mv -f composer.phar /usr/local/bin/composer
-fi
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar /usr/local/bin/composer
 
 echo 'Install homebrew'
 echo '----------------'
