@@ -12,15 +12,23 @@ alias deploy='envoy run deploy'
 alias deploy-code='envoy run deploy-code'
 alias mfs='php artisan migrate:fresh --seed'
 alias nah='git reset --hard;git clean -df'
-alias p="phpunit"
-alias pf="phpunit --filter "
-alias d="php artisan dusk"
-alias df="php artisan dusk --filter"
+alias dusk="php artisan dusk"
+alias duskfilter="php artisan dusk --filter"
 alias sshconfig="vi ~/.ssh/config"
 alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
 
+# Docker
+alias d="docker"
+alias dc="docker container"
+alias dv="docker volume"
+alias di="docker image"
+alias dco="docker-compose"
+alias dcl="docker-compose logs"
+alias dclf="docker-compose logs -f"
+
 # JavaScript
 alias jest="./node_modules/.bin/jest"
+alisa nr="npm run"
 
 # Git
 alias gc="git checkout"
@@ -69,4 +77,3 @@ alias scrape="scrapeUrl"
 
 # Switch NPM
 alias npmnpm="npm config set registry https://registry.npmjs.org"
-alias npmspatie="npm config set registry https://npm.spatie.be"
