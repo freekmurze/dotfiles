@@ -25,16 +25,19 @@ alias di="docker image"
 alias dco="docker-compose"
 alias dcl="docker-compose logs"
 alias dclf="docker-compose logs -f"
+alias dcx="docker-compose exec -t"
+alisa dx="docker exec"
 
 # JavaScript
 alias jest="./node_modules/.bin/jest"
-alisa nr="npm run"
+alias nr="npm run"
 
 # Git
 alias gc="git checkout"
 alias gpo="git push origin"
 alias gm="git merge"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gs="git status"
 
 # Fast open
 alias o="open ."
