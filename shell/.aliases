@@ -32,6 +32,10 @@ alisa dx="docker exec"
 alias jest="./node_modules/.bin/jest"
 alias nr="npm run"
 
+#Bash
+alias bash="vi ~/.bash_profile"
+alias bashref="source ~/.bash_profile"
+
 # Git
 alias gc="git checkout"
 alias gpo="git push origin"
