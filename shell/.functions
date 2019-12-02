@@ -75,6 +75,10 @@ function scrapeUrl() {
     wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
 }
 
+function rector() {
+   docker run -v $(pwd):/project rector/rector:latest process /project/$1 --config="/project/rector.yaml"  --autoload-file /project/vendor/autoload.php
+}
+
 #  Commit everything
 function commit() {
   commitMessage="$1"
