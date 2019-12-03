@@ -12,15 +12,14 @@ phpv() {
 alias php70="phpv php@7.0"
 alias php71="phpv php@7.1"
 alias php72="phpv php@7.2"
-alias php73="phpv php"
+alias php73="phpv php@7.3"
+alias php74="phpv php@7.4"
 
 
 # Create a new directory and enter it
 function mkd() {
    mkdir -p "$@" && cd "$@"
 }
-
-# Open a valet project in the browser
 
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
