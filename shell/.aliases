@@ -70,3 +70,6 @@ alias scrape="scrapeUrl"
 # Switch NPM
 alias npmnpm="npm config set registry https://registry.npmjs.org"
 alias npmspatie="npm config set registry https://npm.spatie.be"
+
+# Restart touch bar
+alias touchbar="killall ControlStrip"
