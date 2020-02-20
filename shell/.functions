@@ -1,26 +1,26 @@
 # Switch PHP versions
 phpv() {
-    valet stop
-    brew unlink php@7.0 php@7.1 php@7.2 php@7.3
-    brew link --force --overwrite $1
-    brew services start $1
+    if [ $1 = "7.4" ]; then
+        valet use php
+    else
+        valet use php@$1
+    fi
+    sed -in "s/128M/512M/g" /usr/local/etc/php/$1/conf.d/php-memory-limits.ini
     composer global update
-    rm -f ~/.config/valet/valet.sock
-    valet install
+    source ~/.zshrc
 }
 
-alias php70="phpv php@7.0"
-alias php71="phpv php@7.1"
-alias php72="phpv php@7.2"
-alias php73="phpv php"
+alias php70="phpv 7.0"
+alias php71="phpv 7.1"
+alias php72="phpv 7.2"
+alias php73="phpv 7.3"
+alias php74="phpv 7.4"
 
 
 # Create a new directory and enter it
 function mkd() {
    mkdir -p "$@" && cd "$@"
 }
-
-# Open a valet project in the browser
 
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
@@ -75,6 +75,10 @@ function scrapeUrl() {
     wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
 }
 
+function rector() {
+   docker run -v $(pwd):/project rector/rector:latest process /project/$1 --config="/project/rector.yaml"  --autoload-file /project/vendor/autoload.php
+}
+
 #  Commit everything
 function commit() {
   commitMessage="$1"
@@ -88,7 +92,7 @@ function commit() {
 }
 
 xdebug() {
-   iniFileLocation="/usr/local/etc/php/7.3/conf.d/ext-xdebug.ini";
+   iniFileLocation="/usr/local/etc/php/7.4/php.ini";
    
    currentLine=`cat $iniFileLocation | grep xdebug.so`
 
