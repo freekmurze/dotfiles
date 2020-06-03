@@ -34,6 +34,10 @@ ln -s $HOME/.dotfiles/macos/.mackup.cfg $HOME/.mackup.cfg
 cd ~/.oh-my-zsh/themes/
 git checkout d6a36b1 agnoster.zsh-theme
 
+# xdebug toggle
+cp $HOME/.dotfiles/shell/xdebug /usr/local/bin/xdebug
+chmod +x /usr/local/bin/xdebug
+
 # Activate z
 cd ~/.dotfiles/shell
 chmod +x z.sh
