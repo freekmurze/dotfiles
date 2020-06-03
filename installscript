@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Hide "last login" line when starting a new terminal session
-touch $HOME/.hushlogin
+#touch $HOME/.hushlogin
 
 # Install zsh
 echo 'Install oh-my-zsh'
@@ -54,7 +54,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 echo 'Install node'
 echo '-----------'
-brew install node@8
+brew install node
 
 echo 'Install pkg-config'
 echo '------------------'
@@ -95,9 +95,6 @@ brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlpret
 
 echo 'Install php'
 echo '-----------'
-brew install php@7.0
-brew install php@7.1
-brew install php@7.2
 brew install php@7.4
 
 echo 'Install imagemagick'
@@ -139,8 +136,8 @@ valet install
 
 echo 'Install mysql'
 echo '-------------'
-brew install mysql@5.7
-brew services start mysql@5.7
+brew install mariadb
+brew services start mariadb
 
 echo 'Install yarn'
 echo '------------'
