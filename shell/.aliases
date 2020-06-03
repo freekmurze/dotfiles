@@ -19,6 +19,8 @@ alias df="php artisan dusk --filter"
 alias sshconfig="vi ~/.ssh/config"
 alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
 
+alias pullDM='git checkout develop && git pull && git checkout - && git checkout master && git pull && git checkout -'
+
 # JavaScript
 alias jest="./node_modules/.bin/jest"
 
@@ -65,11 +67,7 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 alias sudo='sudo '
 
 # Scape webpage
-alias scrape="scrapeUrl"
-
-# Switch NPM
-alias npmnpm="npm config set registry https://registry.npmjs.org"
-alias npmspatie="npm config set registry https://npm.spatie.be"
+alias scrape="scrapeUrl
 
 # Restart touch bar
 alias touchbar="killall ControlStrip"
