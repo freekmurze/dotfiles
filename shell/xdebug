@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+# http://github.com/w00fz/xdebug-osx
+#
+# @author   Djamil Legato http://github.com/w00fz/xdebug-osx
+# @license  MIT
+# @version  1.2
+
+app="$(basename "$0")"
+command="$1"
+options="$2"
+php_version_dot=$(php -r "\$v=explode('.', PHP_VERSION ); echo implode('.', array_splice(\$v, 0, -1));")
+php_version="${php_version_dot//./}"
+
+xdebug_conf_path="$(brew --prefix)/etc/php/$php_version_dot/conf.d"
+xdebug_conf_file="ext-xdebug.ini"
+xdebug_conf=${xdebug_conf_path}/${xdebug_conf_file}
+extension_dir=$(php -r "echo PEAR_EXTENSION_DIR;")
+
+if [ ! -f "$extension_dir"/xdebug.so ]; then
+    if [ ! -f "$xdebug_conf" ] && [ ! -f "$xdebug_conf.disabled" ]; then
+        echo ""
+        echo "The ini file for Xdebug was not found at '$xdebug_conf_path'"
+        echo "Did you install Xdebug via PECL?"
+        echo "For more informations: http://github.com/w00fz/xdebug-osx/blob/master/README.md"
+        echo ""
+
+        exit 1
+    else
+        STATUS="enabled"
+        IS_PHP_FPM=false
+        SERVER_NAME="apache"
+
+        if [ -f "$xdebug_conf" ] && [ -f "$xdebug_conf.disabled" ]; then
+            echo ""
+            echo "Detected both enabled and disabled Xdebug ini files. Deleting the disabled one."
+            echo ""
+
+            rm -rf "$xdebug_conf.disabled"
+            STATUS="enabled"
+        elif [ -f "$xdebug_conf.disabled" ]; then
+            STATUS="disabled"
+        fi
+
+        if [ $# -ge 1 ] && [ "$command" == "on" ] || [ "$command" == "off" ]; then
+            if [ "$command" == "on" ]; then
+                mv "$xdebug_conf.disabled" "$xdebug_conf" 2> /dev/null
+                STATUS="enabled"
+            elif [ "$command" == "off" ]; then
+                mv "$xdebug_conf" "$xdebug_conf.disabled" 2> /dev/null
+                STATUS="disabled"
+            fi
+
+            current_stable_php_path="/usr/local/opt/php/bin/php"
+            if [ -f $(eval echo ${current_stable_php_path}) ]; then
+                current_stable_php_version=$(${current_stable_php_path} -r "\$v=explode('.', PHP_VERSION ); echo implode('.', array_splice(\$v, 0, -1));")
+            fi
+
+            php_plist_file="~/Library/LaunchAgents/homebrew.mxcl.php@$php_version_dot.plist"
+            if [ "${php_version_dot}" == "${current_stable_php_version}" ]; then
+                php_plist_file="~/Library/LaunchAgents/homebrew.mxcl.php.plist"
+            fi
+
+            if [ -f $(eval echo ${php_plist_file}) ]; then
+                IS_PHP_FPM=true
+                SERVER_NAME="php-fpm"
+            fi
+
+            if [ "$options" == '--no-server-restart' ]; then
+                echo ""
+                echo "Xdebug has been $STATUS. Will not restart $SERVER_NAME"
+            else
+                if [ "$IS_PHP_FPM" == true ]; then
+                    echo ""
+                    echo "Xdebug has been $STATUS, restarting $SERVER_NAME"
+
+                   sudo  brew services restart php@"${php_version_dot}"
+                else
+                    echo ""
+                    echo "Xdebug has been $STATUS, restarting $SERVER_NAME (it might ask for your password)"
+
+                    sudo pkill -9 httpd
+                    sudo apachectl -k restart > /dev/null 2>&1
+                fi
+            fi
+        else
+            echo ""
+            echo "Usage: ${app} <on | off> [--no-server-restart]"
+        fi
+
+        echo ""
+        echo "You are running PHP v$php_version_dot with Xdebug $STATUS"
+        echo ""
+    fi
+else
+    echo ""
+    echo "Xdebug for PHP $php_version_dot was never installed or not installed via PECL."
+    echo "For more informations: http://github.com/w00fz/xdebug-osx/blob/master/README.md"
+    echo ""
+    exit 1
+fi
