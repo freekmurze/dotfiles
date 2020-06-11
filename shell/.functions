@@ -18,13 +18,27 @@ alias php74="phpv 7.4"
 
 # git flow
 gfrs() {
+    git fetch
     gs
     gc develop
     git pull --rebase 
     gc -b release/$1
     gs pop
 }
-alias gfrf=""
+gfrf() {
+    git fetch
+    gc master
+    git pull
+    git merge release/$1
+    gc develop
+    git pull
+    git merge release/$1
+    git branch -D release/$1
+    git push
+    gc master
+    git push
+    gc develop
+}
 gfhs() {
     gs
     gc master
@@ -32,7 +46,20 @@ gfhs() {
     gc -b hotfix/$1
     gs pop
 }
-alias gfhf=""
+gfhf() {
+    git fetch
+    gc master
+    git pull
+    git merge hotfix/$1
+    gc develop
+    git pull
+    git merge hotfix/$1
+    git branch -D hotfix/$1
+    git push
+    gc master
+    git push
+    gc develop
+}
 
 # Create a new directory and enter it
 function mkd() {
