@@ -69,7 +69,7 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 alias sudo='sudo '
 
 # Scape webpage
-alias scrape="scrapeUrl
+alias scrape="scrapeUrl"
 
 # Restart touch bar
 alias touchbar="killall ControlStrip"
