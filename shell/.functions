@@ -16,6 +16,23 @@ alias php72="phpv 7.2"
 alias php73="phpv 7.3"
 alias php74="phpv 7.4"
 
+# git flow
+gfrs() {
+    gs
+    gc develop
+    git pull --rebase 
+    gc -b release/$1
+    gs pop
+}
+alias gfrf=""
+gfhs() {
+    gs
+    gc master
+    git pull --rebase 
+    gc -b hotfix/$1
+    gs pop
+}
+alias gfhf=""
 
 # Create a new directory and enter it
 function mkd() {
