@@ -31,11 +31,9 @@ testflow() {
 # git flow
 gfrs() {
     git fetch
-    gs
     gc develop
     git pull --rebase 
     gc -b release/$1
-    gs pop
 }
 gfrf() {
     git fetch
@@ -62,11 +60,9 @@ gfrf() {
     gc develop
 }
 gfhs() {
-    gs
     gc master
     git pull --rebase 
     gc -b hotfix/$1
-    gs pop
 }
 gfhf() {
     git fetch
