@@ -81,8 +81,8 @@ gfhf() {
     git merge $branch
     gc develop
     git pull
-    git merge branch
-    git branch -D branch
+    git merge $branch
+    git branch -D $branch
     git push
     gc master
     git push
