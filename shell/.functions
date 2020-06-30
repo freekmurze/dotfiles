@@ -50,13 +50,14 @@ gfrf() {
     gc master
     git pull
     git merge $branch
+    git tag -a $branch -m "$branch"
     gc develop
     git pull
     git merge $branch
     git branch -D $branch
-    git push
+    git push --tags
     gc master
-    git push
+    git push --tags
     gc develop
 }
 gfhs() {
@@ -79,13 +80,14 @@ gfhf() {
     gc master
     git pull
     git merge $branch
+    git tag -a $branch -m "$branch"
     gc develop
     git pull
     git merge $branch
     git branch -D $branch
-    git push
+    git push --tags
     gc master
-    git push
+    git push --tags
     gc develop
 }
 
