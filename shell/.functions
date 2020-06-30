@@ -55,8 +55,9 @@ gfrf() {
     git pull
     git merge $branch
     git branch -D $branch
-    git push --tags
+    git push
     gc master
+    git push
     git push --tags
     gc develop
 }
@@ -85,8 +86,9 @@ gfhf() {
     git pull
     git merge $branch
     git branch -D $branch
-    git push --tags
+    git push
     gc master
+    git push
     git push --tags
     gc develop
 }
