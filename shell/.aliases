@@ -28,7 +28,7 @@ alias gpo="git push origin"
 alias gm="git merge"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gcm="git commit -a -m"
-alias gp="git pull --rebase && git push"
+alias gp="git pull --rebase && git push --tags"
 alias gs="git stash"
 alias pullDM='git fetch && git checkout develop && git pull --rebase && git checkout - && git checkout master && git pull --rebase && git checkout -'
 
