@@ -49,6 +49,8 @@ gfrf() {
     else
         branch=release/$branch
     fi
+    
+    echo "using on "$branch 
 
     gc master
     git pull
@@ -84,6 +86,8 @@ gfhf() {
     else
         branch=hotfix/$branch
     fi
+    
+    echo "using on "$branch 
     
     gc master
     git pull
