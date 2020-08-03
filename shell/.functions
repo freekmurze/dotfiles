@@ -1,3 +1,10 @@
+set -e
+# keep track of the last executed command
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+# echo an error message before exiting
+trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
+
+
 # Switch PHP versions
 phpv() {
     if [ $1 = "7.4" ]; then
@@ -29,17 +36,13 @@ testflow() {
 }
 
 # git flow
-gfrs() {
-    set -e
-    
+gfrs() {    
     git fetch
     gc develop
     git pull --rebase 
     gc -b release/$1
 }
-gfrf() {
-    set -e
-    
+gfrf() {    
     git fetch
 
     branch=$1
@@ -65,16 +68,12 @@ gfrf() {
     git push --tags
     gc develop
 }
-gfhs() {
-    set -e
-    
+gfhs() {    
     gc master
     git pull --rebase 
     gc -b hotfix/$1
 }
-gfhf() {
-    set -e
-    
+gfhf() {    
     git fetch
     
     branch=$1
