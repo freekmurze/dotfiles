@@ -30,12 +30,16 @@ testflow() {
 
 # git flow
 gfrs() {
+    set -e
+    
     git fetch
     gc develop
     git pull --rebase 
     gc -b release/$1
 }
 gfrf() {
+    set -e
+    
     git fetch
 
     branch=$1
@@ -62,11 +66,15 @@ gfrf() {
     gc develop
 }
 gfhs() {
+    set -e
+    
     gc master
     git pull --rebase 
     gc -b hotfix/$1
 }
 gfhf() {
+    set -e
+    
     git fetch
     
     branch=$1
