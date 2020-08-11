@@ -45,7 +45,7 @@ gfrf() {
     
     if [ -z $branch ]
     then
-        branch=$(git rev-parse --abbrev-ref HEAD)
+        branch=$(git branch --no-color | grep '^\* ' | grep -v 'no branch' | sed 's/^* //g')
     else
         branch=release/$branch
     fi
@@ -84,7 +84,7 @@ gfhf() {
 
     if [ -z $branch ]
     then
-        branch=$(git rev-parse --abbrev-ref HEAD)
+        branch=$(git branch --no-color | grep '^\* ' | grep -v 'no branch' | sed 's/^* //g')
     else
         branch=hotfix/$branch
     fi
