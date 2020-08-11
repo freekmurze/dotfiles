@@ -50,7 +50,7 @@ gfrf() {
         branch=release/$branch
     fi
     
-    gitTag=${branch##*/}
+    gitTag=${branch##*/}$(date +" %Y-%m-%d_%H-%M-%S")
     
     echo "using on "$branch 
 
@@ -89,7 +89,7 @@ gfhf() {
         branch=hotfix/$branch
     fi
     
-    gitTag=${branch##*/}
+    gitTag=${branch##*/}$(date +" %Y-%m-%d_%H-%M-%S")
     
     echo "using on "$branch 
     
