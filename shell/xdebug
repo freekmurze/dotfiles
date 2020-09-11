@@ -73,7 +73,8 @@ if [ ! -f "$extension_dir"/xdebug.so ]; then
                     echo ""
                     echo "Xdebug has been $STATUS, restarting $SERVER_NAME"
 
-                   sudo  brew services restart php@"${php_version_dot}"
+                    sudo brew services restart php@"${php_version_dot}"
+                    sudo pkill -9 php-fpm
                 else
                     echo ""
                     echo "Xdebug has been $STATUS, restarting $SERVER_NAME (it might ask for your password)"
