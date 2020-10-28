@@ -80,7 +80,7 @@ function scrapeUrl() {
 }
 
 function rector() {
-   docker run -v $(pwd):/project rector/rector:latest process /project/$1 --config="/project/rector.yaml"  --autoload-file /project/vendor/autoload.php
+   docker run -v $(pwd):/project rector/rector:latest process /project/$1 --set php80 --autoload-file /project/vendor/autoload.php 
 }
 
 #  Commit everything
