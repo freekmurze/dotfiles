@@ -44,7 +44,7 @@ bindkey -s "^[Oj" "*"
 bindkey -s "^[Oo" "/"
 
 # Load the shell dotfiles, and then some:
-# * ~/.extra can be used for other settings you don’t want to commit.
+# * ~/.dotfiles-custom can be used for other settings you don’t want to commit.
 for file in ~/.dotfiles/shell/.{exports,aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
