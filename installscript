@@ -38,6 +38,12 @@ git checkout d6a36b1 agnoster.zsh-theme
 cd ~/.dotfiles/shell
 chmod +x z.sh
 
+echo 'Configure npm'
+echo '-------------'
+# Create a directory for global packages and tell npm where to store globally installed packages
+mkdir "${HOME}/.npm-packages"
+npm config set prefix "${HOME}/.npm-packages"
+
 echo 'Install composer'
 echo '----------------'
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
