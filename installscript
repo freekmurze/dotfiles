@@ -53,7 +53,7 @@ sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo 'Install node'
-echo '-----------'
+echo '------------'
 brew install node@8
 
 echo 'Install pkg-config'
