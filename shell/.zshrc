@@ -19,7 +19,7 @@ plugins=(git laravel4 laravel5 composer osx vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
-export=Users/$DEFAULT_USER/.rvm/gems/ruby-2.1.2/bin:$PATH
+export PATH=Users/$DEFAULT_USER/.rvm/gems/ruby-2.1.2/bin:$PATH
 #set numeric keys
 # 0 . Enter
 bindkey -s "^[Op" "0"
