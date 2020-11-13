@@ -46,7 +46,7 @@ npm config set prefix "${HOME}/.npm-packages"
 
 echo 'Install composer'
 echo '----------------'
-EXPECTED_COMPOSER_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
+EXPECTED_COMPOSER_CHECKSUM="$(curl https://composer.github.io/installer.sig)"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ACTUAL_COMPOSER_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
 if [ "$EXPECTED_COMPOSER_CHECKSUM" != "$ACTUAL_COMPOSER_CHECKSUM" ]
