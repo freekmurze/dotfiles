@@ -143,3 +143,8 @@ function scheduler () {
         sleep 60
     done
 }
+
+function silent() {
+   "$@" >& /dev/null
+}
+
