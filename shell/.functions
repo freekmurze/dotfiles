@@ -1,21 +1,3 @@
-# Switch PHP versions
-phpv() {
-    if [ $1 = "7.4" ]; then
-        valet use php
-    else
-        valet use php@$1
-    fi
-    sed -in "s/128M/512M/g" /usr/local/etc/php/$1/conf.d/php-memory-limits.ini
-    composer global update
-    source ~/.zshrc
-}
-
-alias php70="phpv 7.0"
-alias php71="phpv 7.1"
-alias php72="phpv 7.2"
-alias php73="phpv 7.3"
-alias php74="phpv 7.4"
-
 # Docker
 function ssh-docker() {
    docker exec -it "$@" bash

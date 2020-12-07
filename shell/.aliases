@@ -36,6 +36,10 @@ alias l="ls -laF"
 # PhpStorm
 alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
 
+# PHP
+alias switch-php80="brew unlink php@7.4 && brew link --overwrite --force php"
+alias switch-php74="brew unlink php && brew link --overwrite --force php@7.4"
+
 # Redis
 alias flush-redis="redis-cli FLUSHALL"
 
