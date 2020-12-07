@@ -23,10 +23,6 @@ ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
 rm $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
-# Symlink yarn prefs
-rm $HOME/.yarnrc
-ln -s $HOME/.dotfiles/shell/.yarnrc $HOME/.yarnrc
-
 # Symlink the Mackup config
 ln -s $HOME/.dotfiles/macos/.mackup.cfg $HOME/.mackup.cfg
 
@@ -108,10 +104,9 @@ brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlpret
 
 echo 'Install php'
 echo '-----------'
-brew install php@7.0
-brew install php@7.1
-brew install php@7.2
 brew install php@7.4
+brew install php@8.0
+
 
 echo 'Install imagemagick'
 echo '-------------------'
@@ -135,7 +130,7 @@ pecl install redis
 
 echo 'Install laravel envoy'
 echo '---------------------'
-composer global require "laravel/envoy=~1.0"
+composer global require "laravel/envoy=~2.0"
 
 echo 'Install phpunit-watcher'
 echo '-----------------------'
@@ -152,8 +147,8 @@ valet install
 
 echo 'Install mysql'
 echo '-------------'
-brew install mysql@5.7
-brew services start mysql@5.7
+brew install mysql
+brew services start mysql
 
 echo 'Install yarn'
 echo '------------'
