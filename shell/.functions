@@ -1,6 +1,6 @@
 # Switch PHP versions
 phpv() {
-    if [ $1 = "7.4" ]; then
+    if [ $1 = "8.0" ]; then
         valet use php
     else
         valet use php@$1
