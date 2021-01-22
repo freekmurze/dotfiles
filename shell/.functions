@@ -55,7 +55,7 @@ gfrf() {
     echo "using on "$branch 
     
     masterBranch="master"
-    if [ `git branch | egrep "^[[:space:]]+main$"` ]
+    if [ `git branch |  egrep "^\*?[[:space:]]+main"` ]
     then
         echo "Main branch exists"
 	
@@ -81,7 +81,7 @@ gfhs() {
     ( set -e
     
     masterBranch="master"
-    if [ `git branch | egrep "^[[:space:]]+main$"` ]
+    if [ `git branch |  egrep "^\*?[[:space:]]+main"` ]
     then
         echo "Main branch exists"
 	
@@ -111,7 +111,7 @@ gfhf() {
     echo "using on "$branch 
     
     masterBranch="master"
-    if [ `git branch | egrep "^[[:space:]]+main$"` ]
+    if [ `git branch |  egrep "^\*?[[:space:]]+main"` ]
     then
         echo "Main branch exists"
 	
