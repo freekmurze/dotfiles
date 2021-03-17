@@ -77,10 +77,6 @@ echo 'Install httpie'
 echo '--------------'
 brew install httpie
 
-echo 'Install wrk'
-echo '-----------'
-brew install wrk
-
 echo 'Install ncdu'
 echo '------------'
 brew install ncdu
