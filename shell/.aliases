@@ -20,7 +20,7 @@ alias d="php artisan dusk"
 alias sshconfig="vi ~/.ssh/config"
 alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
 alias sail='./vendor/bin/sail'
-
+alias tunnel='valet share -subdomain=freekmurze -region=eu'
 
 # JavaScript
 alias jest="./node_modules/.bin/jest"
