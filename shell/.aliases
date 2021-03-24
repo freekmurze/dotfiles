@@ -30,7 +30,7 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 alias gcm="git commit -a -m"
 alias gp="git pull --rebase && git push"
 alias gs="git stash"
-alias pullDM='git fetch && git checkout develop && git pull --rebase && git checkout - && git checkout master && git pull --rebase && git checkout -'
+# alias pullDM='git fetch && git checkout develop && git pull --rebase && git checkout - && git checkout master && git pull --rebase && git checkout -'
 
 # Fast open
 alias o="open ."
