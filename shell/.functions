@@ -17,6 +17,27 @@ alias php73="phpv 7.3"
 alias php74="phpv 7.4"
 alias php80="phpv 8.0"
 
+pullDM() {
+    ( set -e
+    git checkout develop
+    git pull
+    git checkout -
+        
+    masterBranch="master"
+    if [ `git rev-parse --verify --quiet main` ]
+    then
+        echo "Main branch exists"
+	
+        masterBranch="main"
+    fi
+    
+    git checkout $masterBranch
+    git pull
+    git checkout -
+    
+    )
+}
+
 testflow() {
     myVar=$1
     if [ -z $myVar ]
