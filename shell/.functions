@@ -87,7 +87,7 @@ gfrf() {
     gc $masterBranch
     git pull
     git merge $branch
-    git tag -a $gitTag -m "$branch"
+    # git tag -a $gitTag -m "$branch"
     gc develop
     git pull
     git merge $branch
@@ -144,7 +144,7 @@ gfhf() {
     gc $masterBranch
     git pull
     git merge $branch
-    git tag -a $gitTag -m "$branch"
+    # git tag -a $gitTag -m "$branch"
     gc develop
     git pull
     git merge $branch
