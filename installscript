@@ -50,7 +50,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo 'Install node'
 echo '------------'
-brew install node@8
+brew install node
 
 echo 'Install pkg-config'
 echo '------------------'
