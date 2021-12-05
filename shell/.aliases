@@ -1,5 +1,4 @@
 # PHP
-alias pest="vendor/bin/pest"
 alias phpunit="vendor/bin/phpunit"
 alias phpunitw="phpunit-watcher watch"
 alias a="php artisan"
@@ -15,9 +14,8 @@ alias deploy='envoy run deploy'
 alias deploy-code='envoy run deploy-code'
 alias mfs='php artisan migrate:fresh --seed'
 alias nah='git reset --hard;git clean -df'
-alias p="phpunit"
+
 alias pp="php artisan test --parallel"
-alias pf="phpunit --filter "
 alias d="php artisan dusk"
 alias sshconfig="vi ~/.ssh/config"
 alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
