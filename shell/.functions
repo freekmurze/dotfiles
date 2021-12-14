@@ -17,6 +17,11 @@ alias php73="phpv 7.3"
 alias php74="phpv 7.4"
 alias php80="phpv 8.0"
 
+arm() {
+  arch -x86_64 $@
+}
+
+
 pullDM() {
     ( set -e
     git checkout develop
