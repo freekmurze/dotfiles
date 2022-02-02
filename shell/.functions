@@ -61,49 +61,51 @@ gfrs() {
     git fetch
     gc develop
     git pull --rebase 
-    gc -b release/$1
+    #gc -b release/$1
+    gh pr create --fill --title $1
+    gh pr view --web
     )
 }
-gfrf() {    
-    ( set -e
-    git fetch
-
-    branch=$1
-    
-    if [ -z $branch ]
-    then
-        branch=$(git branch --no-color | grep '^\* ' | grep -v 'no branch' | sed 's/^* //g')
-    else
-        branch=release/$branch
-    fi
-    
-    gitTag=${branch##*/}$(date +"%Y-%m-%d_%H-%M-%S")
-    
-    echo "using on "$branch 
-    
-    masterBranch="master"
-    if [ `git rev-parse --verify --quiet main` ]
-    then
-        echo "Main branch exists"
-	
-        masterBranch="main"
-    fi
-
-    gc $masterBranch
-    git pull
-    git merge $branch
-    # git tag -a $gitTag -m "$branch"
-    gc develop
-    git pull
-    git merge $branch
-    git branch -D $branch
-    git push
-    gc $masterBranch
-    git push
-    git push --tags
-    gc develop
-    )
-}
+#gfrf() {    
+#    ( set -e
+#    git fetch
+#
+#    branch=$1
+#    
+#    if [ -z $branch ]
+#    then
+#        branch=$(git branch --no-color | grep '^\* ' | grep -v 'no branch' | sed 's/^* //g')
+#    else
+#        branch=release/$branch
+#    fi
+#    
+#    gitTag=${branch##*/}$(date +"%Y-%m-%d_%H-%M-%S")
+#    
+#    echo "using on "$branch 
+#    
+#    masterBranch="master"
+#    if [ `git rev-parse --verify --quiet main` ]
+#    then
+#        echo "Main branch exists"
+#	
+#        masterBranch="main"
+#    fi
+#
+#    gc $masterBranch
+#    git pull
+#    git merge $branch
+#    # git tag -a $gitTag -m "$branch"
+#    gc develop
+#    git pull
+#    git merge $branch
+#    git branch -D $branch
+#    git push
+#    gc $masterBranch
+#    git push
+#    git push --tags
+#    gc develop
+#    )
+#}
 gfhs() {    
     ( set -e
     
