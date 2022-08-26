@@ -80,6 +80,9 @@ echo 'Install doctl'
 echo '-------------'
 brew install doctl
 
+echo 'Install git secret'
+echo '------------------'
+brew install git-secret
 
 echo 'Install some nice quicklook plugins'
 echo '-----------------------------------'
