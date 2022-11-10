@@ -59,7 +59,7 @@ alias localip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{
 alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
 # Lock the screen
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk="osascript -e 'tell application \"System Events\" to keystroke \"q\" using {command down,control down}'"
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
@@ -70,6 +70,10 @@ alias sudo='sudo '
 
 # Scape webpage
 alias scrape="scrapeUrl"
+
+# Switch NPM
+alias npmnpm="npm config set registry https://registry.npmjs.org"
+alias npmspatie="npm config set registry https://npm.spatie.be"
 
 # Restart touch bar
 alias touchbar="killall ControlStrip"

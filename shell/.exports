@@ -22,3 +22,6 @@ export MANPAGER="less -X"
 
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto"
+
+# Do not auto update brew
+export HOMEBREW_NO_AUTO_UPDATE=1

@@ -23,10 +23,6 @@ ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
 rm $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
-# Symlink yarn prefs
-rm $HOME/.yarnrc
-ln -s $HOME/.dotfiles/shell/.yarnrc $HOME/.yarnrc
-
 # Symlink the Mackup config
 ln -s $HOME/.dotfiles/macos/.mackup.cfg $HOME/.mackup.cfg
 
@@ -42,22 +38,22 @@ chmod +x /usr/local/bin/xdebug
 cd ~/.dotfiles/shell
 chmod +x z.sh
 
-echo 'Install composer'
-echo '----------------'
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-#php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-mv composer.phar /usr/local/bin/composer
+echo 'Configure npm'
+echo '-------------'
+# Create a directory for global packages and tell npm where to store globally installed packages
+mkdir "${HOME}/.npm-packages"
+npm config set prefix "${HOME}/.npm-packages"
 
 echo 'Install homebrew'
 echo '----------------'
 echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/freek/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo 'Install node'
-echo '-----------'
+echo '------------'
 brew install node
 
 echo 'Install pkg-config'
@@ -66,7 +62,7 @@ brew install pkg-config
 
 echo 'Install wget'
 echo '------------'
-brew install wget --overwrite
+brew install wget
 
 echo 'Install httpie'
 echo '--------------'
@@ -88,18 +84,35 @@ echo 'Install doctl'
 echo '-------------'
 brew install doctl
 
-echo 'Install brew-cask'
-echo '-----------------'
-brew tap caskroom/cask
-brew install brew-cask
+echo 'Install git secret'
+echo '------------------'
+brew install git-secret
 
 echo 'Install some nice quicklook plugins'
 echo '-----------------------------------'
-brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+brew install --cask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzip  suspicious-package
 
 echo 'Install php'
 echo '-----------'
-brew install php@7.4
+brew tap shivammathur/php
+brew install shivammathur/php/php@8.1
+brew link --overwrite --force php@8.1
+
+echo 'Install composer'
+echo '----------------'
+EXPECTED_COMPOSER_CHECKSUM="$(curl https://composer.github.io/installer.sig)"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+ACTUAL_COMPOSER_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+if [ "$EXPECTED_COMPOSER_CHECKSUM" != "$ACTUAL_COMPOSER_CHECKSUM" ]
+then
+    >&2 echo 'ERROR: Invalid installer checksum'
+    rm composer-setup.php
+    exit 1
+fi
+php composer-setup.php
+rm composer-setup.php
+sudo mkdir /usr/local/bin/
+sudo mv composer.phar /usr/local/bin/composer
 
 echo 'Install imagemagick'
 echo '-------------------'
@@ -123,19 +136,11 @@ pecl install redis
 
 echo 'Install laravel envoy'
 echo '---------------------'
-composer global require "laravel/envoy"
+composer global require "laravel/envoy=~2.0"
 
 echo 'Install phpunit-watcher'
 echo '-----------------------'
 composer global require spatie/phpunit-watcher
-
-echo 'Install mixed-content-scanner-cli'
-echo '---------------------------------'
-composer global require spatie/mixed-content-scanner-cli
-
-echo 'Install PHP CS Fixer'
-echo '---------------------'
-composer global require friendsofphp/php-cs-fixer
 
 echo 'Install laravel valet'
 echo '---------------------'
