@@ -77,3 +77,6 @@ alias npmspatie="npm config set registry https://npm.spatie.be"
 
 # Restart touch bar
 alias touchbar="killall ControlStrip"
+
+alias php-log="open ~/.config/valet/Log/php-fpm.log"
+alias nginx-log="open ~/.config/valet/Log/nginx-error.log"
