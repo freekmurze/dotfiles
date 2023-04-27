@@ -94,7 +94,8 @@ function commit() {
   git add .
 
   if [ "$commitMessage" = "" ]; then
-     opencommit
+     aicommits
+     return
   fi
     
   eval "git commit -a -m '${commitMessage}'"
