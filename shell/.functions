@@ -91,11 +91,12 @@ function rector() {
 function commit() {
   commitMessage="$*"
 
-  if [ "$commitMessage" = "" ]; then
-     commitMessage="wip"
-  fi
-
   git add .
+
+  if [ "$commitMessage" = "" ]; then
+     opencommit
+  fi
+    
   eval "git commit -a -m '${commitMessage}'"
 }
 
