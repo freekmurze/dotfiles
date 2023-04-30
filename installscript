@@ -110,6 +110,10 @@ rm composer-setup.php
 sudo mkdir /usr/local/bin/
 sudo mv composer.phar /usr/local/bin/composer
 
+echo 'Install aicommits'
+echo '-----------------'
+npm install -g aicommits
+
 echo 'Install imagemagick'
 echo '-------------------'
 brew install imagemagick
