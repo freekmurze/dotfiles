@@ -156,3 +156,7 @@ function silent() {
    "$@" >& /dev/null
 }
 
+function browse() {
+  url="https://$(basename "$(pwd)").test"
+  open "$url"
+}
