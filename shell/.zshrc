@@ -102,3 +102,6 @@ export PATH="/Users/freek/Library/Application Support/fnm:$PATH"
 eval "`fnm env`"
 
 eval "$(fnm env --use-on-cd)"
+
+# do not update all homebrew stuff automatically
+export HOMEBREW_NO_AUTO_UPDATE=1
