@@ -31,6 +31,7 @@ alias gcm="git commit -a -m"
 alias gp="git pull --rebase && git push"
 alias gs="git stash"
 # alias pullDM='git fetch && git checkout develop && git pull --rebase && git checkout - && git checkout master && git pull --rebase && git checkout -'
+alias uncommit="git reset --soft HEAD~1"
 
 # Fast open
 alias o="open ."
@@ -44,15 +45,12 @@ alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
 # Redis
 alias flush-redis="redis-cli FLUSHALL"
 
-# VSCode
-alias code='open -a "/Applications/Visual Studio Code.app" "`pwd`"'
-
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # IP addresses
-alias ip="curl https://diagnostic.opendns.com/myip ; echo"
+alias ip="curl ifconfig.me/ip ; echo"
 alias localip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
 # Flush Directory Service cache
@@ -77,3 +75,6 @@ alias npmspatie="npm config set registry https://npm.spatie.be"
 
 # Restart touch bar
 alias touchbar="killall ControlStrip"
+
+alias php-log="open ~/.config/valet/Log/php-fpm.log"
+alias nginx-log="open ~/.config/valet/Log/nginx-error.log"

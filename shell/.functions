@@ -214,13 +214,8 @@ function removehost() {
 }
 
 function weather() {
-   city="$1"
-
-   if [ -z "$city" ]; then
-      city="Berlin"
-   fi
-
-   eval "curl http://wttr.in/${city}"
+   local city="${1:-Berlin}"
+   curl http://wttr.in/${city// /+}\?F
 }
 
 alias mysqladm='mysql -u root'
@@ -238,11 +233,13 @@ function rector() {
 function commit() {
   commitMessage="$*"
 
-  if [ "$commitMessage" = "" ]; then
-     commitMessage="wip"
-  fi
-
   git add .
+
+  if [ "$commitMessage" = "" ]; then
+     aicommits
+     return
+  fi
+    
   eval "git commit -a -m '${commitMessage}'"
 }
 
@@ -301,3 +298,7 @@ function silent() {
    "$@" >& /dev/null
 }
 
+function browse() {
+  url="https://$(basename "$(pwd)").test"
+  open "$url"
+}
