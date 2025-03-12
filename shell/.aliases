@@ -81,3 +81,4 @@ alias touchbar="killall ControlStrip"
 
 alias php-log="open ~/.config/valet/Log/php-fpm.log"
 alias nginx-log="open ~/.config/valet/Log/nginx-error.log"
+alias proxy="ssh -D 1337 -f -C -q -N forge@freek.dev"
