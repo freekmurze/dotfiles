@@ -104,3 +104,5 @@ eval "$(fnm env --use-on-cd)"
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 export PATH=/Users/Shared/DBngin/postgresql/17.0/bin:$PATH
+
+export PATH=$HOME/bin:~/.config/phpmon/bin:$PATH
