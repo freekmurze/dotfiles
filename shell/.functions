@@ -160,3 +160,48 @@ function browse() {
   url="https://$(basename "$(pwd)").test"
   open "$url"
 }
+
+function git-prune-local() {
+  echo "Finding local branches without remote counterparts..."
+  
+  # Get all local branches except main/master
+  local_branches=$(git branch --format='%(refname:short)' | grep -v "^main$\|^master$")
+  
+  # Get all remote branches without fetching
+  remote_branches=$(git ls-remote --heads origin | sed 's/.*refs\/heads\///')
+  
+  branches_to_delete=()
+  
+  # Check each local branch if it exists on remote
+  for branch in ${(f)local_branches}; do
+    found=0
+    for remote_branch in ${(f)remote_branches}; do
+      if [[ "$branch" == "$remote_branch" ]]; then
+        found=1
+        break
+      fi
+    done
+    if [[ $found -eq 0 ]]; then
+      branches_to_delete+=("$branch")
+    fi
+  done
+  
+  if [[ ${#branches_to_delete[@]} -eq 0 ]]; then
+    echo "No branches to remove."
+    return
+  fi
+  
+  echo "Branches to be removed:"
+  printf '%s\n' "${branches_to_delete[@]}"
+  
+  # Ask for confirmation
+  read "REPLY?Are you sure you want to delete these branches? (y/N): "
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    for branch in "${branches_to_delete[@]}"; do
+      git branch -D "$branch"
+    done
+    echo "Branches removed successfully."
+  else
+    echo "Operation cancelled."
+  fi
+}
