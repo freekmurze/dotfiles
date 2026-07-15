@@ -85,10 +85,11 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
+  "fastMode": true,
   "skipDangerousModePermissionPrompt": true,
   "theme": "light",
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "fastMode": true
+  "model": "claude-fable-5[1m]"
 }

@@ -230,6 +230,7 @@ $failedChecks = $site->checks()->where('status', 'failed')->get();
 - Keep test classes in same file when possible
 - Use descriptive test method names
 - Follow the arrange-act-assert pattern
+- Put helper functions last in test files, below the `it`/`test` blocks (the tests should read first; helpers are support detail)
 
 ## Quick Reference
 

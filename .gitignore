@@ -8,3 +8,9 @@
 # Local configs
 home/.yarnrc
 .claude/
+
+# Private Claude skills. Real files live in ~/.dotfiles-custom/claude/skills and are
+# symlinked into config/claude/skills by ~/.dotfiles-custom/claude/link-skills.sh, so they
+# load like any skill but are never published. One line per private skill (no trailing slash,
+# so the symlink itself is matched); the linker appends new entries automatically.
+config/claude/skills/spatie-product-stats

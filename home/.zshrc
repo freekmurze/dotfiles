@@ -126,7 +126,7 @@ alias valet="/opt/homebrew/bin/valet"
 #export PATH=/Users/Shared/DBngin/postgresql/17.0/bin:$PATH
 
 export PATH=$HOME/bin:~/.config/phpmon/bin:$PATH
-export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -148,3 +148,8 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Raise the open-file limit. macOS defaults NOFILE to "unlimited", which the
+# kernel clamps to a tiny legacy value for real open() calls, causing
+# "Too many open files" in test runs. A concrete number avoids that clamp.
+ulimit -n 65536

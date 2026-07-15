@@ -18,3 +18,4 @@ Avoid `private const` in PHP. Replace each one: inline it if it is used once (us
 For questions about GitHub, use the gh tool
 Never mention Claude Code in PR descriptions, PR comments, or issue comments
 Do not include a "Test plan" section in PR descriptions
+Keep PR descriptions terse. No section titles. Focus on the main things; minimal examples are fine. Do this unless I ask for more detail.
