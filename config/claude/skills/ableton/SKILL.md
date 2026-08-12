@@ -20,6 +20,23 @@ Where you're genuinely useful is the tedious, mechanical work: 200 automation
 breakpoints, coprime loop lengths, phase offsets across six parameters,
 session scaffolding. Where you're useless is taste. Don't pretend otherwise.
 
+## Safety and hard limits
+
+Ask before destructive work. Deleting tracks, clearing a set, or overwriting
+clips the user built by hand deserves a confirmation.
+
+Live won't delete the last remaining track. Create the new one first, then
+delete the old.
+
+There's no command for a new Live set. That's File, New Live Set, by hand.
+
+## Start here: resolve indices first
+
+Before you act, resolve the indices you'll be working with. Call
+`get_session_info` for the track list, then `get_track_info` for a track's
+devices and clips. Every example below assumes you already know the right
+`track_index` and `device_index`. Never guess them.
+
 ## Verify everything. Status codes lie.
 
 A `success` response does not mean the change happened. Always read the value
@@ -50,37 +67,48 @@ and `value_string`. That last field is the text Live prints on the knob
 ("Off", "1/16", "440 Hz"), and it's the only way to know what a bare float
 like `Transpose Mode = 0.0` actually means.
 
-Ranges are not always 0 to 1. `Gate` on the Arpeggiator runs 1 to 200.
-`Transpose` on Drift runs -48 to 48. `Depth` on the M4L LFO runs 0 to 100.
-Read first.
+Ranges are not always 0 to 1. Read first.
 
-## Dropdowns are unreachable. Ask the user to click.
+| Parameter | Device | Range |
+| --- | --- | --- |
+| `Gate` | Arpeggiator | 1 to 200 |
+| `Transpose` | Drift | -48 to 48 |
+| `Depth` | M4L LFO | 0 to 100 |
 
-Live doesn't expose routing choices as automatable parameters. If it's a
-dropdown or a Map button in the UI, the API cannot set it. Known cases:
+## Things the API can't set. Ask the user to click.
 
-The Max for Live LFO's Map button. Every other knob on it (Rate, Depth,
-Jitter, Smooth, Phase, Shape) is yours, but the target isn't. Whenever you use a
-Max for Live LFO to modulate a parameter, you MUST stop and ask the user to
-click Map and pick the target. Do not proceed as if it is done, and do not
-pretend a workaround makes it unnecessary. Set every knob on the LFO first, then
-say exactly which knob to Map onto (device and parameter name). The click is
-once per LFO; after it, you own the rest.
+Live doesn't expose routing choices as automatable parameters. What it does not
+expose is a chooser that picks another object, a track, a device, a modulation
+target, plus a few outright API gaps like grouping. Set what you can, then hand
+the click to the user.
 
-A Compressor's sidechain Audio From source. You can set `S/C On`, threshold,
-ratio, attack, release, and the whole sidechain EQ. You cannot pick the source
-track.
+Not every dropdown is off limits, and assuming so will make you refuse work you
+can do. An ordinary quantized parameter, the kind that reports `value_items` in
+`get_device_parameters`, is settable by index like any other. Utility's
+`Channel Mode`, Auto Filter's `LFO T Mode`, the Arpeggiator's `Groove` and
+Reverb's filter switches all set fine. Read the parameter, set the index, read
+it back. Known cases that genuinely cannot be set:
 
-Drift's modulation matrix source and destination selectors. The amounts
-(`Mod Matrix Amt 1`, `LP Mod Amt 1`) are settable; the routing is not.
-
-Grouping tracks (Cmd+G). The Live API cannot group existing tracks: it only
-reads group membership, never creates a group. Do not promise grouping. When
-the goal is a shared effect across tracks, which is the usual reason to group,
-make a return track instead: create_return_track, load the effect on it, then
-raise each source track's send. That is fully scriptable and is the right home
-for a send effect like a shared echo or reverb. Only a real group needs the user
-to select the tracks and press Cmd+G.
+- **The Max for Live LFO's Map button.** Every other knob on it (Rate, Depth,
+  Jitter, Smooth, Phase, Shape) is yours, but the target isn't. Whenever you use
+  a Max for Live LFO to modulate a parameter, you MUST stop and ask the user to
+  click Map and pick the target. Do not proceed as if it is done, and do not
+  pretend a workaround makes it unnecessary. Set every knob on the LFO first,
+  then say exactly which knob to Map onto (device and parameter name). The click
+  is once per LFO; after it, you own the rest.
+- **A Compressor's sidechain Audio From source.** You can set `S/C On`,
+  threshold, ratio, attack, release, and the whole sidechain EQ. You cannot pick
+  the source track.
+- **Drift's modulation matrix source and destination selectors.** The amounts
+  (`Mod Matrix Amt 1`, `LP Mod Amt 1`) are settable; the routing is not.
+- **Grouping tracks (Cmd+G).** This is an API gap, not a dropdown. The Live API
+  cannot group existing tracks: it only reads group membership, never creates a
+  group. Do not promise grouping. When the goal is a shared effect across tracks,
+  which is the usual reason to group, make a return track instead:
+  create_return_track, load the effect on it, then raise each source track's
+  send. That is fully scriptable and is the right home for a send effect like a
+  shared echo or reverb. Only a real group needs the user to select the tracks
+  and press Cmd+G.
 
 Don't fake your way around these. Set everything you can, then tell the user
 exactly which control to click, naming the device and the parameter.
@@ -100,25 +128,27 @@ free-running. A long or coprime clip length hides the repetition but does not
 remove it. Use it when a loop-locked, editable curve is acceptable.
 
 The Max for Live LFO is the only way to get free-running modulation of an
-arbitrary parameter, and it requires the one Map click. If the user wants that
-combination, ask for the click. Never imply `add_shaped_automation` is
-equivalent to a real LFO; it loops, a real LFO does not.
+arbitrary parameter, and it requires the one Map click (see "Things the API
+can't set" above for the full procedure). If the user wants that combination,
+ask for the click. Never imply `add_shaped_automation` is equivalent to a real
+LFO; it loops, a real LFO does not.
 
 ## Parameter names that will bite you
 
-These commands silently defaulted on a wrong argument name in older versions,
-and the names are not what you'd guess:
+Several MCP tools take an argument name you wouldn't guess. Passing `value` (or
+an index/point pair) to these does not do what you mean:
 
-`set_track_volume` wants `volume`, not `value`.
-`set_track_pan` wants `pan`, not `value`.
-`set_send_level` wants `level`, not `value`.
-`load_browser_item` wants `item_uri`, not `uri`.
-`load_browser_item_to_return` wants `return_index`, not `return_track_index`.
-`set_clip_automation` wants `parameter_name` and `envelope_data`, not indices
-and points.
+| Tool | Argument it wants | Not |
+| --- | --- | --- |
+| `set_track_volume` | `volume` | `value` |
+| `set_track_pan` | `pan` | `value` |
+| `set_send_level` | `level` | `value` |
+| `set_clip_automation` | `parameter_name`, `envelope_data` | indices, points |
 
-The MCP tool layer uses the correct names. If you're calling the socket
-directly, check the handler signature first.
+The two browser-load tools take `uri` (the value you get back from `browse_path`
+or `search_browser`): `load_item_to_track(track_index, uri)` and
+`load_item_to_return(return_index, uri)`. Note `load_item_to_return` keys the
+return track by `return_index`, not `track_index`.
 
 ## Note probability: use the right command
 
@@ -206,16 +236,44 @@ An arpeggiator discards incoming note timing and emits at its own fixed rate.
 Editing clip note lengths on an arp track does nothing. Automate `Gate` if you
 want note length to vary.
 
-## Safety
-
-Ask before destructive work. Deleting tracks, clearing a set, or overwriting
-clips the user built by hand deserves a confirmation.
-
-Live won't delete the last remaining track. Create the new one first, then
-delete the old.
-
-There's no command for a new Live set. That's File, New Live Set, by hand.
+## Session view vs Arrangement
 
 Prefer working in Session view for anything that loops or phases. Arrangement
 view is a fixed timeline, and launching a scene restarts every clip, which
 resets any phasing you set up.
+
+Every clip tool whose signature takes `clip_index` means a Session clip slot,
+numbered 1 to 8 down the track. Point one at a track whose material lives on
+the timeline and it reports "No clip in slot", which looks like a bug and is
+not. The Arrangement has its own four commands:
+
+`get_arrangement_clips` lists what is on a track's timeline and gives you the
+`clip_index` the others need. `get_arrangement_clip_notes` reads the notes.
+`set_arrangement_clip_notes` edits an existing clip. `create_arrangement_midi_clip`
+makes a new one.
+
+To change notes on the timeline, always reach for `set_arrangement_clip_notes`
+rather than creating a clip over the top. Creating discards the loop braces,
+the name, the colour and any clip envelopes, and it collapses a stretched loop
+to its loop length. Editing keeps all of it, because the clip object survives.
+
+Probability and velocity deviation ride along in both directions. Those two
+carry the randomness and the humanization, so read, change what you need, write
+the whole list back, and the rest is preserved. Never rebuild a note list from
+pitch and timing alone, or you will flatten every generative and human touch in
+the clip.
+
+Watch the difference between a clip's loop and its extent. A 16 beat loop
+dragged across 300 bars reports `length` 16 while `start_time` and `end_time`
+span the whole region, and it stores one copy of the notes. Reading returns
+that single copy, not 300 bars of repeats, and writing replaces only that copy,
+so every repeat updates at once.
+
+The remaining limitation is creating a stretched loop from scratch.
+`create_arrangement_midi_clip` takes one `length` that sets loop and extent
+together. Either write the notes out in full, which gets large fast, or write
+one loop and ask the user to drag its right edge.
+
+There is still no delete. A new clip overwrites whatever it overlaps, so the
+way to erase a region is to create an empty clip across it, which leaves a
+silent clip behind for the user to remove.
