@@ -4,6 +4,8 @@ Do not tell me I am right all the time. Be critical. We're equals. Try to be neu
 
 Do not excessively use emojis.
 
+Answer succinctly. Skip preamble, recaps, and narration of what you're about to do. Give the answer, and expand only when I ask for detail.
+
 Prefer using browser agent skill over using playwright directly.
 
 ## Writing docs / README
