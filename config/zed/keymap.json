@@ -53,5 +53,11 @@
       "ctrl-v": "pane::SplitRight",
       "ctrl-h": "pane::SplitDown"
     }
+  },
+  {
+    "bindings": {
+      "cmd-alt-left": "pane::GoBack",
+      "cmd-alt-right": "pane::GoForward"
+    }
   }
 ]
