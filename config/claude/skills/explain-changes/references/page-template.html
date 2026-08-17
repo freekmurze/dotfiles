@@ -10,6 +10,7 @@
     --muted: #6b6560; --accent: #8a4b2a; --accent-soft: #f5ece6;
     --warn-bg: #fdf6e8; --warn-border: #e8c987; --warn-text: #6b4f13;
     --risk-bg: #fdeeec; --risk-border: #e9b0a6; --risk-text: #7a2d1e;
+    --bug-bg: #fbe9e7; --bug-border: #c0392b; --bug-text: #8c1d12;
     --add: #1a7f37; --del: #b3261e;
     --code-bg: #f6f3f0;
     --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
@@ -20,6 +21,7 @@
       --muted: #a09a95; --accent: #e0a17a; --accent-soft: #2b2320;
       --warn-bg: #2a2417; --warn-border: #6b5626; --warn-text: #e8cf9a;
       --risk-bg: #2c1c19; --risk-border: #7a3d32; --risk-text: #f0b6a8;
+      --bug-bg: #331915; --bug-border: #c0392b; --bug-text: #ffb4a6;
       --add: #4ac26b; --del: #f0837a;
       --code-bg: #26252b;
     }
@@ -61,13 +63,17 @@
   .add { color: var(--add); }
   .del { color: var(--del); }
 
-  .note, .risk {
+  .note, .risk, .bug {
     border-left: 3px solid; border-radius: 0 8px 8px 0;
     padding: .9rem 1.1rem; margin: 1.25rem 0;
   }
+  .bug {
+    background: var(--bug-bg); border-color: var(--bug-border); color: var(--bug-text);
+    border-left-width: 5px;
+  }
   .note { background: var(--warn-bg); border-color: var(--warn-border); color: var(--warn-text); }
   .risk { background: var(--risk-bg); border-color: var(--risk-border); color: var(--risk-text); }
-  .note > :last-child, .risk > :last-child { margin-bottom: 0; }
+  .note > :last-child, .risk > :last-child, .bug > :last-child { margin-bottom: 0; }
   .label {
     display: block; font-size: .7rem; text-transform: uppercase;
     letter-spacing: .08em; font-weight: 700; margin-bottom: .35rem; opacity: .85;
@@ -106,6 +112,11 @@
 
     <div class="risk"><span class="label">Look closely</span>
       Authorization, money, data loss, migrations, multi-tenancy.
+    </div>
+
+    <div class="bug"><span class="label">This looks wrong</span>
+      Something the explaining actually turned up. Place it inline, next to the
+      code it concerns, never collected in a list at the bottom.
     </div>
 
     <pre><code><span class="filename">app/Models/Ticket.php:42</span>

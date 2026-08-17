@@ -7,7 +7,11 @@ description: Explain how the code on the current branch works, as a self-contain
 
 Produce a detailed written explanation of everything on this branch, as an HTML page, and open it.
 
-This is not a review. It does not judge, fix, or approve anything. Its only job is to make the change legible fast enough that the reader's own judgment can engage. Finding problems is a separate task.
+The goal is comprehension, not judgment. Do not fix anything, do not approve anything, and do not run a systematic bug hunt over the diff. That is a separate task with its own checklists.
+
+**But say what the explaining reveals.** Writing an explanation is a stronger comprehension test than reading a diff. You can skim a diff and nod. You cannot write "this is correct because the guard above catches the null case" without going to look at whether that guard exists. When it does not, you have found a real bug, and it came from understanding rather than from a checklist.
+
+So when explaining a piece of code shows that it is wrong, say so plainly and prominently, then carry on explaining. If you cannot explain why a line is correct, that inability is itself the finding. Write it down rather than smoothing over it.
 
 ## Scope
 
@@ -43,6 +47,8 @@ The reader is about to review this change. They need to understand the mechanism
 | What did not change but arguably should | Call sites not updated, tests not added, documentation now stale |
 | File index | Orientation for a large change |
 
+Anything the explanation turned up goes inline, at the point in the walkthrough where it became apparent, not collected into a list at the bottom. The reader needs the surrounding code in view to judge it.
+
 **This structure is a suggestion, not a template.** Reorganise it, merge sections, or invent different ones whenever that explains the change better. Judge any deviation against the purposes above, not against the layout.
 
 The "Decisions made" section is the one most worth keeping. When an agent wrote the code, the failure mode is rarely a syntax error. It is a reasonable-looking choice that is wrong for this codebase: a new helper where one already existed, an observer where the codebase uses events, a pattern the rest of the project deliberately avoids. The fork in the road is invisible in a diff.
@@ -51,6 +57,7 @@ The "Decisions made" section is the one most worth keeping. When an agent wrote 
 
 - **Show real code.** Excerpts from the change and from the existing code around it. Never invent an illustrative example. If you cannot show the line, do not make the claim.
 - **Say when you do not know.** Write "unclear why this was needed" rather than inventing a rationale. An honest gap tells the reader where to look. A confident guess sends them past the problem.
+- **Never explain around a problem.** The temptation, when a piece of code does not make sense, is to write a plausible paragraph that makes it sound deliberate. That is the single worst thing this page can do, because it launders a bug into an explanation and the reader stops looking. Say it does not make sense.
 - **Explain, do not summarise.** "Adds caching to the report query" is a commit message. Explain what is cached, keyed on what, invalidated when, and what happens on a miss.
 - **Explain the choice, not just the code.** Where one approach was taken over an obvious alternative, name the alternative. A reader can evaluate a decision far faster than they can reconstruct it.
 - **Aim for readable in ten minutes** for a change of a few hundred lines. For much larger changes, explain the mechanism thoroughly once and then summarise the repetitive applications of it rather than marching through every instance.
