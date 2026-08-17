@@ -1,6 +1,6 @@
 ---
 name: explain-changes
-description: Explain how the code on the current branch works, as a self-contained HTML page opened in the browser, written so someone can understand the change and review it. Use when asked to explain a branch, explain these changes, walk me through this code, help me review this, or explain what an agent just did. Most useful when someone other than the reader wrote the code and it has to be understood before merging.
+description: Explain how the code on the current branch works, as an HTML page opened in the browser, written so someone can understand the change and review it. Use when asked to explain a branch, explain these changes, walk me through this code, help me review this, or explain what an agent just did. Most useful when someone other than the reader wrote the code and it has to be understood before merging.
 ---
 
 # Explain changes
@@ -38,7 +38,7 @@ A diff shows `$query->where('workspace_id', $id)` but not whether a global scope
 
 Explain the change the way you would to a colleague sitting next to you, in whatever order actually explains it. Follow the mechanism, not the file list. There is no required set of sections: decide what this particular change needs, and write that.
 
-- **Show the code.** Real excerpts from the change and from the existing code around it, in syntax-highlighted blocks with the file path above them. Never invent an illustrative example. If you cannot show the line, do not make the claim.
+- **Show the code.** Real excerpts from the change and from the existing code around it, with the file path above them. Never invent an illustrative example. If you cannot show the line, do not make the claim.
 - **Explain, do not summarise.** "Adds caching to the report query" is a commit message. Explain what is cached, keyed on what, invalidated when, and what happens on a miss.
 - **Explain the choices.** Where one approach was taken over an obvious alternative, name the alternative. A diff shows what was done and never what was rejected, and that fork in the road is where agent-written code usually goes wrong: a new helper where one already existed, an observer where the codebase uses events, a pattern the rest of the project deliberately avoids.
 - **Point at what deserves scrutiny.** Authorization, money, data loss, migrations, multi-tenancy, anything that fails quietly. Also what did not change but arguably should: call sites not updated, tests not added, documentation now stale.
@@ -77,7 +77,9 @@ Write the page outside the repository:
 
 **Never write it inside the working tree**, not even untracked. It would show up in `git status` while the reader is trying to read a clean diff, and any tooling that commits pending work before merging would carry it into the default branch.
 
-Build the page from `references/page-template.html`, which carries the styling and the syntax highlighting classes. Keep it self-contained: no CDN, no remote fonts, no external scripts. It is opened over `file://` and has to work offline.
+Build the page from `references/page-template.html`, which carries the styling and loads highlight.js.
+
+Write code blocks as plain code with the language set on the element, `<code class="language-php">`. Do not mark up tokens by hand; highlight.js colours them. Use `language-diff` with real `+` and `-` lines when a before and after belong side by side.
 
 Then open it and print the path:
 

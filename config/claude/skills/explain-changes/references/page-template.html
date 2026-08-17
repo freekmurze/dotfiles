@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{TITLE}}</title>
+<link rel="stylesheet" media="(prefers-color-scheme: light)"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<link rel="stylesheet" media="(prefers-color-scheme: dark)"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 <style>
   :root {
     --bg: #fbfaf9; --surface: #fff; --border: #e6e2dd; --text: #1c1a17;
@@ -14,8 +18,6 @@
     --add: #1a7f37; --del: #b3261e;
     --code-bg: #f6f3f0;
     --link: #8a4b2a;
-    --t-key: #b3261e; --t-str: #1a7f37; --t-com: #8a8580; --t-var: #24507a;
-    --t-fn: #6f42c1; --t-num: #a15c00; --t-type: #005a9e; --t-punc: #57534e;
     --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
@@ -28,8 +30,6 @@
       --add: #4ac26b; --del: #f0837a;
       --code-bg: #26252b;
       --link: #e0a17a;
-      --t-key: #ff8a80; --t-str: #a5d6a7; --t-com: #7d7873; --t-var: #90caf9;
-      --t-fn: #ce93d8; --t-num: #ffcc80; --t-type: #81d4fa; --t-punc: #9e9994;
     }
   }
   * { box-sizing: border-box; }
@@ -73,17 +73,9 @@
   a:hover { text-decoration-thickness: 2px; }
   pre .filename a { color: inherit; }
 
-  /* Syntax highlighting. Wrap tokens in these classes by hand; no JS. */
-  .k   { color: var(--t-key); }              /* keyword: function, return, class, if */
-  .s   { color: var(--t-str); }              /* string literal */
-  .c   { color: var(--t-com); font-style: italic; }  /* comment */
-  .v   { color: var(--t-var); }              /* $variable */
-  .f   { color: var(--t-fn); }               /* function or method name */
-  .n   { color: var(--t-num); }              /* number */
-  .t   { color: var(--t-type); }             /* class name or type hint */
-  .p   { color: var(--t-punc); }             /* punctuation, arrows, operators */
-  pre .ins { background: color-mix(in srgb, var(--add) 16%, transparent); display: block; }
-  pre .rem { background: color-mix(in srgb, var(--del) 16%, transparent); display: block; }
+  /* highlight.js paints the tokens. Keep its background out of the way so the
+     block matches the rest of the page in both themes. */
+  pre code.hljs { background: none; padding: 0; }
 
   .note, .risk, .bug {
     border-left: 3px solid; border-radius: 0 8px 8px 0;
@@ -141,16 +133,16 @@
       code it concerns, never collected in a list at the bottom.
     </div>
 
-    <pre><code><span class="filename"><a href="https://github.com/OWNER/REPO/blob/SHA/app/Models/Ticket.php#L42-L58">app/Models/Ticket.php:42</a></span>
-<span class="k">public function</span> <span class="f">handle</span><span class="p">(</span><span class="t">Ticket</span> <span class="v">$ticket</span><span class="p">):</span> <span class="t">void</span>
-<span class="p">{</span>
-    <span class="c">// real code only, never an invented example</span>
-<span class="p">}</span></code></pre>
+    <pre><code class="language-php"><span class="filename"><a href="https://github.com/OWNER/REPO/blob/SHA/app/Models/Ticket.php#L42-L58">app/Models/Ticket.php:42</a></span>
+public function handle(Ticket $ticket): void
+{
+    // plain code, no manual token markup. highlight.js does the colouring.
+}</code></pre>
 
-    Token classes: k keyword, s string, c comment, v variable, f function,
-    n number, t type or class, p punctuation. Wrap a whole line in
-    <span class="ins">...</span> or <span class="rem">...</span> to mark it
-    added or removed.
+    Set the language on the code element: language-php, language-blade,
+    language-ts, language-tsx, language-js, language-json, language-bash,
+    language-sql, language-diff. Use language-diff with real +/- lines when
+    showing a before and after together.
 
     Link file paths to the pushed commit when the branch is on the remote.
     Pin to the sha, not the branch name. Never emit a link you have not
@@ -164,5 +156,7 @@
 <footer>Generated to help review this branch. This is an explanation, not a review.</footer>
 
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
