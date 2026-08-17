@@ -55,7 +55,6 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
 
     # Symlink configuration files
     ln -sf "$DOTFILES_DIR/config/claude/CLAUDE.md" ~/.claude/CLAUDE.md
-    ln -sf "$DOTFILES_DIR/config/claude/laravel-php-guidelines.md" ~/.claude/laravel-php-guidelines.md
     ln -sf "$DOTFILES_DIR/config/claude/settings.json" ~/.claude/settings.json
     ln -sf "$DOTFILES_DIR/config/claude/statusline.sh" ~/.claude/statusline.sh
 
@@ -66,6 +65,20 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
     # Symlink entire agents directory
     rm -rf ~/.claude/agents
     ln -sf "$DOTFILES_DIR/config/claude/agents" ~/.claude/agents
+
+    # The music workspace is a plain directory, not a repo, so nothing else
+    # version controls the enablement of the music@skills-dir plugin.
+    MUSIC_DIR="$HOME/dev/code/music"
+    mkdir -p "$MUSIC_DIR/.claude"
+    if [ ! -f "$MUSIC_DIR/.claude/settings.json" ]; then
+        cat > "$MUSIC_DIR/.claude/settings.json" <<'JSON'
+{
+  "enabledPlugins": {
+    "music@skills-dir": true
+  }
+}
+JSON
+    fi
 
     success "Claude Code configured"
 else
