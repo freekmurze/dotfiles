@@ -104,3 +104,22 @@ After a while, you'll end up with a few stale branches in your local repository.
 - Most of this is based on the [GitHub Flow](https://guides.github.com/introduction/flow/)
 - Merge vs. rebase on [Atlassian](https://www.atlassian.com/git/tutorials/merging-vs-rebasing/workflow-walkthrough)
 - Merge vs. rebase by [@porteneuve](https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa)
+## Git & GitHub Workflow
+
+### Branch Naming
+
+- Feature branches: `feature-mailchimp`, `fix-deliverycosts`
+- Use present tense, descriptive commit messages
+- Master/main is always stable after go-live
+
+### PR Workflow for Spatie Packages
+
+1. Fork the repo and create a feature branch
+2. Write tests for new functionality
+3. Follow the code style (run `composer format` / Pint)
+4. Run `composer test` and `composer analyse` (PHPStan)
+5. Squash on merge to master
+6. Keep PRs small and focused
+
+---
+

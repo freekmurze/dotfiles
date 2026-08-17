@@ -12,11 +12,11 @@ The spatie.be docs site does not rebuild automatically after a PR merges. To pub
 Run this twice to be sure (the second run catches any version that lagged on the first pass):
 
 ```bash
-cd /Users/freek/dev/code/spatie.be && ar "docs:import --repo=spatie/{repo_name}"
-cd /Users/freek/dev/code/spatie.be && ar "docs:import --repo=spatie/{repo_name}"
+cd /Users/freek/dev/code/spatie.be && php artisan remote "docs:import --repo=spatie/{repo_name}"
+cd /Users/freek/dev/code/spatie.be && php artisan remote "docs:import --repo=spatie/{repo_name}"
 ```
 
-`ar` is a shell alias for `php artisan remote`, so this runs the command against the production spatie.be instance.
+`php artisan remote` runs the command against the production spatie.be instance. Write it out in full. The `ar` alias is equivalent when typed by hand, but aliases are not defined in non-interactive shells, so a subagent or scheduled run would fail silently.
 
 If no repo name argument is provided, ask the user for one.
 

@@ -1,6 +1,7 @@
 ---
 name: write-freek-dev-blogpost
-version: 1.0.0
+metadata:
+  version: 1.0.0
 description: "When the user wants to write, draft, or outline a blog post for freek.dev. Also use when the user mentions 'blog post,' 'write a post,' 'freek.dev post,' 'draft a post,' or 'blogpost.' This skill captures the writing style, tone, and structure conventions of freek.dev original posts."
 ---
 

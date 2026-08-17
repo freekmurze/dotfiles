@@ -19,7 +19,7 @@ mailcoach login
 mailcoach list-email-lists
 ```
 
-See [rules/authentication.md](rules/authentication.md) for the full login flow.
+See [references/authentication.md](references/authentication.md) for the full login flow.
 
 ## How commands work
 
@@ -101,19 +101,22 @@ mailcoach list-subscribers --email-list=<uuid> --filter-search="john" --sort=ema
 
 ## Common workflows
 
+### Command patterns
+- [references/command-patterns.md](references/command-patterns.md) — Discovering commands and the shared flag conventions
+
 ### Email lists and subscribers
-- [rules/email-lists.md](rules/email-lists.md) — Create and manage email lists, tags, and segments
-- [rules/subscribers.md](rules/subscribers.md) — Add, import, tag, and manage subscribers
+- [references/email-lists.md](references/email-lists.md) — Create and manage email lists, tags, and segments
+- [references/subscribers.md](references/subscribers.md) — Add, import, tag, and manage subscribers
 
 ### Campaigns
-- [rules/campaigns.md](rules/campaigns.md) — Full campaign lifecycle: create, configure, test, send, and view statistics
+- [references/campaigns.md](references/campaigns.md) — Full campaign lifecycle: create, configure, test, send, and view statistics
 
 ### Transactional emails
-- [rules/transactional.md](rules/transactional.md) — Send transactional emails via templates or inline content
+- [references/transactional.md](references/transactional.md) — Send transactional emails via templates or inline content
 
 ### Templates and automations
-- [rules/templates.md](rules/templates.md) — Manage reusable email templates
-- [rules/automations.md](rules/automations.md) — Trigger automations via the CLI
+- [references/templates.md](references/templates.md) — Manage reusable email templates
+- [references/automations.md](references/automations.md) — Trigger automations via the CLI
 
 ## Important notes
 
