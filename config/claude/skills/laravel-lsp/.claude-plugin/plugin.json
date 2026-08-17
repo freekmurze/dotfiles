@@ -1,0 +1,8 @@
+{
+  "name": "laravel-lsp",
+  "description": "Framework-aware code intelligence for Laravel via the first-party laravel/lsp language server",
+  "version": "1.0.0",
+  "author": {
+    "name": "Freek Van der Herten"
+  }
+}

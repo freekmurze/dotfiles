@@ -55,6 +55,16 @@
     "defaultMode": "auto"
   },
   "disableClaudeAiConnectors": true,
+  "skillOverrides": {
+    "simplify": "user-invocable-only",
+    "update-config": "user-invocable-only",
+    "keybindings-help": "user-invocable-only",
+    "fewer-permission-prompts": "user-invocable-only",
+    "loop": "user-invocable-only",
+    "schedule": "user-invocable-only",
+    "run": "user-invocable-only",
+    "init": "user-invocable-only"
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
@@ -63,7 +73,9 @@
     "laravel-simplifier@laravel": true,
     "agent-browser@agent-browser": true,
     "frontend-design@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "superpowers-marketplace": {
@@ -87,15 +99,18 @@
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "skillOverrides": {
-    "simplify": "user-invocable-only",
-    "security-review": "user-invocable-only",
-    "update-config": "user-invocable-only",
-    "keybindings-help": "user-invocable-only",
-    "fewer-permission-prompts": "user-invocable-only",
-    "loop": "user-invocable-only",
-    "schedule": "user-invocable-only",
-    "run": "user-invocable-only",
-    "init": "user-invocable-only"
+  "cleanupPeriodDays": 365,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | grep -E '\\.php$' | while read -r f; do d=\"$(dirname \"$f\")\"; while [ \"$d\" != \"/\" ]; do if [ -x \"$d/vendor/bin/pint\" ]; then (cd \"$d\" && ./vendor/bin/pint --quiet \"$f\") ; break; fi; d=\"$(dirname \"$d\")\"; done; done"
+          }
+        ]
+      }
+    ]
   }
 }

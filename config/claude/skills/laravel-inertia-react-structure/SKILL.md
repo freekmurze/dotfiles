@@ -1,6 +1,9 @@
 ---
 name: laravel-inertia-react-structure
 description: Frontend structure conventions for Laravel Inertia React applications based on Spatie's production practices. Use when creating, scaffolding, or reviewing frontend code in a Laravel Inertia React project. Triggers on creating React components, pages, modules, organizing frontend directories, setting up Inertia pages, structuring a React frontend within Laravel, or when the user asks about frontend file organization in an Inertia app.
+paths:
+  - "resources/js/**/*.{ts,tsx,js,jsx}"
+  - "**/*.{tsx,jsx}"
 ---
 
 # Laravel Inertia React Frontend Structure

@@ -21,4 +21,4 @@ Aggregate and deduplicate as described in `references/lanes.md`, then act on eac
 - Clear correction with a concrete fix, apply it directly with Edit.
 - Judgment call or false positive, note it in the summary and skip.
 
-End with a short bulleted summary grouped as **Correctness** and **Conventions**, covering what was changed (or confirming the code was already clean). No "Test plan" section.
+End with a short bulleted summary grouped as **Security**, **Correctness**, and **Conventions**, covering what was changed (or confirming the code was already clean). No "Test plan" section.

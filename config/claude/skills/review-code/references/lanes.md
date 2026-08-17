@@ -24,6 +24,16 @@ For changed PHP files, check routing, database performance, and architecture aga
 
 Only when JS or TS files changed. Check against the `react-best-practices` skill.
 
+## Lane 6: security (always)
+
+Review the changed code for vulnerabilities. Like lane 1 this is a defect lane, not a conventions lane.
+
+Look for: missing or wrong authorization checks on routes, controllers, and policies; mass assignment exposure; SQL injection through raw queries or unescaped bindings; XSS through `{!! !!}` in Blade or `dangerouslySetInnerHTML` in React; secrets, tokens, or keys committed in code or config; unsafe deserialization; SSRF in outbound HTTP calls; path traversal in file handling; missing rate limiting on public or authentication endpoints; PII in logs, in exception context, and in anything reported to error tracking; CSRF exemptions; and insecure direct object references where a record is loaded by id without an ownership check.
+
+Same evidence bar as lane 1: describe the concrete attack, meaning who sends what and what they get that they should not. If you cannot, it is not a finding.
+
+Rank findings by exploitability, not by category.
+
 ## Running the lanes
 
 ### Claude Code
@@ -37,6 +47,7 @@ Run all lanes in parallel, in a single message.
 | 3 Spatie conventions | a `general-purpose` agent invoking `spatie-guidelines` |
 | 4 Laravel practices | a `general-purpose` agent invoking `laravel-best-practices` |
 | 5 React | a `general-purpose` agent invoking `react-best-practices` |
+| 6 security | `/security-review` on the target |
 
 ### Codex
 
@@ -47,12 +58,13 @@ Run all lanes in parallel, in a single message.
 | 3 Spatie conventions | read `spatie-guidelines` and apply it to the changed files yourself |
 | 4 Laravel practices | **only if `laravel-best-practices` is readable from this repo.** It is normally installed by Laravel Boost into `<repo>/.claude/skills/`, which Codex does not load. Read that path directly if it exists, otherwise say the lane was skipped. |
 | 5 React | read `react-best-practices` and apply it to the changed files yourself |
+| 6 security | apply the lane 6 checklist to the changed files yourself |
 
 Never report a review as complete without naming the lanes that were skipped.
 
 ### Any other harness
 
-Lane 1 is a defect-first review. Lanes 2 to 5 are each "read the named skill, apply it to the changed files, report deviations". Use whatever delegation the harness offers, or do them inline.
+Lanes 1 and 6 are defect-first reviews, for bugs and for vulnerabilities. Lanes 2 to 5 are each "read the named skill, apply it to the changed files, report deviations". Use whatever delegation the harness offers, or do them inline.
 
 ## Brief for every lane
 
@@ -64,6 +76,6 @@ Lane 1 is a defect-first review. Lanes 2 to 5 are each "read the named skill, ap
 
 Deduplicate across lanes. When two lanes flag the same line, keep the correctness finding and drop the convention one.
 
-Correctness findings take priority. Never apply a convention fix that changes behaviour flagged as a bug. Fix the bug first.
+Security findings outrank correctness findings, which outrank convention findings. Never apply a convention fix that changes behaviour flagged as a bug or a vulnerability. Fix that first.
 
-Group the summary as **Correctness** and **Conventions**. No "Test plan" section.
+Group the summary as **Security**, **Correctness**, and **Conventions**, in that order. No "Test plan" section.

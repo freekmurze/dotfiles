@@ -1,6 +1,8 @@
 ---
 name: react-best-practices
 description: Provides React patterns for hooks, effects, refs, and component design. Covers escape hatches, anti-patterns, and correct effect usage. Must use when reading or writing React components (.tsx, .jsx files with React imports).
+paths:
+  - "**/*.{tsx,jsx}"
 ---
 
 # React Best Practices
