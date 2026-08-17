@@ -120,6 +120,9 @@ step "Starting MySQL"
 brew services start mysql || warn "MySQL already running or failed"
 success "MySQL processed"
 
+# Spotlight exclusions
+bash ~/.dotfiles/bin/exclude-from-spotlight || warn "Spotlight exclusions had issues"
+
 # Claude Code setup
 echo ""
 read -p "Install Claude Code? (y/n) " -n 1 -r

@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# Keep data heavy directories out of the Spotlight index
+# Can be run independently or as part of full dotfiles setup
+#
+# Spotlight skips any directory containing a .metadata_never_index file,
+# along with everything below it. Xcode ships the same marker in DerivedData.
+# Local database directories are the worst offenders: they hold hundreds of
+# thousands of binary files that get rewritten constantly, so the indexer
+# never stops re-reading them.
+#
+# Directories are created when missing, so a fresh machine is covered before
+# the app in question ever writes its first file.
+
+set -e
+
+# Colors
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+step() { echo ""; echo -e "${BLUE}➜${NC} $1"; }
+success() { echo -e "${GREEN}✓${NC} $1"; }
+warn() { echo -e "${YELLOW}⚠${NC} $1"; }
+error() { echo -e "${RED}✗${NC} $1"; exit 1; }
+
+# Add new entries here. Local databases and build artifact directories are the
+# usual candidates. Paths that already live outside the index (~/Library/Caches,
+# ~/Library/Containers, /opt/homebrew) need no marker.
+EXCLUDED_DIRS=(
+    "$HOME/Library/Application Support/com.tinyapp.DBngin"
+)
+
+echo ""
+echo "Spotlight Exclusions"
+echo "===================="
+
+step "Marking directories as never indexed"
+for dir in "${EXCLUDED_DIRS[@]}"; do
+    if ! mkdir -p "$dir" 2>/dev/null; then
+        warn "Could not create ${dir/#$HOME/\~}"
+        continue
+    fi
+
+    if ! touch "$dir/.metadata_never_index" 2>/dev/null; then
+        warn "Could not mark ${dir/#$HOME/\~}"
+        continue
+    fi
+
+    success "${dir/#$HOME/\~}"
+done
+
+echo ""
+warn "Markers only prevent future indexing."
+echo "  Entries already in the index stay until the folder is added to"
+echo "  System Settings > Spotlight > Search Privacy, which purges them."
+echo "  That list is protected by SIP and cannot be scripted."
+echo ""

@@ -325,6 +325,7 @@ The `bin/` directory contains helper scripts:
 
 - **install** - Main installation script (idempotent, safe to re-run)
 - **install-claude-code** - Standalone Claude Code installer
+- **exclude-from-spotlight** - Drop a `.metadata_never_index` marker into data heavy directories so Spotlight skips them. Local database directories (DBngin and friends) hold hundreds of thousands of constantly rewritten files, which keeps `mds_stores` busy indefinitely.
 - **update** - Update dotfiles, Homebrew, npm, and Composer packages
 - **doctor** - Health check and diagnostic tool
 - **conductor-merge** - Fast-forward the current Conductor workspace branch into `main` (which lives in another git worktree). Use `--push` to also push `main` to `origin`, which clears Conductor's "Changes" view (it diffs against `origin/main`).
