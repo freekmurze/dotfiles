@@ -29,6 +29,7 @@ SHARED=(
     audit-architecture
     code-snippet-images
     conductor
+    explain-changes
     flare
     grill-me
     laravel-inertia-react-structure
