@@ -4,7 +4,7 @@
 # {buffer_path} is passed as $1 for context (file extension, config lookup).
 
 FILE="$1"
-GLOBAL_PINT="/Users/freek/.composer/vendor/bin/pint"
+GLOBAL_PINT="${GLOBAL_PINT:-$HOME/.composer/vendor/bin/pint}"
 
 # Find project root by walking up from the file's directory
 find_project_root() {
@@ -30,9 +30,11 @@ if [ -n "$PROJECT_ROOT" ] && [ -f "$PROJECT_ROOT/vendor/bin/pint" ]; then
 elif [ -n "$PROJECT_ROOT" ] && [ -f "$PROJECT_ROOT/vendor/bin/php-cs-fixer" ]; then
     cd "$PROJECT_ROOT"
     ./vendor/bin/php-cs-fixer fix --allow-risky=yes "$TEMP" > /dev/null 2>&1
-else
+elif [ -x "$GLOBAL_PINT" ]; then
     "$GLOBAL_PINT" "$TEMP" > /dev/null 2>&1
 fi
+# With no formatter available the buffer is returned unchanged, so Zed still
+# gets valid output instead of an error.
 
 cat "$TEMP"
 rm -f "$TEMP"

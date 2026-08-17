@@ -309,11 +309,11 @@ All skills live in `config/claude/skills/` and are version-controlled. On a new 
 
 Any directory under `skills/` with a `.claude-plugin/plugin.json` loads as a plugin named `<name>@skills-dir`. Plugins can be turned off globally and enabled per repository, so situational skills cost nothing in unrelated sessions.
 
-| Plugin | Contents | Enabled in |
-|--------|----------|------------|
-| `marketing` | 29 marketing, CRO, and SEO skills | freek.dev, spatie.be, flareapp.io, mailcoach, ohdear, there-there.app |
-| `music` | Ableton Live control | `~/dev/code/music` |
-| `laravel-lsp` | The Laravel language server, see below | everywhere |
+| Plugin | Contents | Enabled |
+|--------|----------|---------|
+| `marketing` | 29 marketing, CRO, and SEO skills | Per repo, in the ones with a marketing site |
+| `music` | Ableton Live control | Per workspace |
+| `laravel-lsp` | The Laravel language server, see below | Globally |
 
 To enable one in a repository, add it to that repo's `.claude/settings.json`:
 

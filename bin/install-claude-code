@@ -68,11 +68,11 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
     rm -rf ~/.claude/agents
     ln -sf "$DOTFILES_DIR/config/claude/agents" ~/.claude/agents
 
-    # The music workspace is a plain directory, not a repo, so nothing else
-    # version controls the enablement of the music@skills-dir plugin.
-    MUSIC_DIR="$HOME/dev/code/music"
-    mkdir -p "$MUSIC_DIR/.claude"
-    if [ ! -f "$MUSIC_DIR/.claude/settings.json" ]; then
+    # Scoped plugins are enabled per workspace. Only wire up a workspace that
+    # already exists, so a fresh machine is not littered with empty directories.
+    MUSIC_DIR="${MUSIC_DIR:-$HOME/dev/code/music}"
+    if [ -d "$MUSIC_DIR" ] && [ ! -f "$MUSIC_DIR/.claude/settings.json" ]; then
+        mkdir -p "$MUSIC_DIR/.claude"
         cat > "$MUSIC_DIR/.claude/settings.json" <<'JSON'
 {
   "enabledPlugins": {
@@ -80,6 +80,7 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
   }
 }
 JSON
+        success "Enabled music@skills-dir in $MUSIC_DIR"
     fi
 
     # Share the harness-neutral skills with Codex and any other SKILL.md reader.
