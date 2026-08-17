@@ -18,3 +18,16 @@ composer global require laravel/lsp
 
 Composer's global bin directory must be on `PATH`. `phpEnvironment` defaults to
 `auto`, which finds Herd and Valet without configuration.
+
+## Why this only claims `.blade.php`
+
+Claude Code registers one LSP server per file extension. `php-lsp` (Intelephense)
+claims `.php`, so this plugin takes `.blade.php`, which nothing else covers.
+
+That splits the work sensibly: Intelephense gives type errors, undefined methods,
+and references in PHP, and Laravel LSP gives route names, view paths, config keys,
+and translation strings in Blade.
+
+The cost is that Laravel's framework awareness does not apply inside `.php` files,
+so a wrong `route()` or `config()` key in a controller is not flagged. To swap the
+priority, disable `php-lsp` and add `".php": "php"` back to `.lsp.json`.
