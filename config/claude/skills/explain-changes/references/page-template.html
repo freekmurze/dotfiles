@@ -13,6 +13,9 @@
     --bug-bg: #fbe9e7; --bug-border: #c0392b; --bug-text: #8c1d12;
     --add: #1a7f37; --del: #b3261e;
     --code-bg: #f6f3f0;
+    --link: #8a4b2a;
+    --t-key: #b3261e; --t-str: #1a7f37; --t-com: #8a8580; --t-var: #24507a;
+    --t-fn: #6f42c1; --t-num: #a15c00; --t-type: #005a9e; --t-punc: #57534e;
     --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
@@ -24,6 +27,9 @@
       --bug-bg: #331915; --bug-border: #c0392b; --bug-text: #ffb4a6;
       --add: #4ac26b; --del: #f0837a;
       --code-bg: #26252b;
+      --link: #e0a17a;
+      --t-key: #ff8a80; --t-str: #a5d6a7; --t-com: #7d7873; --t-var: #90caf9;
+      --t-fn: #ce93d8; --t-num: #ffcc80; --t-type: #81d4fa; --t-punc: #9e9994;
     }
   }
   * { box-sizing: border-box; }
@@ -62,6 +68,22 @@
   }
   .add { color: var(--add); }
   .del { color: var(--del); }
+
+  a { color: var(--link); text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent); }
+  a:hover { text-decoration-thickness: 2px; }
+  pre .filename a { color: inherit; }
+
+  /* Syntax highlighting. Wrap tokens in these classes by hand; no JS. */
+  .k   { color: var(--t-key); }              /* keyword: function, return, class, if */
+  .s   { color: var(--t-str); }              /* string literal */
+  .c   { color: var(--t-com); font-style: italic; }  /* comment */
+  .v   { color: var(--t-var); }              /* $variable */
+  .f   { color: var(--t-fn); }               /* function or method name */
+  .n   { color: var(--t-num); }              /* number */
+  .t   { color: var(--t-type); }             /* class name or type hint */
+  .p   { color: var(--t-punc); }             /* punctuation, arrows, operators */
+  pre .ins { background: color-mix(in srgb, var(--add) 16%, transparent); display: block; }
+  pre .rem { background: color-mix(in srgb, var(--del) 16%, transparent); display: block; }
 
   .note, .risk, .bug {
     border-left: 3px solid; border-radius: 0 8px 8px 0;
@@ -119,9 +141,20 @@
       code it concerns, never collected in a list at the bottom.
     </div>
 
-    <pre><code><span class="filename">app/Models/Ticket.php:42</span>
-    real code here, never an invented example
-    </code></pre>
+    <pre><code><span class="filename"><a href="https://github.com/OWNER/REPO/blob/SHA/app/Models/Ticket.php#L42-L58">app/Models/Ticket.php:42</a></span>
+<span class="k">public function</span> <span class="f">handle</span><span class="p">(</span><span class="t">Ticket</span> <span class="v">$ticket</span><span class="p">):</span> <span class="t">void</span>
+<span class="p">{</span>
+    <span class="c">// real code only, never an invented example</span>
+<span class="p">}</span></code></pre>
+
+    Token classes: k keyword, s string, c comment, v variable, f function,
+    n number, t type or class, p punctuation. Wrap a whole line in
+    <span class="ins">...</span> or <span class="rem">...</span> to mark it
+    added or removed.
+
+    Link file paths to the pushed commit when the branch is on the remote.
+    Pin to the sha, not the branch name. Never emit a link you have not
+    confirmed resolves.
 
     <div class="scroll"> ... </div>   wrap wide tables
 -->
