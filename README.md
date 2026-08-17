@@ -28,7 +28,6 @@ Personal dotfiles with modern shell tooling, optimized for Laravel/PHP developme
   - [Code Intelligence](#code-intelligence) - Laravel LSP, Intelephense, TypeScript
   - [Agents](#agents) - custom subagents
   - [The Review Workflow](#the-review-workflow) - the six lanes behind `review-code` and `review-pr`
-  - [Hooks](#hooks) - Pint on edited PHP files, without touching unrelated code
   - [Settings Worth Knowing](#settings-worth-knowing)
   - [Sharing With Codex](#sharing-with-codex) - how one source feeds both harnesses
   - [Adding New Skills](#adding-new-skills) - and the two rules that decide whether a skill gets used
@@ -364,9 +363,6 @@ Findings are deduplicated, and security outranks correctness, which outranks con
 
 The lanes file has a per-harness table, so the same review runs under Codex using its `review-agent` skill.
 
-### Hooks
-
-A `PostToolUse` hook runs Pint on every PHP file the agent edits. It walks up from the file to the nearest `vendor/bin/pint` and formats just that file, so repositories without Pint are a no-op. Formatting is deterministic rather than something the agent has to remember.
 
 ### Settings Worth Knowing
 
@@ -468,7 +464,6 @@ The `bin/` directory contains helper scripts:
 - **install** - Main installation script (idempotent, safe to re-run)
 - **install-claude-code** - Standalone installer for the AI setup: the CLI, the symlinks, and the Codex links
 - **link-agent-skills** - Symlink the harness-neutral skills and `AGENTS.md` into Codex, leaving Codex's own built-in skills alone
-- **claude-pint-hook** - Format edited PHP files with Pint without reformatting code the change did not touch
 - **exclude-from-spotlight** - Drop a `.metadata_never_index` marker into data heavy directories so Spotlight skips them. Local database directories (DBngin and friends) hold hundreds of thousands of constantly rewritten files, which keeps `mds_stores` busy indefinitely.
 - **update** - Update dotfiles, Homebrew, npm, and Composer packages
 - **doctor** - Health check and diagnostic tool
