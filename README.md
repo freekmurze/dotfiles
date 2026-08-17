@@ -4,6 +4,42 @@
 
 Personal dotfiles with modern shell tooling, optimized for Laravel/PHP development. Features fast startup times, smart directory navigation, and modern CLI tools.
 
+## Contents
+
+**Getting started**
+
+- [Key Features](#key-features)
+- [Quick Start](#quick-start) - clone and run `bin/install`
+- [What's Included](#whats-included) - [Shell & Prompt](#shell--prompt) · [Modern CLI Tools](#modern-cli-tools) · [Development Tools](#development-tools) · [QuickLook Plugins](#quicklook-plugins)
+
+**Reference**
+
+- [How It Works](#how-it-works) - [Symlinked Files](#symlinked-files) · [Sourced Files](#sourced-files) · [Custom Agnoster Theme](#custom-agnoster-theme)
+- [Daily Usage](#daily-usage) - [Smart Navigation](#smart-navigation) · [Laravel/PHP Shortcuts](#laravelphp-shortcuts) · [Data Processing](#data-processing) · [Maintenance Commands](#maintenance-commands)
+- [Version Management](#version-management) - [Node.js via fnm](#nodejs-via-fnm) · [PHP & Composer via Homebrew](#php--composer-via-homebrew)
+- [Package Management](#package-management) - the Brewfile and global npm and Composer packages
+
+**AI setup**
+
+- [AI Development Setup](#ai-development-setup) - one config for Claude Code and Codex
+  - [Quick Install (Standalone)](#quick-install-standalone) - the AI setup without the rest of the dotfiles
+  - [Skills](#skills) - all 19, grouped by purpose
+  - [Scoped Plugins](#scoped-plugins) - skills that load only in the repos that need them
+  - [Code Intelligence](#code-intelligence) - Laravel LSP, Intelephense, TypeScript
+  - [Agents](#agents) - custom subagents
+  - [The Review Workflow](#the-review-workflow) - the six lanes behind `review-code` and `review-pr`
+  - [Hooks](#hooks) - Pint on every edited PHP file
+  - [Settings Worth Knowing](#settings-worth-knowing)
+  - [Sharing With Codex](#sharing-with-codex) - how one source feeds both harnesses
+  - [Adding New Skills](#adding-new-skills) - and the two rules that decide whether a skill gets used
+
+**Everything else**
+
+- [Customization](#customization) - [Personal Aliases & Functions](#personal-aliases--functions) · [Project-Specific Variables](#project-specific-variables)
+- [Post-Installation](#post-installation) · [Tool Comparisons](#tool-comparisons) · [Utilities](#utilities) · [Migration Notes](#migration-notes) · [Credits](#credits)
+
+---
+
 ## Key Features
 
 - **Custom Agnoster Theme** - Clean powerline prompt with no branch symbols, `•` for changes
