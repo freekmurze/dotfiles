@@ -43,7 +43,12 @@ Run all lanes in parallel, in a single message.
 | Lane | How |
 |---|---|
 | 1 correctness | the `review-agent` skill, delegating the target to it |
-| 2 to 5 | read the named skill and apply it to the changed files yourself |
+| 2 PHP simplification | the simplifier is a Claude plugin agent, but its definition is a plain file. Read `~/.claude/plugins/cache/laravel/laravel-simplifier/*/agents/laravel-simplifier.md` and apply it yourself. If that path does not exist, say the lane was skipped. |
+| 3 Spatie conventions | read `spatie-guidelines` and apply it to the changed files yourself |
+| 4 Laravel practices | **only if `laravel-best-practices` is readable from this repo.** It is normally installed by Laravel Boost into `<repo>/.claude/skills/`, which Codex does not load. Read that path directly if it exists, otherwise say the lane was skipped. |
+| 5 React | read `react-best-practices` and apply it to the changed files yourself |
+
+Never report a review as complete without naming the lanes that were skipped.
 
 ### Any other harness
 
