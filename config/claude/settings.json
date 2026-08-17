@@ -84,7 +84,8 @@
     "superpowers@claude-plugins-official": true,
     "php-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "laravel@laravel": true
+    "laravel@laravel": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "spinnerVerbs": {
     "mode": "replace",
