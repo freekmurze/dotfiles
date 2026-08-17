@@ -75,6 +75,21 @@ if [ -d "$HOME/.codex" ]; then
     done
 
     success "Linked ${#SHARED[@]} skills into $CODEX_SKILLS"
+
+    # Codex reads AGENTS.md natively, so it links straight to the canonical file.
+    ln -sfn "$DOTFILES_DIR/config/claude/AGENTS.md" "$HOME/.codex/AGENTS.md"
+    success "Linked AGENTS.md into ~/.codex"
+
+    # AGENTS.md tells every harness to use agent-browser, but that skill ships in
+    # a Claude plugin. The CLI it drives is on PATH, so link the newest copy of
+    # the skill doc so Codex knows how to drive it too.
+    AGENT_BROWSER="$(ls -td "$HOME"/.claude/plugins/cache/agent-browser/agent-browser/*/skills/agent-browser 2>/dev/null | head -1)"
+    if [ -n "$AGENT_BROWSER" ]; then
+        ln -sfn "$AGENT_BROWSER" "$CODEX_SKILLS/agent-browser"
+        success "Linked agent-browser from the Claude plugin"
+    else
+        warn "agent-browser plugin not found, Codex will not have it"
+    fi
 else
     warn "Codex not installed, skipping"
 fi
