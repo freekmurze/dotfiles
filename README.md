@@ -28,7 +28,7 @@ Personal dotfiles with modern shell tooling, optimized for Laravel/PHP developme
   - [Code Intelligence](#code-intelligence) - Laravel LSP, Intelephense, TypeScript
   - [Agents](#agents) - custom subagents
   - [The Review Workflow](#the-review-workflow) - the six lanes behind `review-code` and `review-pr`
-  - [Hooks](#hooks) - Pint on every edited PHP file
+  - [Hooks](#hooks) - Pint on edited PHP files, without touching unrelated code
   - [Settings Worth Knowing](#settings-worth-knowing)
   - [Sharing With Codex](#sharing-with-codex) - how one source feeds both harnesses
   - [Adding New Skills](#adding-new-skills) - and the two rules that decide whether a skill gets used
