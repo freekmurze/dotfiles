@@ -36,7 +36,7 @@ Personal dotfiles with modern shell tooling, optimized for Laravel/PHP developme
 **Everything else**
 
 - [Customization](#customization) - [Personal Aliases & Functions](#personal-aliases--functions) · [Project-Specific Variables](#project-specific-variables)
-- [Post-Installation](#post-installation) · [Tool Comparisons](#tool-comparisons) · [Utilities](#utilities) · [Migration Notes](#migration-notes) · [Credits](#credits)
+- [Post-Installation](#post-installation) · [Tool Comparisons](#tool-comparisons) · [Utilities](#utilities) · [Credits](#credits)
 
 ---
 
@@ -472,23 +472,6 @@ The `bin/` directory contains helper scripts:
 - **update** - Update dotfiles, Homebrew, npm, and Composer packages
 - **doctor** - Health check and diagnostic tool
 - **conductor-merge** - Fast-forward the current Conductor workspace branch into `main` (which lives in another git worktree). Use `--push` to also push `main` to `origin`, which clears Conductor's "Changes" view (it diffs against `origin/main`).
-
----
-
-## Migration Notes
-
-If upgrading from an older setup:
-
-1. **Directory history**: Run `migration/migrate-z-to-zoxide.sh` to import your `~/.z` data
-2. **Prompt**: The default is now Oh My Zsh with custom agnoster theme
-3. **Version managers**:
-   - fnm replaces nvm for Node.js
-   - Homebrew manages PHP/Composer (no more compilation or mise)
-4. **Terminal**: Ghostty replaces iTerm2 (config symlinked from dotfiles)
-5. **Claude Code Skills**: Now version-controlled in `config/claude/skills/` and symlinked to `~/.claude/skills`
-6. **Claude Code Agents**: Now version-controlled in `config/claude/agents/` and symlinked to `~/.claude/agents`
-7. **Agent instructions**: `CLAUDE.md` was renamed to `AGENTS.md` and is symlinked under both names, so Codex reads the same file. `laravel-php-guidelines.md` was folded into the `spatie-guidelines` skill and removed
-8. **Custom Theme**: Custom agnoster theme stored in `oh-my-zsh-custom/themes/`
 
 ---
 
