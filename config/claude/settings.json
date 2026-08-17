@@ -4,13 +4,10 @@
   },
   "permissions": {
     "allow": [
-      "Skill(ray-skill:*)",
-      "Skill(php-guidelines-from-spatie:*)",
-      "Skill(fix-github-issue:*)",
-      "Skill(context7-auto-research:*)",
-      "Skill(readability:*)",
-      "Skill(agent-browser:*)",
       "Bash(gh:*)",
+      "Bash(flare:*)",
+      "Bash(there-there:*)",
+      "Bash(mailcoach:*)",
       "Bash(curl:*)",
       "Bash(composer:*)",
       "Bash(vendor/bin/phpunit:*)",
@@ -53,11 +50,11 @@
       "Bash(open:*)",
       "WebSearch",
       "WebFetch",
-      "mcp__laravel-boost__*",
-      "mcp__chrome-devtools__*"
+      "mcp__laravel-boost__*"
     ],
     "defaultMode": "auto"
   },
+  "disableClaudeAiConnectors": true,
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
@@ -66,8 +63,7 @@
     "laravel-simplifier@laravel": true,
     "agent-browser@agent-browser": true,
     "frontend-design@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "stripe@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "superpowers-marketplace": {
@@ -91,5 +87,15 @@
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "model": "claude-fable-5[1m]"
+  "skillOverrides": {
+    "simplify": "user-invocable-only",
+    "security-review": "user-invocable-only",
+    "update-config": "user-invocable-only",
+    "keybindings-help": "user-invocable-only",
+    "fewer-permission-prompts": "user-invocable-only",
+    "loop": "user-invocable-only",
+    "schedule": "user-invocable-only",
+    "run": "user-invocable-only",
+    "init": "user-invocable-only"
+  }
 }

@@ -1,0 +1,9 @@
+{
+  "name": "marketing",
+  "description": "Marketing, CRO, SEO and growth skills for Spatie product sites",
+  "version": "1.0.0",
+  "defaultEnabled": false,
+  "author": {
+    "name": "Freek Van der Herten"
+  }
+}

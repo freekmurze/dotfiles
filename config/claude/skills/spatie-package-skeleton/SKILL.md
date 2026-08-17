@@ -198,7 +198,7 @@ $package->hasInstallCommand(function (InstallCommand $command) {
 
 - **Optimize for easy usage.** The API exposed to users should be as simple as possible. Every public method, facade call, and middleware should feel obvious and require minimal setup.
 - **Use well-named methods.** Method names should be intuitive and self-documenting. Prefer descriptive names over terse ones — the user should understand what a method does without reading its implementation. Use verb-first method names (`clear()`, `forget()`, `save()`).
-- **Follow Spatie PHP/Laravel guidelines.** All code must follow the conventions described in the `php-guidelines-from-spatie` skill.
+- **Follow Spatie PHP/Laravel guidelines.** All code must follow the conventions described in the `spatie-guidelines` skill.
 
 ## Package patters
 

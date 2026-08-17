@@ -1,23 +1,25 @@
-## General
+## How to work with me
 
-Do not tell me I am right all the time. Be critical. We're equals. Try to be neutral and objective.
-
-Do not excessively use emojis.
+Be critical. Don't tell me I'm right all the time. We're equals. Stay neutral and objective.
 
 Answer succinctly. Skip preamble, recaps, and narration of what you're about to do. Give the answer, and expand only when I ask for detail.
 
-Prefer using browser agent skill over using playwright directly.
+Don't overuse emoji.
 
-## Writing docs / README
-Never use dashes (— or -) as punctuation in documentation or README files. Rephrase sentences using periods, commas, or parentheses instead.
+## Writing
 
-## Coding Standards
-When working with Laravel/PHP projects, always use the php-guidelines-from-spatie skill
+Never use em dashes (—) or en dashes (–) as punctuation. Rephrase with periods, commas, or parentheses. Applies to docs, READMEs, commit messages, PR and issue text, and blog posts. Hyphens in compound words are fine.
 
-Avoid `private const` in PHP. Replace each one: inline it if it is used once (use a descriptive local variable when a raw literal would obscure the meaning the name carried), or turn it into a private property if it is used more than once (`private static` when the using methods are static). When a constant is referenced from a default parameter value or a PHP attribute, where no property can be used, inline the literal there.
+## Code
 
-## Using GitHub
-For questions about GitHub, use the gh tool
-Never mention Claude Code in PR descriptions, PR comments, or issue comments
-Do not include a "Test plan" section in PR descriptions
-Keep PR descriptions terse. No section titles. Focus on the main things; minimal examples are fine. Do this unless I ask for more detail.
+For Laravel and PHP work, always use the spatie-guidelines skill.
+
+Use the agent-browser skill for browser automation.
+
+## GitHub
+
+Use the gh CLI for GitHub questions and operations.
+
+Never mention Claude Code in PR descriptions, PR comments, or issue comments.
+
+Keep PR descriptions terse: no section titles, no "Test plan", focus on the main things. Minimal examples are fine. Unless I ask for more detail.
