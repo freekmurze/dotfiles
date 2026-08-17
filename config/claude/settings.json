@@ -4,6 +4,14 @@
     "CLAUDE_CODE_NO_FLICKER": "1"
   },
   "permissions": {
+    "ask": [
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.codex/config.toml)",
+      "Read(**/.env)",
+      "Read(**/.env.*)"
+    ],
     "allow": [
       "Bash(gh:*)",
       "Bash(flare:*)",
