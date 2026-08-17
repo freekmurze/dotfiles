@@ -31,3 +31,19 @@ and translation strings in Blade.
 The cost is that Laravel's framework awareness does not apply inside `.php` files,
 so a wrong `route()` or `config()` key in a controller is not flagged. To swap the
 priority, disable `php-lsp` and add `".php": "php"` back to `.lsp.json`.
+
+Laravel LSP is not a substitute for Intelephense on `.php`. Asked over an LSP
+`initialize` handshake (v0.0.31), it advertises only:
+
+```
+codeActionProvider   quickfix
+completionProvider   triggers " ' . | x - : @
+definitionProvider   true
+documentLinkProvider true
+hoverProvider        true
+```
+
+There is no `referencesProvider`, no document or workspace symbol provider, no
+signature help, no rename, and no type diagnostics. The completion triggers are
+string and Blade characters, with no `$` or `>`, so it does not complete member
+access. It knows the application, not the language.
