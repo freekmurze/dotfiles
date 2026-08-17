@@ -4,14 +4,6 @@
     "CLAUDE_CODE_NO_FLICKER": "1"
   },
   "permissions": {
-    "ask": [
-      "Read(~/.ssh/**)",
-      "Read(~/.aws/**)",
-      "Read(~/.claude/.credentials.json)",
-      "Read(~/.codex/config.toml)",
-      "Read(**/.env)",
-      "Read(**/.env.*)"
-    ],
     "allow": [
       "Bash(gh:*)",
       "Bash(flare:*)",
@@ -61,6 +53,14 @@
       "WebFetch",
       "mcp__laravel-boost__*"
     ],
+    "ask": [
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.codex/config.toml)",
+      "Read(**/.env)",
+      "Read(**/.env.*)"
+    ],
     "defaultMode": "auto"
   },
   "disableClaudeAiConnectors": true,
@@ -75,13 +75,24 @@
     "init": "user-invocable-only"
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.dotfiles/bin/claude-pint-hook pre"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path' | grep -E '\\.php$' | while read -r f; do d=\"$(dirname \"$f\")\"; while [ \"$d\" != \"/\" ]; do if [ -x \"$d/vendor/bin/pint\" ]; then (cd \"$d\" && ./vendor/bin/pint --quiet \"$f\") ; break; fi; d=\"$(dirname \"$d\")\"; done; done"
+            "command": "~/.dotfiles/bin/claude-pint-hook post"
           }
         ]
       }
@@ -92,12 +103,12 @@
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "laravel-simplifier@laravel": true,
     "agent-browser@agent-browser": true,
     "frontend-design@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
     "php-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "laravel@laravel": true
   },
   "spinnerVerbs": {
     "mode": "replace",
