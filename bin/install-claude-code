@@ -80,6 +80,11 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
 JSON
     fi
 
+    # Share the harness-neutral skills with Codex and any other SKILL.md reader.
+    if [ -x "$DOTFILES_DIR/bin/link-agent-skills" ]; then
+        DOTFILES_DIR="$DOTFILES_DIR" "$DOTFILES_DIR/bin/link-agent-skills"
+    fi
+
     success "Claude Code configured"
 else
     warn "Dotfiles directory not found, skipping configuration"

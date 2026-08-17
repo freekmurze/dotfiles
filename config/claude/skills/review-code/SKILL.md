@@ -12,7 +12,7 @@ Everything changed in the working tree (staged and unstaged), relative to HEAD.
 
 ## Run the lanes
 
-Run every applicable lane from `references/lanes.md`, in parallel, in a single message.
+Run every applicable lane from `references/lanes.md`, following the "Running the lanes" section for whichever harness you are.
 
 ## Apply the findings
 

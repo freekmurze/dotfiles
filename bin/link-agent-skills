@@ -1,0 +1,83 @@
+#!/bin/bash
+#
+# Link the shared agent skills into every harness that reads SKILL.md files.
+#
+# One source of truth lives in config/claude/skills. Claude Code gets the whole
+# directory via a single symlink (see install-claude-code). Codex cannot take a
+# directory symlink, because ~/.codex/skills also holds Codex's own .system and
+# codex-primary-runtime skills, so it gets one symlink per shared skill instead.
+
+set -e
+
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+step() { echo ""; echo -e "${BLUE}➜${NC} $1"; }
+success() { echo -e "${GREEN}✓${NC} $1"; }
+warn() { echo -e "${YELLOW}⚠${NC} $1"; }
+
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
+SOURCE="$DOTFILES_DIR/config/claude/skills"
+
+# Skills that work in any harness. Excluded on purpose:
+#   ui        needs the mcp__uidotsh__uidotsh_fetch tool, Claude only
+#   typefully declares Claude specific allowed-tools
+#   marketing, music  Claude plugin directories, no top level SKILL.md
+SHARED=(
+    audit-architecture
+    code-snippet-images
+    conductor
+    flare
+    grill-me
+    laravel-inertia-react-structure
+    livewire-4
+    mailcoach
+    react-best-practices
+    review-code
+    review-pr
+    spatie-guidelines
+    spatie-package-skeleton
+    speeding-up-laravel-tests
+    there-there
+    update-spatie-docs
+    write-freek-dev-blogpost
+)
+
+if [ ! -d "$SOURCE" ]; then
+    warn "No skills directory at $SOURCE, nothing to link"
+    exit 0
+fi
+
+# Codex
+CODEX_SKILLS="$HOME/.codex/skills"
+if [ -d "$HOME/.codex" ]; then
+    step "Linking shared skills into Codex"
+    mkdir -p "$CODEX_SKILLS"
+
+    # Drop anything we previously linked or copied, but never touch Codex's own.
+    for entry in "$CODEX_SKILLS"/*; do
+        [ -e "$entry" ] || continue
+        name="$(basename "$entry")"
+        case "$name" in
+            .system|codex-primary-runtime) continue ;;
+        esac
+        rm -rf "$entry"
+    done
+
+    for skill in "${SHARED[@]}"; do
+        if [ -d "$SOURCE/$skill" ]; then
+            ln -sfn "$SOURCE/$skill" "$CODEX_SKILLS/$skill"
+        else
+            warn "Skipping $skill, not found in $SOURCE"
+        fi
+    done
+
+    success "Linked ${#SHARED[@]} skills into $CODEX_SKILLS"
+else
+    warn "Codex not installed, skipping"
+fi
+
+echo ""
+success "Agent skills linked"

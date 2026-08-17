@@ -26,7 +26,7 @@ Run the shared review lanes against this PR, in **report-only mode**. Read the l
 ~/.claude/skills/review-code/references/lanes.md
 ```
 
-Run every applicable lane in parallel, in a single message, targeting the PR (pass the PR number to `/code-review`, and give the other lane agents the diff from step 1).
+Run every applicable lane against the PR, following the "Running the lanes" section for whichever harness you are. Give each lane the diff from step 1 as its target.
 
 **Report only. Never apply fixes to someone else's PR**, even for findings that would be auto-applied in `/review-code`. The output of this step is a verdict, not an edit.
 
