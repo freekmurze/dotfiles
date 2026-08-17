@@ -77,6 +77,21 @@
      block matches the rest of the page in both themes. */
   pre code.hljs { background: none; padding: 0; }
 
+  /* Diagrams. Mermaid renders into these; inline SVG works the same way. */
+  pre.mermaid {
+    background: var(--surface); text-align: center; padding: 1.5rem 1rem;
+    border: 1px solid var(--border); border-radius: 8px;
+  }
+  pre.mermaid:not([data-processed]) { color: transparent; }   /* hide source pre-render */
+  svg { max-width: 100%; height: auto; }
+  figure { margin: 1.5rem 0; }
+  figcaption { color: var(--muted); font-size: .8rem; text-align: center; margin-top: .5rem; }
+
+  /* Two things side by side, such as a before and an after. */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .cols > * { min-width: 0; margin: 0; }
+  @media (max-width: 46rem) { .cols { grid-template-columns: 1fr; } }
+
   .note, .risk, .bug {
     border-left: 3px solid; border-radius: 0 8px 8px 0;
     padding: .9rem 1.1rem; margin: 1.25rem 0;
@@ -144,6 +159,23 @@ public function handle(Ticket $ticket): void
     language-sql, language-diff. Use language-diff with real +/- lines when
     showing a before and after together.
 
+    <figure>
+      <pre class="mermaid">
+sequenceDiagram
+    Caller->>Action: option_ulids
+    Action->>DB: resolve ulids
+    DB-->>Action: ids
+    Action->>Writer: optionIds
+      </pre>
+      <figcaption>Optional caption.</figcaption>
+    </figure>
+
+    <div class="cols"> ... two blocks side by side, such as before and after ... </div>
+
+    Diagrams are encouraged wherever they explain faster than prose. Draw the
+    mechanism this change touches, not a generic architecture picture. Inline
+    SVG works too.
+
     Link file paths to the pushed commit when the branch is on the remote.
     Pin to the sha, not the branch name. Never emit a link you have not
     confirmed resolves.
@@ -158,5 +190,10 @@ public function handle(Ticket $ticket): void
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({ startOnLoad: true, theme: dark ? 'dark' : 'neutral' });
+</script>
 </body>
 </html>

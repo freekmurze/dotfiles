@@ -41,6 +41,7 @@ Explain the change the way you would to a colleague sitting next to you, in what
 - **Show the code.** Real excerpts from the change and from the existing code around it, with the file path above them. Never invent an illustrative example. If you cannot show the line, do not make the claim.
 - **Explain, do not summarise.** "Adds caching to the report query" is a commit message. Explain what is cached, keyed on what, invalidated when, and what happens on a miss.
 - **Explain the choices.** Where one approach was taken over an obvious alternative, name the alternative. A diff shows what was done and never what was rejected, and that fork in the road is where agent-written code usually goes wrong: a new helper where one already existed, an observer where the codebase uses events, a pattern the rest of the project deliberately avoids.
+- **Draw it when a picture explains it faster.** Diagrams are welcome and often better than a paragraph: a sequence diagram for a request path, a flowchart for branching logic, a state diagram for a lifecycle, a small table for a matrix of cases, two columns for a before and after. The template loads Mermaid, and inline SVG works too. Draw the mechanism the change actually touches, not a generic architecture picture, and only when it earns its place. A diagram that just restates the file list is noise.
 - **Point at what deserves scrutiny.** Authorization, money, data loss, migrations, multi-tenancy, anything that fails quietly. Also what did not change but arguably should: call sites not updated, tests not added, documentation now stale.
 - **Say when you do not know.** Write "unclear why this was needed" rather than inventing a rationale. An honest gap tells the reader where to look. A confident guess sends them past the problem.
 - **Never explain around a problem.** The temptation, when code does not make sense, is to write a plausible paragraph that makes it sound deliberate. That is the single worst thing this page can do, because it launders a bug into an explanation and the reader stops looking. Say it does not make sense.
@@ -79,7 +80,9 @@ Write the page outside the repository:
 
 Build the page from `references/page-template.html`, which carries the styling and loads highlight.js.
 
-Write code blocks as plain code with the language set on the element, `<code class="language-php">`. Do not mark up tokens by hand; highlight.js colours them. Use `language-diff` with real `+` and `-` lines when a before and after belong side by side.
+Write code blocks as plain code with the language set on the element, `<code class="language-php">`. Do not mark up tokens by hand; highlight.js colours them. Use `language-diff` with real `+` and `-` lines when a before and after belong in one block.
+
+For a diagram, put Mermaid source in `<pre class="mermaid">`. For two things side by side, wrap them in `<div class="cols">`. Inline SVG is fine as well when Mermaid cannot express what you need.
 
 Then open it and print the path:
 
