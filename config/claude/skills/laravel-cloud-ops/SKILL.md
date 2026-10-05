@@ -67,8 +67,20 @@ The defaults we settled on after moving ~40 apps. Deviate only with a reason. Fo
 
 **Observability and mail**
 - Flare with performance tracing (sample rate 0.1, or 0.02 for busy sites; `minimal_log_level` error), deploy notifications to Slack (dashboard setting).
-- Uptime monitors wake hibernating apps: keep their frequency low on apps meant to sleep.
 - Mail through a Postmark server per app with a verified sender. Store tokens in the password manager, set them with `env:variables`, never print them.
+
+**Oh Dear**
+
+Every request Oh Dear makes can wake a hibernating app, and an edge-cached page can hide an outage. Per app:
+
+- Monitor URL: after the move, make sure it is `https://` and the real domain, so the certificate check sees Cloud's certificate.
+- Uptime check: point it at `/up` (Laravel's health route, never edge cached). Checking an edge-cached homepage only notices downtime after the cache expires. For apps meant to sleep, use a long interval (720 or 1440 minutes); busy apps that never sleep can stay at 1 minute. Look for extra monitors on other paths of the same site, they wake it too.
+- Other checks (broken links, mixed content, performance, Lighthouse) also hit the app: give them long intervals on sleeping apps.
+- Application health (`spatie/laravel-health`): Oh Dear polls the endpoint every few minutes, so the app never sleeps. Use it only on apps that are awake anyway, otherwise turn it off. Drop checks that make no sense on Cloud (Redis, Horizon, used disk space).
+- Scheduled task monitoring (`spatie/laravel-schedule-monitor`): the app pings Oh Dear after each task, so it wakes nothing. Set the monitor id (the package reads `monitor_id`), add `php artisan schedule-monitor:sync` to the deploy commands, and raise grace times to about 5 minutes for cold starts.
+- Cutover: start a maintenance period on the monitor via the Oh Dear API before freezing the old site and stop it after verification, so the switch doesn't page anyone.
+- Check the `OH_DEAR_API_TOKEN` actually works (a 401 means cron sync and maintenance windows silently fail).
+- Decommissioning: delete or repoint monitors of removed sites and servers.
 
 **Node apps**
 - `X-Forwarded-Proto` is `http`; use `CF-Visitor` for the scheme and `CF-Connecting-IP` for the client IP.

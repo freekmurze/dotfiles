@@ -101,6 +101,7 @@ Test against the Cloud origin, not DNS: `curl --resolve example.com:443:<cloud-i
 
 ## 6. Cutover
 
+- [ ] Start an Oh Dear maintenance period on the site's monitor so the switch doesn't alert. Stop it after verification, then update the monitor (https URL, `/up` uptime check, intervals) as described in laravel-cloud-ops.
 - [ ] Freeze the old site: `php artisan down` (or an nginx maintenance response for non-Laravel). Stop its cron and daemons.
 - [ ] Final DB sync and media sync; re-verify row counts and bytes.
 - [ ] Make the old server proxy to Cloud so visitors on stale DNS get the new site. Back up the nginx config first:
