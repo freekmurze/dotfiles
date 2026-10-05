@@ -1,6 +1,6 @@
 ---
 name: laravel-cloud-ops
-description: Day-to-day Laravel Cloud operations with the `cloud` CLI and the Cloud REST API. Use when asked to look up a Cloud app or environment, read or set env vars, deploy or check a deployment, run tinker or an artisan command on Cloud, fix a stuck or failed domain, purge the edge cache, attach a bucket, check usage, cost or bandwidth, report which apps sleep or stay awake, change hibernation or instance size, configure a database cluster (suspend, backups, public endpoint), or set up deploy notifications.
+description: Day-to-day Laravel Cloud operations with the `cloud` CLI and the Cloud REST API, plus the conventions for setting up a new Cloud app. Use when asked to create or set up a new Cloud app or environment, look up a Cloud app or environment, read or set env vars, deploy or check a deployment, run tinker or an artisan command on Cloud, fix a stuck or failed domain, purge the edge cache, attach a bucket, check usage, cost or bandwidth, report which apps sleep or stay awake, change hibernation or instance size, configure a database cluster (suspend, backups, public endpoint), or set up deploy notifications.
 ---
 
 # Laravel Cloud ops
@@ -24,6 +24,55 @@ The token is the Laravel Cloud API token from your password manager (or the one 
 - `cloud ... --json` masks env var values. `--show-sensitive` reveals them: only use it piped into a file (chmod 600) or a script, never into the conversation.
 - `GET /buckets/{id}/keys` and `/bucket-keys/{id}` return `access_key_secret`. Only print `id`, `name`, `permission`.
 - Before deleting env vars, save their values to a chmod 600 backup file without printing them.
+
+## Setting up a new app (conventions)
+
+The defaults we settled on after moving ~40 apps. Deviate only with a reason. For moving an existing site, follow the move-site-to-laravel-cloud skill; this section is the target setup.
+
+**Naming and source**
+- App name = primary domain (`example.com`). Name the GitHub repo after the domain too. If you rename the repo later, point the app at it: `PATCH /applications/<id>` with `{"repository":"org/example.com","source_control_provider_type":"github"}`, then trigger a deploy to prove it works.
+- One environment, `production`, deploying `main` with push to deploy. No staging unless asked.
+- Region closest to the users (`eu-central-1` for Belgian sites).
+- Set the app icon (logo) in the dashboard so it is recognisable on the canvas.
+
+**Runtime**
+- Latest Laravel and PHP 8.5. Upgrade old apps first rather than running legacy versions on Cloud.
+- Build: `composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader`, then `npm ci && npm run build`, then `php artisan optimize`. Deploy command: `php artisan migrate --force`.
+- Cloud deletes `node_modules` after the build. If PHP shells out to a Node tool at runtime (for example Shiki), install it into a separate directory during the build.
+- Compute: the smallest Flex size for plain sites. Apps that process images (Glide, media conversions on large originals) or run Statamic need 1 GB; 512 MB runs out of memory. Hibernation on with a 2 minute timeout.
+- Keep requests short. We hit a 20 s gateway timeout on cold, expensive pages and a hard limit on long downloads. Anything slow goes to a queued job; cache warm expensive pages before the DNS switch.
+- `cloud command:run` runs inside the web container. Heavy one-offs (cache warming, image generation, big imports) compete with web traffic and can OOM the app: dispatch them to the queue, and never run two in parallel.
+- Queues: Cloud managed queue on Flex (scales to zero, 90 s job cap). Remove Horizon. Split long jobs into chained or self-dispatching chunks.
+- Scheduler: Cloud wakes the app for every cron expression, so a per-minute task means the app never sleeps. Prefer daily or hourly schedules.
+- No headless Chromium on Cloud. Use Cloudflare Browser Rendering (REST `/browser-rendering/content`) instead.
+
+**Database**
+- Internal and personal apps share one cluster per owner (one for the company's internal apps, one per person's hobby projects). Client sites always get their own cluster.
+- MySQL Flex, smallest size, `suspend_seconds: 120`, daily backups kept 7 days, public endpoint off (on only during an import).
+- Keep `utf8mb4` and turn MySQL strict mode on. With strict mode off, values longer than a column (for example a 191-char string column) are silently truncated.
+
+**Storage**
+- Every bucket is attached to the environment (`filesystem_keys`), so it shows on the canvas and Cloud injects credentials. Restore `throw => true` and any `root`/`visibility`/`url` in a service provider.
+- Separate public assets bucket for versioned `public/` assets if stale CSS/JS after deploys matters.
+- Never write content to the local disk at runtime; it is wiped on deploy. For Statamic, use the Eloquent driver and turn git automation off.
+
+**Edge cache**
+- Guest HTML: `Cache-Control: public, max-age=60, s-maxage=300` for client sites. No `stale-while-revalidate` (ignored).
+- For a longer edge TTL, purge on save: a scoped Cloud API token (purge only, one environment) in an env var, a queued job calling `POST /environments/<env>/purge-edge-cache`. Note the token's expiry date somewhere you will see it.
+- Never cache the back office, logged-in responses, form posts or live preview. Send `private, no-store` there.
+
+**Domains**
+- Add with `wildcard_enabled: false`, `www_redirect: www_to_root` (apex) and `verification_method: real_time`, and add the pre-verification records for both apex and `www`, even if `www` does not resolve today. Without the `www` records the canvas shows "Not connected" although the apex works.
+- Lower the TTL to 600 or less well before the switch.
+
+**Observability and mail**
+- Flare with performance tracing (sample rate 0.1, or 0.02 for busy sites; `minimal_log_level` error), deploy notifications to Slack (dashboard setting).
+- Uptime monitors wake hibernating apps: keep their frequency low on apps meant to sleep.
+- Mail through a Postmark server per app with a verified sender. Store tokens in the password manager, set them with `env:variables`, never print them.
+
+**Node apps**
+- `X-Forwarded-Proto` is `http`; use `CF-Visitor` for the scheme and `CF-Connecting-IP` for the client IP.
+- Cloud's scheduler only runs `php artisan schedule:run`. For Node, expose secret-protected job endpoints and trigger them from a GitHub Actions schedule (or a Cloudflare cron trigger).
 
 ## Lookup
 
