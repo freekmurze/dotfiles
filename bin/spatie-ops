@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+
+DOTFILES_DIR="${DOTFILES_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+exec python3 "$DOTFILES_DIR/config/claude/skills/spatie-ops/scripts/ops.py" "$@"

@@ -16,6 +16,10 @@ For Laravel and PHP work, always use the spatie-guidelines skill.
 
 Use the agent-browser skill for browser automation.
 
+## Infrastructure
+
+For hosting, server, DNS or migration requests involving DigitalOcean (DO), Forge, Laravel Cloud or Openprovider, read `~/.agents/skills/spatie-ops/SKILL.md` first. It locates private authentication and the appropriate provider or migration skill. This includes ordinary requests such as moving a site to Cloud, checking a droplet, changing DNS or inspecting Cloud performance.
+
 ## GitHub
 
 Use the gh CLI for GitHub questions and operations.

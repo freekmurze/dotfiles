@@ -15,25 +15,21 @@ API base: `https://api.openprovider.eu/v1beta`. Nameservers: `ns1.openprovider.n
 
 ## Auth
 
-Login with the API user from your password manager. The token is valid for about 48 hours.
+Read [spatie-ops](../spatie-ops/SKILL.md) first. Its helper reads the private 1Password mapping, logs in with the API user and retains the resulting token in memory. The token is valid for about 48 hours, but the helper does not persist it between commands.
 
 ```bash
-op_token() {
-  curl -s https://api.openprovider.eu/v1beta/auth/login -H 'Content-Type: application/json' \
-    -d "$(jq -n --arg u "$(op read 'op://<vault>/<item>/username')" --arg p "$(op read 'op://<vault>/<item>/password')" '{username:$u,password:$p}')" \
-  | jq -r .data.token
-}
-TOKEN=$(op_token)   # keep in the shell only
+OPS="$HOME/.dotfiles/bin/spatie-ops"
 ```
 
 ## Read a zone (and back it up)
 
 ```bash
 ZONE=example.com
-curl -s "https://api.openprovider.eu/v1beta/dns/zones/$ZONE?with_records=true" -H "Authorization: Bearer $TOKEN" \
-  > "$ZONE-zone-backup-$(date +%Y%m%d-%H%M%S).json" && chmod 600 "$ZONE"-zone-backup-*.json
+BACKUP="$HOME/.dotfiles-custom/spatie-ops/backups/$ZONE-zone-backup-$(date +%Y%m%d-%H%M%S).json"
+"$OPS" request openprovider GET "/dns/zones/$ZONE?with_records=true" \
+  --private-output "$BACKUP"
 
-jq -r '.data.records[] | select(.type != "SOA" and .type != "NS") | [.type, .name, .value, .prio, .ttl] | @tsv' "$ZONE"-zone-backup-*.json
+jq -r '.data.records[] | select(.type != "SOA" and .type != "NS") | [.type, .name, .value, .prio, .ttl] | @tsv' "$BACKUP"
 ```
 
 GET returns full names (`www.example.com`). PUT uses names relative to the zone (`""` for the apex, `"www"`).
@@ -43,8 +39,7 @@ GET returns full names (`www.example.com`). PUT uses names relative to the zone 
 All changes are a `PUT /dns/zones/{zone}` with `add`, `remove` or `update` under `records`.
 
 ```bash
-op_put() { curl -s -X PUT "https://api.openprovider.eu/v1beta/dns/zones/$ZONE" \
-  -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d "$1"; }
+op_put() { printf '%s' "$1" | "$OPS" request openprovider PUT "/dns/zones/$ZONE" --input -; }
 
 # add
 op_put '{"name":"example.com","records":{"add":[{"type":"A","name":"","value":"203.0.113.10","ttl":900}]}}'

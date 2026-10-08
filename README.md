@@ -284,6 +284,17 @@ All skills live in `config/claude/skills/` and are version-controlled. On a new 
 | `review-pr` | Reviews a GitHub PR, gates on CI, merges, thanks the author. Releases only when asked |
 | `audit-architecture` | Whole-codebase audit of how state and data are modelled. Read-only, ranked P0 to P3 |
 
+**Infrastructure**
+
+| Skill | What it does |
+|-------|--------------|
+| `spatie-ops` | Entry point for DO, Forge, Laravel Cloud, Openprovider DNS and site migrations. Shared instructions route ordinary hosting requests here automatically |
+| `laravel-cloud-ops` | Cloud applications, deployments, resources, usage and performance |
+| `move-site-to-laravel-cloud` | Migrate a site and verify cutover before retiring its old server |
+| `openprovider-dns` | DNS changes and propagation checks |
+
+`bin/spatie-ops` performs authenticated API requests and redacts secret values before displaying responses. Its actual credential references live in `~/.dotfiles-custom/spatie-ops/credentials.json`, outside this repository. The public skill includes a placeholder configuration example; credentials remain in 1Password or the existing Cloud CLI configuration. Keep the real mapping private and copy it separately when setting up another machine. See [authentication](config/claude/skills/spatie-ops/references/authentication.md).
+
 **Products and publishing** (CLI wrappers for things Spatie runs)
 
 | Skill | What it does |

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Spatie Ops"
+  short_description: "Hosting, DNS and migrations with private credentials"
+  default_prompt: "Use $spatie-ops to inspect or manage our hosting infrastructure."
+
+policy:
+  allow_implicit_invocation: true

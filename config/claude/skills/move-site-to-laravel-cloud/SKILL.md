@@ -9,6 +9,8 @@ A phased checklist distilled from moving ~35 sites from Forge/DigitalOcean to La
 
 Related skills: `laravel-cloud-ops` (Cloud CLI/API recipes), `openprovider-dns` (zone edits), `flare` (errors), `agent-browser` (screenshots, back office tests).
 
+Before accessing provider accounts, read [spatie-ops](../spatie-ops/SKILL.md) for private authentication, the shared API helper and Forge/DO identity checks.
+
 ## Ground rules
 
 - Never print secrets. Tokens come from the password manager (`op read "op://<vault>/<item>/credential"`), are used inline and never written to disk.

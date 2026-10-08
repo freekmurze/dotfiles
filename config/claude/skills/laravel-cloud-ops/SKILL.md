@@ -11,19 +11,23 @@ Two tools:
 - REST API, base `https://cloud.laravel.com/api`, bearer token. Use it for things the CLI lacks.
 
 ```bash
-cloudapi() {  # usage: cloudapi METHOD PATH [JSON]
-  curl -s -X "$1" "https://cloud.laravel.com/api$2" -H "Authorization: Bearer $(op read 'op://<vault>/<item>/credential')" \
-    -H 'Accept: application/json' -H 'Content-Type: application/json' ${3:+-d "$3"}
+cloudapi() {  # usage: cloudapi METHOD PATH [non-secret JSON]
+  if [ -n "${3:-}" ]; then
+    printf '%s' "$3" | "$HOME/.dotfiles/bin/spatie-ops" request cloud "$1" "$2" --input -
+  else
+    "$HOME/.dotfiles/bin/spatie-ops" request cloud "$1" "$2"
+  fi
 }
 ```
 
-The token is the Laravel Cloud API token from your password manager (or the one `cloud auth` stores in `~/.config/cloud/config.json`). Never print it.
+Read [spatie-ops](../spatie-ops/SKILL.md) first for private authentication and safe API output. The helper uses the Cloud CLI login or a private 1Password reference; its response is wrapped in `status` and `response`. For sensitive payloads, construct JSON in memory and send it on stdin rather than passing secret values as shell arguments. Use `--private-output` or the in-memory client when automation needs unredacted data.
 
 ## Never print secrets
 
 - `cloud ... --json` masks env var values. `--show-sensitive` reveals them: only use it piped into a file (chmod 600) or a script, never into the conversation.
 - `GET /buckets/{id}/keys` and `/bucket-keys/{id}` return `access_key_secret`. Only print `id`, `name`, `permission`.
 - Before deleting env vars, save their values to a chmod 600 backup file without printing them.
+- Any API response containing an environment can include its secret values, including a cache-purge response. Use the shared helper's redacted output instead of displaying raw HTTP JSON.
 
 ## Setting up a new app (conventions)
 
