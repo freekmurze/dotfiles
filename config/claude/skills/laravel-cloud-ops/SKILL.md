@@ -38,12 +38,13 @@ The defaults we settled on after moving ~40 apps. Deviate only with a reason. Fo
 - One environment, `production`, deploying `main` with push to deploy. No staging unless asked.
 - Region closest to the users (`eu-central-1` for Belgian sites).
 - Set the app icon (logo) in the dashboard so it is recognisable on the canvas.
+- Icon uploads also support `cloud app:update <app> --avatar=/absolute/path/icon.png --force -n --fields=id,name,avatarUrl`. If the CLI returns 422 for a valid PNG, use `POST /applications/<id>/avatar` with multipart field `avatar=@/absolute/path/icon.png;type=image/png`; explicitly setting the MIME type fixed the CLI upload failure. Keep the API token in RAM, pass headers through stdin, capture the response, and emit only the app ID/avatar URL because application responses can include environment values.
 
 **Runtime**
 - Latest Laravel and PHP 8.5. Upgrade old apps first rather than running legacy versions on Cloud.
 - Build: `composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader`, then `npm ci && npm run build`, then `php artisan optimize`. Deploy command: `php artisan migrate --force`.
 - Cloud deletes `node_modules` after the build. If PHP shells out to a Node tool at runtime (for example Shiki), install it into a separate directory during the build.
-- Compute: the smallest Flex size for plain sites. Apps that process images (Glide, media conversions on large originals) or run Statamic need 1 GB; 512 MB runs out of memory. Hibernation on with a 2 minute timeout.
+- Compute: current-generation `flex-512mb` for plain sites. Apps that process images (Glide, media conversions on large originals) or run Statamic need `flex-1gb`; 512 MB runs out of memory. Hibernation on with a 1 minute idle timeout (Freek's current preference, backend acceptance verified 6 Oct 2026). See the size identifiers and upgrade procedure below.
 - Keep requests short. We hit a 20 s gateway timeout on cold, expensive pages and a hard limit on long downloads. Anything slow goes to a queued job; cache warm expensive pages before the DNS switch.
 - `cloud command:run` runs inside the web container. Heavy one-offs (cache warming, image generation, big imports) compete with web traffic and can OOM the app: dispatch them to the queue, and never run two in parallel.
 - Queues: Cloud managed queue on Flex (scales to zero, 90 s job cap). Remove Horizon. Split long jobs into chained or self-dispatching chunks.
@@ -127,6 +128,9 @@ cloud env:update <env> --branch=main --force
 
 Poll `deployment:get` every 10 to 15 s until the status contains `succeeded`, `failed` or `cancel`. Run waits in a background agent.
 
+- Start `cloud deploy:monitor <app> <env> -n` immediately while a deployment is active. The CLI may wait for a future deployment if the latest one already finished. If it hangs, check that deployment's actual status and stop only the local monitor when a terminal result is confirmed.
+- Apply shared rate-pacing locks only to short API/CLI operations. Run long deployment monitors and command-output waits outside the global lock; otherwise one monitor can block every parallel rollout worker.
+
 ## Commands and tinker
 
 ```bash
@@ -158,7 +162,7 @@ cloudapi DELETE /domains/<domain-id>
 - Apex domains: always pass `www_redirect` (`www_to_root`, or the reverse if the site lives on www). Without it the `www` host is dropped.
 - Subdomains: `wildcard_enabled: false`, no www.
 - Wildcard cannot be changed after creation; update only supports `verification_method`. Delete and re-add instead.
-- Pre-verification: add the `_cf-custom-hostname` TXT and `_acme-challenge` CNAME records shown in `dns_records` (also for `www`) so SSL is issued before DNS points at Cloud.
+- Pre-verification: set `verification_method: pre_verification`, then add the `_cf-custom-hostname` TXT and `_acme-challenge` CNAME records shown in `dns_records` (also for `www`). For an existing domain, use `cloud domain:update <id> --verification-method=pre_verification --force -n`. `real_time` waits for origin DNS to point at Cloud first. Pre-verification is unavailable when the hostname is already proxied by Cloudflare. Verify TLS before switching DNS. See https://laravel.com/cloud/docs/domains.
 - **Stuck or failed:** domains can sit in `pending` forever or flip to `failed` even with correct DNS. Fix: save the domain JSON, delete, re-add with the same options, re-add the verification records. Audit all domains periodically.
 
 ## Edge cache
@@ -208,14 +212,19 @@ Environment metrics: `cpu_usage`, `memory_usage`, `http_response_count`, `replic
 
 ```bash
 cloud instance:sizes
-cloudapi PATCH /instances/<inst-id> '{"hibernation_timeout":2}'
-cloudapi PATCH /instances/<inst-id> '{"size":"flex.g-1vcpu-512mb"}'
+cloudapi PATCH /instances/<inst-id> '{"hibernation_timeout":1}'
+cloudapi PATCH /instances/<inst-id> '{"size":"flex-512mb"}'
 cloudapi POST /environments/<env>/stop     # or /start
 cloudapi POST /instances/<inst-id>/pause   # pause a queue instance, /resume to undo
 ```
 
 - Instance changes apply after the next deploy.
-- The dashboard dropdown may only show legacy sizes; the API accepts the newer `flex.*` sizes.
+- Current-generation App Flex identifiers are `flex-512mb`, `flex-1gb`, and `flex-2gb` (verified 6 Oct 2026). The fixed-CPU `flex.c-*`, `flex.g-*`, and `flex.m-*` sizes are deprecated legacy compute. The dots in their names do not indicate a newer generation.
+- Current Flex uses checkpoint/restore with documented wake times under 500 ms. Legacy Flex typically takes 5 to 20 seconds. A request can still spend time in PHP, database wake-up, or a fallback cold boot. Sources: [compute documentation](https://laravel.com/cloud/docs/compute) and [implementation details](https://laravel.com/blog/how-we-built-laravel-clouds-scale-to-zero).
+- Verify generation using the current [pricing page](https://laravel.com/cloud/docs/pricing): its embedded compute configuration labels size IDs with `visibilityStatus` (`public` or `deprecated`). `GET /instances/sizes` supplies identifiers, CPU, and RAM, but has no generation/deprecation or pricing flags.
+- For an authorized generation upgrade, preserve RAM: legacy 512 MB to `flex-512mb`, 1 GB to `flex-1gb`, 2 GB to `flex-2gb`. A legacy 256 MB instance needs the current minimum of 512 MB. Evaluate larger or always-on workloads separately. Compare current regional prices; the increase is not uniformly $1 across the old compute profiles, and sleeping compute is billed only while awake.
+- Change only the instance `size`, then redeploy its existing branch. Preserve scheduler, replica/scaling settings, hibernation, attached resources, and env vars. Start with the owner's named pilot, confirm the deployed commit and unchanged configuration, check health and natural sleep/wake behavior, then continue the authorized rollout.
+- Managed queues use their own `mq.*` sizes. An App compute upgrade does not require changing queue sizes. Distinguish live environments from rehearsal/default environments before a fleet rollout.
 - Flex queues scale to zero with a 90 s job cap; Pro queues keep one worker running.
 
 ## Database clusters

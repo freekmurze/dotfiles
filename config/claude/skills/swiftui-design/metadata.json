@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "author": "wholiver",
+  "date": "April 2026",
+  "abstract": "SwiftUI frontend visual design skill — Anti-AI Slop 6 rules, Design Direction Advisor, Brand Asset Protocol, 5-Dimension Review. Creates beautiful, distinctive iOS/macOS interfaces that avoid generic AI patterns. Supports Claude Code, Cursor, Codex, OpenCode, and all AI agent platforms.",
+  "references": [
+    "https://developer.apple.com/documentation/swiftui",
+    "https://developer.apple.com/design/human-interface-guidelines"
+  ]
+}

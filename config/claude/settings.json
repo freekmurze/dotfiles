@@ -85,7 +85,23 @@
     "php-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "laravel@laravel": true,
-    "swift-lsp@claude-plugins-official": true
+    "swift-lsp@claude-plugins-official": true,
+    "asb-skills@asb-skills": true,
+    "typesafe@typesafe-ai": true
+  },
+  "extraKnownMarketplaces": {
+    "asb-skills": {
+      "source": {
+        "source": "github",
+        "repo": "asmartbear/asb-skills"
+      }
+    },
+    "typesafe-ai": {
+      "source": {
+        "source": "github",
+        "repo": "typesafe-ai/skills"
+      }
+    }
   },
   "spinnerVerbs": {
     "mode": "replace",
@@ -95,9 +111,9 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
-  "fastMode": true,
   "skipDangerousModePermissionPrompt": true,
   "theme": "light",
+  "switchModelsOnFlag": false,
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true

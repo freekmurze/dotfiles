@@ -54,8 +54,9 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
     mkdir -p ~/.claude
 
     # Symlink configuration files
-    # Claude Code reads CLAUDE.md, not AGENTS.md, so it gets a symlink under the
-    # name it expects. Codex reads AGENTS.md directly. One file, both harnesses.
+    # Claude Code reads a project's AGENTS.md natively (v2.1.277+), but user-level
+    # instructions still have to live at ~/.claude/CLAUDE.md, so that gets a symlink
+    # under the name it expects. Codex reads AGENTS.md directly. One file, both harnesses.
     ln -sf "$DOTFILES_DIR/config/claude/AGENTS.md" ~/.claude/CLAUDE.md
     ln -sf "$DOTFILES_DIR/config/claude/settings.json" ~/.claude/settings.json
     ln -sf "$DOTFILES_DIR/config/claude/statusline.sh" ~/.claude/statusline.sh

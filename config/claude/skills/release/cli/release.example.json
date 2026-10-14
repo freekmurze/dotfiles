@@ -1,0 +1,10 @@
+{
+  "app_name": "MyApp",
+  "github_repo": "owner/myapp",
+  "git_branch": "main",
+  "min_system_version": "14.0",
+  "bundle_name": "MyApp.app",
+  "dmg_name": "MyApp.dmg",
+  "appcast_file": "appcast.xml",
+  "derived_data_prefixes": ["MyApp-"]
+}

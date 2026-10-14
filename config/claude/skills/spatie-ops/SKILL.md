@@ -1,6 +1,6 @@
 ---
 name: spatie-ops
-description: Operate Spatie and Freek's hosting with private credentials. Use for requests to move a site to Laravel Cloud, inspect or change DigitalOcean (DO) droplets, manage Forge servers, deploy or troubleshoot Cloud apps, inspect hosting costs or performance, or change Openprovider DNS. Provides authentication and routes to the relevant provider or migration skill.
+description: Operate Spatie and Freek's hosting with private credentials. Use for requests to move a site to Laravel Cloud, inspect or change DigitalOcean (DO) droplets, manage Forge servers, deploy or troubleshoot Cloud apps, inspect hosting costs or performance, or change Openprovider or Cloudflare DNS. Provides authentication and routes to the relevant provider or migration skill.
 ---
 
 # Spatie ops
@@ -22,6 +22,8 @@ Use `spatie-guidelines` when changing PHP/Laravel code and `gh` for GitHub opera
 ## Authenticate and inspect
 
 The public helper is `~/.dotfiles/bin/spatie-ops`. The private mapping is `~/.dotfiles-custom/spatie-ops/credentials.json`; it contains credential references, not token values. Read [authentication](references/authentication.md) if setup is missing, access fails, or credentials are needed inside another program.
+
+For several related API calls, reuse one `Client` instance from `scripts/ops.py` in a single Python process. The CLI creates a new client for every invocation and repeatedly prompts for 1Password access. Keep credentials and provider tokens in memory for the batch, then let the process exit.
 
 ```sh
 OPS="$HOME/.dotfiles/bin/spatie-ops"
@@ -45,6 +47,7 @@ Use the `cloud` CLI for deployments, command execution and other purpose-built C
 ## Scope and verification
 
 - Credential access establishes access, not permission to change infrastructure. Follow the user's current and standing authorization; resolve routine reads independently.
+- For domains hosted on Laravel Cloud, keep Cloudflare web records DNS-only (`proxied: false`). Verify proxy status after creating or editing these records. Never enable Cloudflare's proxy for these domains.
 - Before a destructive operation, establish the exact named resource, ownership and dependencies. Verify its absence at the provider after deletion.
 - Read back changes and verify the resulting behavior. An accepted API request alone is insufficient.
 - Keep actual item IDs, vault names, credentials and account-specific mappings outside public dotfiles. API responses can contain newly issued secrets, including responses from apparently unrelated operations such as a cache purge.

@@ -31,7 +31,7 @@ alias pull="git pull"
 alias uncommit="git reset --soft HEAD~1"
 
 # Fast open
-alias o="open ."
+alias o='open "$PWD"'
 
 # List all files colorized in long format
 alias l="ls -laF"

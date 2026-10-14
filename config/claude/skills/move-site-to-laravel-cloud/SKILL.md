@@ -48,6 +48,7 @@ Before accessing provider accounts, read [spatie-ops](../spatie-ops/SKILL.md) fo
 ## 3. Cloud setup
 
 - [ ] Application + `production` environment, branch and deploy commands (`php artisan migrate --force` etc.).
+- [ ] Choose current-generation App Flex using the identifiers in the laravel-cloud-ops skill's "Hibernation and instance sizes" section. Its fixed-CPU `flex.c/g/m` predecessors are deprecated, despite the newer-looking names. Use the current minimum 512 MB, or 1 GB for Statamic/image processing, and verify the deployed size.
 - [ ] Database: client sites get their **own** cluster (never a shared internal cluster). Smallest Flex, `suspend_seconds: 120`, backups on (7 days), public endpoint off (only on temporarily for imports).
 - [ ] Managed queue (if the app queues anything).
 - [ ] Buckets, **attached** to the environment (`PATCH /environments/{id}` with `filesystem_keys`, see laravel-cloud-ops):
@@ -58,7 +59,7 @@ Before accessing provider accounts, read [spatie-ops](../spatie-ops/SKILL.md) fo
 - [ ] An assets bucket for `public/` assets: Cloud's edge caches `public/` files for 2 hours with no purge per file, so versioned assets from a bucket avoid stale CSS/JS.
 - [ ] Edge cache headers for guest HTML: short `s-maxage` (300 for client sites). Cloud ignores `stale-while-revalidate`; expired entries go straight to origin.
 - [ ] Flare key, mail (Postmark server token, verified sender), `APP_URL`, project icon.
-- [ ] Domain: add with `wildcard_enabled: false`, `www_redirect: www_to_root`, `verification_method: real_time`. Add the pre-verification records Cloud shows (`_cf-custom-hostname` TXT and `_acme-challenge` CNAME, also for `www`) so SSL is ready before the DNS switch.
+- [ ] Domain: for an uninterrupted migration from a hostname that is not already proxied by Cloudflare, add with `wildcard_enabled: false`, `www_redirect: www_to_root`, `verification_method: pre_verification`. Add the ownership and SSL records Cloud shows (`_cf-custom-hostname` TXT and `_acme-challenge` CNAME, also for `www`) and verify HTTPS before the DNS switch. `real_time` waits for origin DNS to point at Cloud first. Pre-verification is unavailable for a hostname already proxied by Cloudflare; inspect that case separately. See https://laravel.com/cloud/docs/domains.
 
 ## 4. Data
 

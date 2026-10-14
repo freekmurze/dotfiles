@@ -14,3 +14,8 @@ home/.yarnrc
 # load like any skill but are never published. One line per private skill (no trailing slash,
 # so the symlink itself is matched); the linker appends new entries automatically.
 config/claude/skills/spatie-product-stats
+
+# Machine-local skill state and build artifacts
+config/claude/skills/synced/
+config/claude/skills/.trash/
+__pycache__/
