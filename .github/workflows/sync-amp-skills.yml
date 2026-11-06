@@ -1,0 +1,71 @@
+# Install in freekmurze/dotfiles as .github/workflows/sync-amp-skills.yml.
+name: Sync personal Amp skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/claude/skills/**'
+      - '.github/workflows/sync-amp-skills.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: personal-amp-skills
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'freekmurze/dotfiles' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Use latest main even when retrying an older run. Nothing here executes upstream code.
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+          path: source
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Install Amp Git authentication
+        run: |
+          curl -fsSL https://ampcode.com/install.sh | bash
+          echo "$HOME/.amp/bin" >> "$GITHUB_PATH"
+      - name: Clone the trusted adapter and reviewed allowlist
+        env:
+          AMP_API_KEY: ${{ secrets.AMP_SKILLS_API_KEY }}
+        run: |
+          test -n "$AMP_API_KEY" || { echo 'Set the AMP_SKILLS_API_KEY Actions secret first.' >&2; exit 1; }
+          amp clone user-skills hosted
+          test "$(git -C hosted remote get-url origin)" = 'https://ampcode.com/git/@freekmurze/-/skills'
+      - name: Adapt and validate without executing upstream scripts
+        working-directory: hosted
+        run: |
+          python -m pip install -r tools/requirements.txt
+          python -m unittest discover -s tools -p 'test_*.py' -v
+          revision="$(git -C ../source rev-parse HEAD)"
+          python tools/sync.py --source ../source --automatic-upstream "$revision"
+          python tools/sync.py --source ../source --check
+          git diff --stat
+      - name: Publish validated changes to personal Amp skills
+        working-directory: hosted
+        env:
+          AMP_API_KEY: ${{ secrets.AMP_SKILLS_API_KEY }}
+        run: |
+          if test -z "$(git status --porcelain)"; then
+            echo 'Skills are already current.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          revision="$(git -C ../source rev-parse HEAD)"
+          git config user.name 'Amp skills sync'
+          git config user.email 'amp-skills-sync@users.noreply.github.com'
+          git add --all
+          git commit -m "Sync allowlisted dotfiles skills from $revision"
+          # Never force. A concurrent manual update causes failure, not lost work.
+          git push origin HEAD:main
+          echo "Published allowlisted skills from dotfiles revision $revision." >> "$GITHUB_STEP_SUMMARY"
