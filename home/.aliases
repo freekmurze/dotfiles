@@ -12,6 +12,7 @@ alias cda="composer dump-autoload -o"
 alias hostfile="sudo vi /etc/hosts"
 alias deploy='scotty run deploy'
 alias deploy-code='scotty run deploy-code'
+alias generate-newsletter='cloud command:run env-a2e13f80-ad47-4bb2-8161-a960a0dcbe0c --cmd="php artisan newsletter:generate"'
 alias mfs='php artisan migrate:fresh --seed'
 alias nah='git reset --hard;git clean -df'
 
