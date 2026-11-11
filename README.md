@@ -265,6 +265,10 @@ That installs the Claude Code CLI, symlinks the config, and runs `bin/link-agent
 
 All skills live in `config/claude/skills/` and are version-controlled. On a new Mac they are available immediately after the installer runs.
 
+**Web page copy**
+
+[`writing-html-copy`](config/claude/skills/writing-html-copy/SKILL.md) applies whenever an agent creates or revises text on a web page, including page-building requests, prototypes, and HTML artifacts. It requires literal, specific headings and factual prose without eyebrow labels, decorative numbering, slogans, or manufactured contrasts. The shared `AGENTS.md` requires agents to load it alongside design and marketing skills; its description also exposes the page-building and copywriting triggers for automatic discovery.
+
 **Code and conventions** (loaded automatically when relevant)
 
 | Skill | What it does |

@@ -10,6 +10,8 @@ Don't overuse emoji.
 
 Never use em dashes (—) or en dashes (–) as punctuation. Rephrase with periods, commas, or parentheses. Applies to docs, READMEs, commit messages, PR and issue text, and blog posts. Hyphens in compound words are fine.
 
+When creating, redesigning, or editing a web page with human-readable text, load `writing-html-copy` before writing copy, even if the request is to build the page rather than write text. Apply it alongside any design or marketing skills, including for prototypes and generated HTML artifacts.
+
 ## Code
 
 For Laravel and PHP work, always use the spatie-guidelines skill.
