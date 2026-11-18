@@ -17,6 +17,20 @@ success() { echo -e "${GREEN}✓${NC} $1"; }
 warn() { echo -e "${YELLOW}⚠${NC} $1"; }
 error() { echo -e "${RED}✗${NC} $1"; exit 1; }
 
+# Move real files and directories out of the way before they get replaced by
+# symlinks, so a first install never throws away someone's existing config.
+# Symlinks are left alone, so re-running the installer doesn't pile up backups.
+BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+backup() {
+    for target in "$@"; do
+        if [ -e "$target" ] && [ ! -L "$target" ]; then
+            mkdir -p "$BACKUP_DIR/$(dirname "${target#$HOME/}")"
+            mv "$target" "$BACKUP_DIR/${target#$HOME/}"
+            warn "Moved existing ~/${target#$HOME/} to ~/${BACKUP_DIR#$HOME/}"
+        fi
+    done
+}
+
 echo ""
 echo "Claude Code Installation"
 echo "========================"
@@ -57,6 +71,7 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
     # Claude Code reads a project's AGENTS.md natively (v2.1.277+), but user-level
     # instructions still have to live at ~/.claude/CLAUDE.md, so that gets a symlink
     # under the name it expects. Codex reads AGENTS.md directly. One file, both harnesses.
+    backup ~/.claude/CLAUDE.md ~/.claude/settings.json ~/.claude/statusline.sh ~/.claude/skills ~/.claude/agents
     ln -sf "$DOTFILES_DIR/config/claude/AGENTS.md" ~/.claude/CLAUDE.md
     ln -sf "$DOTFILES_DIR/config/claude/settings.json" ~/.claude/settings.json
     ln -sf "$DOTFILES_DIR/config/claude/statusline.sh" ~/.claude/statusline.sh

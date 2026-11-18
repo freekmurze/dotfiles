@@ -16,6 +16,20 @@ success() { echo -e "${GREEN}✓${NC} $1"; }
 warn() { echo -e "${YELLOW}⚠${NC} $1"; }
 error() { echo -e "${RED}✗${NC} $1"; exit 1; }
 
+# Move real files and directories out of the way before they get replaced by
+# symlinks, so a first install never throws away someone's existing config.
+# Symlinks are left alone, so re-running the installer doesn't pile up backups.
+BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+backup() {
+    for target in "$@"; do
+        if [ -e "$target" ] && [ ! -L "$target" ]; then
+            mkdir -p "$BACKUP_DIR/$(dirname "${target#$HOME/}")"
+            mv "$target" "$BACKUP_DIR/${target#$HOME/}"
+            warn "Moved existing ~/${target#$HOME/} to ~/${BACKUP_DIR#$HOME/}"
+        fi
+    done
+}
+
 echo ""
 step "Install Dotfiles"
 echo ""
@@ -45,12 +59,14 @@ success "Oh My Zsh installed"
 
 # Git configuration
 step "Configuring Git"
+backup ~/.gitconfig ~/.global-gitignore
 ln -sf ~/.dotfiles/home/.gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/home/.global-gitignore ~/.global-gitignore
 success "Git configured"
 
 # Symlinks
 step "Creating symlinks"
+backup ~/.zshrc ~/.vimrc ~/.vim ~/.mackup.cfg
 rm -f ~/.zshrc ~/.vimrc ~/.vim ~/.mackup.cfg
 ln -sf ~/.dotfiles/home/.zshrc ~/.zshrc
 ln -sf ~/.dotfiles/home/.vimrc ~/.vimrc
