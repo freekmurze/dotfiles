@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/freek/.global-gitignore
+	excludesfile = ~/.global-gitignore
 	autocrlf = false
 	pager = delta
 
