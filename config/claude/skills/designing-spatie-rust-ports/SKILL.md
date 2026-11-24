@@ -1,26 +1,26 @@
 ---
 name: designing-spatie-rust-ports
-description: "Designs Spatie Rust APIs when porting PHP packages. Use when creating or reviewing a Spatie Rust port, mapping fluent APIs, documenting PHP behavior differences, or adapting the Rust package skeleton. Complements rust-best-practices; not a general Rust style guide."
+description: "Designs Spatie Rust APIs when porting PHP packages. Use when creating or reviewing a Spatie Rust port, designing fluent APIs, writing package guides, or adapting the Rust package skeleton. Complements rust-best-practices; not a general Rust style guide."
 ---
 
 # Designing Spatie Rust ports
 
-Preserve the PHP package's vocabulary, defaults and user journey. Change the language mechanics where Rust requires it, and record observable behavior differences rather than hiding them behind familiar method names.
+Build the best Rust package for the domain. Keep useful vocabulary and workflows from the PHP package, but change APIs, defaults and behavior when Rust offers a better design. Correct known domain bugs instead of reproducing them for parity, with sources and regression tests for the corrected behavior.
 
 Use `rust-best-practices` for ownership, error implementation, generics and ordinary Rust quality rules. This skill decides how those rules meet Spatie's PHP APIs. Follow an existing crate's documented contracts when maintaining it; these defaults are not permission to rename a released API or raise its minimum Rust version.
 
-## Establish the PHP contract first
+## Understand the domain and existing contracts
 
 Read the PHP implementation, tests and documentation at a specific tag or commit. Read existing Rust callers and tests before changing an established port. Inventory public behavior, not just public method names: defaults, validation, output, ordering, mutation, callbacks, cleanup and failure policy.
 
-Keep a parity record, meaning a mapping of PHP behavior to its Rust equivalent and verification. For each feature, record the PHP reference revision, Rust API, status, deliberate difference or omission, and a test or fixture that establishes the claim. Distinguish implemented-and-executed, compiled-only, unverified and intentionally omitted behavior. A passing adapter test does not establish compatibility with a real external runtime.
+Use differential tests against a pinned PHP revision as an internal tool for finding missing behavior and regressions. A PHP result is evidence, not the specification when it is wrong. Record intentional corrections in the test expectations, with independent sources. Distinguish executed checks from compiled-only and unverified checks.
 
-Update an existing parity document when the port has one. Otherwise use a concise maintainer section or focused usage notes; add a separate document only when the mapping needs it or the task requests it. Do not add mandatory parity files to the generic skeleton. Keep differences that affect users beside the relevant usage example, even when a longer mapping exists elsewhere.
+Write user docs as Rust guides, not comparisons with PHP. Do not create compatibility, parity or differences pages or sections, and do not link internal parity records from `docs/`. Keep runtime requirements, safety limits and genuine cross-language interoperability instructions beside the relevant operation in plain words. Maintainer parity records and fixture-generation instructions may live outside `docs/`.
 
 ## Set up every new package
 
 1. Freek creates the public `spatie/<php-package>-rust` repository from `spatie/package-skeleton-rust`; Amp's GitHub integration cannot create it. Give him `https://github.com/new?template_owner=spatie&template_name=package-skeleton-rust&owner=spatie&name=<php-package>-rust&visibility=public`, replacing `<php-package>` with the PHP repository name. Keep the skeleton's packaging and documentation machinery; replace its sample API and tests.
-2. Disable Wiki and Projects. Copy the PHP repository's description exactly. Use its website until the Rust docs are live, then set the GitHub website to `https://spatie.be/docs/<repo>` (for example, `https://spatie.be/docs/browsershot-rust`). Copy its topics plus `rust`, excluding `laravel`: public Rust repositories must not have a `laravel` topic. Under "Include in the home page", enable only Releases; turn Deployments and Packages off. These home-page checkboxes are UI-only: use a signed-in browser on Freek's Mac, not an API approximation.
+2. Disable Wiki and Projects. Copy the PHP repository's description, adapting it for Rust by the README title rule below: replace PHP where it means the user's language and avoid false runtime claims. Use its website until the Rust docs are live, then set the GitHub website to `https://spatie.be/docs/<repo>` (for example, `https://spatie.be/docs/browsershot-rust`). Copy its topics plus `rust`, excluding `laravel`: public Rust repositories must not have a `laravel` topic. Under "Include in the home page", enable only Releases; turn Deployments and Packages off. These home-page checkboxes are UI-only: use a signed-in browser on Freek's Mac, not an API approximation.
 3. Set the README H1 from the PHP README title using the rule under "Make the docs familiar and executable".
 4. Get CI green, then import the docs on spatie.be. With explicit release approval, publish version `1.0.0` to crates.io and add `github:spatie:crates` as an owner. This checklist is not authorization to publish or change shared settings.
 
@@ -30,7 +30,7 @@ Update an existing parity document when the port has one. Otherwise use a concis
 - Keep domain types such as `Period`, `Link`, `SslCertificate` and `TemporaryDirectory`. Convert method names to snake_case: `usingPort` becomes `using_port`.
 - Preserve recognizable named constructors such as `make`, `create` and `download` when they express the PHP workflow. Use `new` for ordinary construction; do not force every PHP factory into `new` or add aliases for every spelling.
 - Follow the port's naming convention for accessors. `SslCertificate::issuer()` drops PHP's `get`, while `DbDumper::get_db_name()` retains it. Both exist deliberately; do not run a blanket `get_` or `set_` removal across the API.
-- Replace PHP's optional-argument overloads with explicit Rust operations when that reads better: `path()` / `path_for(child)` and `optimize(path)` / `optimize_to(input, output)`. Use `Option<T>` when one operation naturally has an optional value. Record the mapping.
+- Replace PHP's optional-argument overloads with explicit Rust operations when that reads better: `path()` / `path_for(child)` and `optimize(path)` / `optimize_to(input, output)`. Use `Option<T>` when one operation naturally has an optional value.
 
 ## Choose fluent ownership by what the object does
 
@@ -48,27 +48,27 @@ Map recoverable PHP exceptions to `Result<T, Error>` and ordinary absence to `Op
 
 Do not add `Result` to infallible operations for symmetry. For configuration that can be fixed by a later setter, validate the combined settings at preparation or execution. Validate independently invalid values at the setter when appropriate. Document where failure occurs so PHP users know where to put `?`.
 
-Preserve the PHP failure policy as well as its exception cases. For example, image optimization can log an optimizer failure and continue by default; `throws(true)` changes that to returning an error, and a Rust callback returns `Result` to choose. Do not reinterpret such a policy as catching Rust panics or turning every failure into `Ok`.
+Choose and document an explicit failure policy. For example, image optimization can log an optimizer failure and continue by default, with a strict mode that returns an error. Do not reinterpret such a policy as catching Rust panics or turning every failure into `Ok`.
 
-Keep defaults aligned unless a Rust/runtime or safety difference is explicit. Use typed configuration for structured options instead of reproducing PHP config arrays: enums for finite choices, `Duration` for durations where the API adopts it, path types for paths, and types such as `u16` for ports. Preserve familiar units in existing APIs and make conversions explicit; a PHP seconds setter must not quietly become milliseconds.
+Choose defaults for Rust callers rather than copying PHP quirks. Use typed configuration for structured options instead of reproducing PHP config arrays: enums for finite choices, `Duration` for durations where the API adopts it, path types for paths, and types such as `u16` for ports. Preserve familiar units in existing APIs and make conversions explicit; a PHP seconds setter must not quietly become milliseconds.
 
 Keep configuration owned by the caller or an explicit runtime context. Pass dependencies or expose traits/closures instead of introducing hidden global services. A standalone package does not need service registration or a framework emulation layer. Preserve an established async boundary, but do not require an async runtime merely to imitate fluent PHP syntax.
 
 ## Preserve useful behavior, not obsolete plumbing
 
-Port the feature's purpose rather than its PHP implementation dependencies. Browsershot controls Chrome directly, so Node/Puppeteer executable and module-path configuration does not belong in its Rust API. Omit such options and explain the requirement change; do not leave successful no-op setters that suggest they work.
+Port the feature's purpose rather than its PHP implementation dependencies. Browsershot controls Chrome directly, so Node/Puppeteer executable and module-path configuration does not belong in its Rust API. Omit such options and document the actual browser requirements; do not leave successful no-op setters that suggest they work.
 
 This is not a blanket ban on Node or external tools. Image optimization can still invoke SVGO, whose installation requires Node. Document requirements per feature and backend.
 
 Use native Rust process arguments rather than PHP shell fragments, and explain split arguments, unsupported pipes and redirects. Use ownership-based cleanup for temporary resources; document whether cleanup is automatic or opt-in and how callers obtain cleanup errors. Do not promise that `Drop` reports errors or that a failed operation leaves output untouched unless the implementation guarantees it.
 
-Do not silently copy an unsafe behavior or silently change a domain rule in the name of safety. Document concrete safety improvements and their compatibility effects, and keep the original domain behavior unless the task calls for a change. For example, a certificate's metadata predicate is not automatically a cryptographic trust check.
+Document the actual safety contract and domain rules. Do not copy unsafe behavior or a known incorrect result to preserve parity. For example, a certificate's metadata predicate is not automatically a cryptographic trust check.
 
 ## Make the docs familiar and executable
 
-Mirror the PHP guide's headings, order, examples, variable names, values and wording where the behavior still matches. If the PHP package has only a README, use its usage sections as the guide source. Change prose that would become false, including installation, exceptions, runtime requirements and safety guarantees.
+Use the PHP guide to identify useful topics and examples, then organize and explain them for Rust callers. If the PHP package has only a README, use its usage sections as a starting point. Describe installation, errors, runtime requirements and safety guarantees as they actually work in Rust.
 
-Start from the PHP package's descriptive README H1, then adapt it for Rust readers rather than copying it literally. Remove package-name prefixes and replace PHP with Rust where it describes the user's language. For example, "spatie/ray - Send debug output from PHP to Ray" becomes "Send debug output from Rust to Ray". Keep PHP references that identify the upstream package or compatibility differences. Check the README H1, docs introduction headings, crate description and docs slogan for the same mistakes. If the PHP title would make a false runtime claim, use the PHP repository's GitHub description and adapt it by the same rule. Browsershot uses "Convert HTML to an image, PDF or string", not "spatie-browsershot" or a Puppeteer claim. Supply the resulting descriptive title to the skeleton's configure step.
+Start from the PHP package's descriptive README H1, then adapt it for Rust readers rather than copying it literally. Remove package-name prefixes and replace PHP with Rust where it describes the user's language. For example, "spatie/ray - Send debug output from PHP to Ray" becomes "Send debug output from Rust to Ray". Keep upstream credits and genuine interoperability requirements, not PHP comparisons. Check the README H1, docs introduction headings, crate description and docs slogan for the same mistakes. If the PHP title would make a false runtime claim, use the PHP repository's GitHub description and adapt it by the same rule. Browsershot uses "Convert HTML to an image, PDF or string", not "spatie-browsershot" or a Puppeteer claim. Supply the resulting descriptive title to the skeleton's configure step.
 
 Use the Rust skeleton's README structure and badges, with Cargo installation and testing commands. Keep the original package and author credits. README ad URLs use the repository key, such as `period-rust`, not the crate key `spatie-period`; check that the image actually exists. Keep `docs/_index.md` and page frontmatter in the skeleton's Spatie-site format. Website registration and hosting are separate from writing Markdown.
 
@@ -122,6 +122,6 @@ Add native-tool, service or generator checks when those are part of the package 
 
 Derive public examples and source links from public repositories. Keep private repository names, unreleased runtime plans and private integration details out of public skills, docs, READMEs, commit messages and package metadata. Describe generic application contracts without revealing private projects. Review provenance before moving a draft to a shared or public location.
 
-## Review a port against its PHP story
+## Review the Rust package
 
-Before calling the port ready, walk the PHP examples against the Rust API, check the parity record, and run the applicable CI checks. Confirm defaults and errors, not only happy-path syntax. Confirm that shared objects still share, consuming setters are retained, external requirements are visible, and every omission has a reason. Report separately what compiled, what executed locally, what passed on CI and what remains unverified.
+Before calling the package ready, run its examples and applicable CI checks. Confirm defaults and errors, not only happy-path syntax. Confirm that shared objects still share, consuming setters are retained and external requirements are visible. Check that `docs/` contains no PHP comparison pages, sections or links to internal parity records. Report separately what compiled, what executed locally, what passed on CI and what remains unverified.
