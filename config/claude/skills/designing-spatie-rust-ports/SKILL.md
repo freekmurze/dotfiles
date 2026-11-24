@@ -13,11 +13,16 @@ Use `rust-best-practices` for ownership, error implementation, generics and ordi
 
 Read the PHP implementation, tests and documentation at a specific tag or commit. Read existing Rust callers and tests before changing an established port. Inventory public behavior, not just public method names: defaults, validation, output, ordering, mutation, callbacks, cleanup and failure policy.
 
-For a new standalone crate, start from `spatie/package-skeleton-rust`. Keep its packaging and documentation machinery rather than recreating it. Replace its sample API and tests; the skeleton deliberately does not prescribe a builder, trait or error type for every library.
-
 Keep a parity record, meaning a mapping of PHP behavior to its Rust equivalent and verification. For each feature, record the PHP reference revision, Rust API, status, deliberate difference or omission, and a test or fixture that establishes the claim. Distinguish implemented-and-executed, compiled-only, unverified and intentionally omitted behavior. A passing adapter test does not establish compatibility with a real external runtime.
 
 Update an existing parity document when the port has one. Otherwise use a concise maintainer section or focused usage notes; add a separate document only when the mapping needs it or the task requests it. Do not add mandatory parity files to the generic skeleton. Keep differences that affect users beside the relevant usage example, even when a longer mapping exists elsewhere.
+
+## Set up every new package
+
+1. Freek creates the public `spatie/<php-package>-rust` repository from `spatie/package-skeleton-rust`; Amp's GitHub integration cannot create it. Give him `https://github.com/new?template_owner=spatie&template_name=package-skeleton-rust&owner=spatie&name=<php-package>-rust&visibility=public`, replacing `<php-package>` with the PHP repository name. Keep the skeleton's packaging and documentation machinery; replace its sample API and tests.
+2. Disable Wiki and Projects. Copy the PHP repository's description and website exactly, and copy its topics plus `rust`. Under "Include in the home page", enable only Releases; turn Deployments and Packages off. These home-page checkboxes are UI-only: use a signed-in browser on Freek's Mac, not an API approximation.
+3. Set the README H1 from the PHP README title using the rule under "Make the docs familiar and executable".
+4. Get CI green, then import the docs on spatie.be. With explicit release approval, publish version `1.0.0` to crates.io and add `github:spatie:crates` as an owner. This checklist is not authorization to publish or change shared settings.
 
 ## Keep names recognizable
 
@@ -62,6 +67,8 @@ Do not silently copy an unsafe behavior or silently change a domain rule in the 
 ## Make the docs familiar and executable
 
 Mirror the PHP guide's headings, order, examples, variable names, values and wording where the behavior still matches. If the PHP package has only a README, use its usage sections as the guide source. Change prose that would become false, including installation, exceptions, runtime requirements and safety guarantees.
+
+Use the PHP package's descriptive README H1 as the Rust README title, not the crate or repository name. Adapt language-specific wording, such as PHP to Rust, so it remains accurate. If the PHP title would make a false runtime claim, use the PHP repository's GitHub description instead. For example, Browsershot uses "Convert HTML to an image, PDF or string", not "spatie-browsershot" or a Puppeteer claim. Supply that description to the skeleton's configure step.
 
 Use the Rust skeleton's README structure and badges, with Cargo installation and testing commands. Keep the original package and author credits. README ad URLs use the repository key, such as `period-rust`, not the crate key `spatie-period`; check that the image actually exists. Keep `docs/_index.md` and page frontmatter in the skeleton's Spatie-site format. Website registration and hosting are separate from writing Markdown.
 
