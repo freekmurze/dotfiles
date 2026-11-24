@@ -20,7 +20,7 @@ Update an existing parity document when the port has one. Otherwise use a concis
 ## Set up every new package
 
 1. Freek creates the public `spatie/<php-package>-rust` repository from `spatie/package-skeleton-rust`; Amp's GitHub integration cannot create it. Give him `https://github.com/new?template_owner=spatie&template_name=package-skeleton-rust&owner=spatie&name=<php-package>-rust&visibility=public`, replacing `<php-package>` with the PHP repository name. Keep the skeleton's packaging and documentation machinery; replace its sample API and tests.
-2. Disable Wiki and Projects. Copy the PHP repository's description and website exactly, and copy its topics plus `rust`. Under "Include in the home page", enable only Releases; turn Deployments and Packages off. These home-page checkboxes are UI-only: use a signed-in browser on Freek's Mac, not an API approximation.
+2. Disable Wiki and Projects. Copy the PHP repository's description exactly. Use its website until the Rust docs are live, then set the GitHub website to `https://spatie.be/docs/<repo>` (for example, `https://spatie.be/docs/browsershot-rust`). Copy its topics plus `rust`, excluding `laravel`: public Rust repositories must not have a `laravel` topic. Under "Include in the home page", enable only Releases; turn Deployments and Packages off. These home-page checkboxes are UI-only: use a signed-in browser on Freek's Mac, not an API approximation.
 3. Set the README H1 from the PHP README title using the rule under "Make the docs familiar and executable".
 4. Get CI green, then import the docs on spatie.be. With explicit release approval, publish version `1.0.0` to crates.io and add `github:spatie:crates` as an owner. This checklist is not authorization to publish or change shared settings.
 
