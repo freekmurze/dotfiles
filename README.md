@@ -275,6 +275,7 @@ All skills live in `config/claude/skills/` and are version-controlled. On a new 
 |-------|--------------|
 | `spatie-guidelines` | The single source for Spatie PHP, Laravel, and JavaScript conventions. Style, docblocks, control flow, naming, validation, Blade, package architecture, Pest, git workflow |
 | `react-best-practices` | React hooks, effects, refs, and component design. Scoped to `**/*.{tsx,jsx}` |
+| [`rust-best-practices`](config/claude/skills/rust-best-practices/SKILL.md) | Apollo GraphQL's Rust handbook, version 1.1.2. Ownership, errors, performance, testing, and nine reference chapters. Imported from [apollographql/skills](https://github.com/apollographql/skills/tree/9dda1397730370aeb8df4ff8f2015c34c86b5003/skills/rust-best-practices) with its [MIT license](config/claude/skills/rust-best-practices/LICENSE) |
 | `laravel-inertia-react-structure` | Frontend directory structure for Laravel Inertia React apps. Scoped to React files |
 | `livewire-4` | Livewire 4 components, single-file and multi-file |
 | `spatie-package-skeleton` | Scaffolding a package from `package-skeleton-laravel`, plus extensibility patterns |
